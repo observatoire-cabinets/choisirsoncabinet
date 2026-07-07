@@ -1,0 +1,6 @@
+[
+  { "snapshotDate": "2026-06-01", "finessGeo": "123456789", "capacityInstalled": 84 },
+  { "snapshotDate": "2026-06-01", "finessGeo": "012345678", "capacityInstalled": 45 },
+  { "snapshotDate": "2023-12-31", "finessGeo": "334455667", "capacityInstalled": 30 },
+  { "snapshotDate": "2024-12-31", "finessGeo": "334455667", "capacityInstalled": 60 }
+]

@@ -1,0 +1,7 @@
+[
+  { "evalCode": "EV-0001", "cabinet": "CAB ALPHA", "dateCloture": "2025-11-14", "region": "Bretagne" },
+  { "evalCode": "EV-0002", "cabinet": "CAB ALPHA", "dateCloture": "2025-09-02", "region": "Bretagne" },
+  { "evalCode": "EV-0003", "cabinet": "CAB BETA", "dateCloture": "2026-01-20", "region": "Occitanie" },
+  { "evalCode": "EV-0004", "cabinet": "CAB_ASOF", "dateCloture": "2024-06-01", "region": "Normandie" },
+  { "evalCode": "EV-0005", "cabinet": "CAB_FALLBACK", "dateCloture": "2022-01-15", "region": "Occitanie" }
+]

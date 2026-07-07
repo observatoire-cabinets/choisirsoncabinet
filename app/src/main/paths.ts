@@ -1,0 +1,29 @@
+import { app } from 'electron';
+import { join } from 'node:path';
+import { existsSync, mkdirSync, cpSync } from 'node:fs';
+
+/**
+ * Répertoire des données.
+ * - Dev : le cœur in-repo (`data/generated`).
+ * - Packagé : `resources/data/generated` est en LECTURE SEULE ; le refresh doit
+ *   écrire → copie initiale dans `userData` au premier lancement.
+ */
+export function resolveDataDir(): string {
+  if (!app.isPackaged) {
+    return join(__dirname, '../../../data/generated');
+  }
+  const userDir = join(app.getPath('userData'), 'data', 'generated');
+  if (!existsSync(userDir)) {
+    mkdirSync(userDir, { recursive: true });
+    cpSync(join(process.resourcesPath, 'data', 'generated'), userDir, { recursive: true });
+  }
+  return userDir;
+}
+
+export function resolveArchiveRoot(): string {
+  const base = app.isPackaged
+    ? join(app.getPath('userData'), 'data', 'archives')
+    : join(__dirname, '../../../data/archives');
+  mkdirSync(base, { recursive: true });
+  return base;
+}

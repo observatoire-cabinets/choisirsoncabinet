@@ -1,0 +1,58 @@
+[
+  {
+    "finessGeo": "123456789",
+    "officialLabel": "EHPAD LES TILLEULS",
+    "addressLine1": "12 rue des Tilleuls",
+    "addressLine2": null,
+    "postalCode": "35000",
+    "commune": "Rennes"
+  },
+  {
+    "finessGeo": "012345678",
+    "officialLabel": "EHPAD DU PARC",
+    "addressLine1": "4 avenue du Parc",
+    "addressLine2": "Bâtiment B",
+    "postalCode": "35200",
+    "commune": "Rennes"
+  },
+  {
+    "finessGeo": "700000001",
+    "officialLabel": "EHPAD DETAIL UN",
+    "addressLine1": "1 rue Detail",
+    "addressLine2": null,
+    "postalCode": "75001",
+    "commune": "Paris"
+  },
+  {
+    "finessGeo": "700000002",
+    "officialLabel": null,
+    "addressLine1": "2 rue Detail",
+    "addressLine2": "2 Rue Detail",
+    "postalCode": "75002",
+    "commune": "Paris"
+  },
+  {
+    "finessGeo": "700000004",
+    "officialLabel": "EHPAD DETAIL QUATRE",
+    "addressLine1": "4 rue Detail",
+    "addressLine2": "75004 PARIS",
+    "postalCode": "75004",
+    "commune": "Paris"
+  },
+  {
+    "finessGeo": "700000005",
+    "officialLabel": "EHPAD DETAIL CINQ",
+    "addressLine1": "5 rue Detail",
+    "addressLine2": null,
+    "postalCode": "75005",
+    "commune": "Paris"
+  },
+  {
+    "finessGeo": "700000006",
+    "officialLabel": "EHPAD DETAIL SIX",
+    "addressLine1": "6 rue Detail",
+    "addressLine2": null,
+    "postalCode": "75006",
+    "commune": "Paris"
+  }
+]

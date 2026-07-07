@@ -1,0 +1,23 @@
+# ⚠️ PRÉREQUIS installeur NSIS : Windows Developer Mode ACTIVÉ (ou exécution admin).
+# electron-builder extrait le cache winCodeSign qui contient des liens symboliques
+# macOS ; leur création exige le privilège SeCreateSymbolicLink (Developer Mode).
+# Sans lui : « Cannot create symbolic link ». L'app portable (win-unpacked) se
+# construit sans ce prérequis ; seul l'emballage NSIS le nécessite.
+appId: fr.observatoire.cabinets
+productName: Observatoire Cabinets Evaluateurs d'ESSMS
+directories:
+  # Chemin de sortie court : évite la limite MAX_PATH de Windows.
+  output: release
+files:
+  - out/**
+extraResources:
+  - from: ../data/generated
+    to: data/generated
+win:
+  target: nsis
+  # Non signé : un certificat nommerait son titulaire. SmartScreen
+  # « éditeur inconnu » assumé et expliqué dans le README.
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  perMachine: false

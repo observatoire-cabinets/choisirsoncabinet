@@ -1,0 +1,21 @@
+{
+  "name": "observatoire-cabinets",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Observatoire hors-ligne des cabinets évaluateurs d'ESSMS — moteur d'analyse sur données publiques HAS/FINESS.",
+  "scripts": {
+    "test": "vitest run",
+    "generate": "tsx scripts/generate-cli.ts",
+    "refresh": "tsx scripts/refresh-real.ts"
+  },
+  "dependencies": {
+    "hyparquet": "^1.25.7",
+    "pdf-lib": "^1.17.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^4.1.5"
+  }
+}

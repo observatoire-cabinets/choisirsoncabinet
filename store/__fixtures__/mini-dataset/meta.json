@@ -1,0 +1,25 @@
+{
+  "builtAt": "2026-07-02T08:00:00.000Z",
+  "hasSyncedAt": "2026-06-30T00:00:00.000Z",
+  "finessSnapshotMax": "2026-06-01",
+  "sources": [
+    {
+      "name": "HAS Synaé — évaluations ESSMS (parquet)",
+      "url": "https://www.data.gouv.fr/fr/datasets/resultats-des-evaluations-de-la-qualite-des-etablissements-et-services-sociaux-et-medico-sociaux/",
+      "license": "ODbL",
+      "retrievedAt": "2026-06-30T00:00:00.000Z"
+    },
+    {
+      "name": "FINESS — répertoire national des établissements",
+      "url": "https://www.data.gouv.fr/fr/datasets/finess-extraction-du-fichier-des-etablissements/",
+      "license": "Licence Ouverte / Open Licence version 2.0",
+      "retrievedAt": "2026-06-01T00:00:00.000Z"
+    },
+    {
+      "name": "base_document_essms.jsonl — dénomination et adresse ESSMS",
+      "url": "https://www.data.gouv.fr/fr/datasets/base-documentaire-des-etablissements-et-services-sociaux-et-medico-sociaux/",
+      "license": "Licence Ouverte / Open Licence version 2.0",
+      "retrievedAt": "2026-06-01T00:00:00.000Z"
+    }
+  ]
+}

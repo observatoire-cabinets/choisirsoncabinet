@@ -1,0 +1,10 @@
+[
+  { "snapshotDate": "2025-06-01", "finessGeo": "123456789", "ejSize": 12 },
+  { "snapshotDate": "2025-06-01", "finessGeo": "012345678", "ejSize": 1 },
+  { "snapshotDate": "2025-06-01", "finessGeo": "98765432", "ejSize": 1 },
+  { "snapshotDate": "2026-06-01", "finessGeo": "123456789", "ejSize": 14 },
+  { "snapshotDate": "2023-12-31", "finessGeo": "556677889", "ejSize": 3 },
+  { "snapshotDate": "2024-12-31", "finessGeo": "556677889", "ejSize": 1 },
+  { "snapshotDate": "2023-12-31", "finessGeo": "334455667", "ejSize": 2 },
+  { "snapshotDate": "2024-12-31", "finessGeo": "334455667", "ejSize": 7 }
+]
