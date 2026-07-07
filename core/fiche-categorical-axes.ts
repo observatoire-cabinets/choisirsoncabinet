@@ -30,9 +30,16 @@ import { confidenceLevel } from './significance';
 // ─── Fiche 6 — CAPACITÉ (continue → binnée) ───────────────────────────────────
 export type CapacityBin = 'petit' | 'moyen' | 'grand';
 
-/** Seuils lisibles (petit <30 / moyen 30–99 / grand ≥100). */
+/**
+ * Seuils lisibles (petit 1–29 / moyen 30–99 / grand ≥100).
+ * Capacité nulle ou absente → hors axe (null) : une capacité installée de 0 place
+ * correspond presque toujours à un SERVICE (ambulatoire/domicile), pas à un petit
+ * établissement — l'inclure dans « petit » tirait la référence vers le bas et
+ * gonflait artificiellement les écarts moyen/grand vs petit.
+ */
 export function capacityBin(capacity: number | null | undefined): CapacityBin | null {
   if (capacity === null || capacity === undefined || Number.isNaN(capacity)) return null;
+  if (capacity <= 0) return null;
   if (capacity < 30) return 'petit';
   if (capacity < 100) return 'moyen';
   return 'grand';
@@ -248,11 +255,22 @@ export function nationalGapsForAxis(
 
 // ─── Gap NATIONAL AJUSTÉ (option 1) ───────────────────────────────────────────
 /** Dimensions de contrôle disponibles (jamais l'axe lui-même ni un colinéaire). */
-export type ControlDim = 'secteur' | 'statut' | 'region';
+export type ControlDim = 'secteur' | 'statut' | 'region' | 'annee';
+
+/** Année de clôture de l'évaluation (pour neutraliser la tendance séculaire, ex. axe temporel). */
+function yearOf(d: Date | string | null | undefined): number | null {
+  if (d === null || d === undefined || d === '') return null;
+  const date = d instanceof Date ? d : new Date(d);
+  return Number.isNaN(date.getTime()) ? null : date.getUTCFullYear();
+}
 
 function controlValue(r: RawMonoMultiExtractRow, dim: ControlDim): string {
   if (dim === 'secteur') return secteurFromCode(r.code);
   if (dim === 'statut') return (r.statut ?? '').trim() || '(inconnu)';
+  if (dim === 'annee') {
+    const y = yearOf(r.eval_date);
+    return y === null ? '(inconnue)' : String(y);
+  }
   return (r.region ?? '').trim() || '(inconnue)';
 }
 

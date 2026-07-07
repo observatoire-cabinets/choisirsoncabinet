@@ -36,7 +36,8 @@ function mockPrisma(rows: RawMonoMultiExtractRow[]) {
 describe('capacityBin (fiche 6 — seuils petit<30 / moyen 30–99 / grand≥100)', () => {
   it.each([
     [null, null],
-    [0, 'petit'],
+    [0, null], // capacité 0 = service sans lits → hors axe (plus rangé en « petit »)
+    [-5, null],
     [29, 'petit'],
     [30, 'moyen'],
     [99, 'moyen'],

@@ -131,7 +131,7 @@ export const statutProvider: FicheAxisProvider = {
   },
 };
 
-const CTRL_LABEL: Record<ControlDim, string> = { secteur: 'secteur', statut: 'statut', region: 'région' };
+const CTRL_LABEL: Record<ControlDim, string> = { secteur: 'secteur', statut: 'statut', region: 'région', annee: 'année' };
 /** Libellé humain des contrôles d'un axe (« statut et région ») — exclut l'axe lui-même. */
 function controlsLabel(dims: ControlDim[]): string {
   const ls = dims.map((d) => CTRL_LABEL[d]);
@@ -221,8 +221,9 @@ export const regionProvider: FicheAxisProvider = {
 export const secteurProvider = makeCategoricalProvider(deriveSecteur, SECTEUR_CONTRASTS, 'secteur', ['statut', 'region'], 'statut');
 /** Fiche 6 — capacité (petit réf) ; ajusté sur secteur + statut + région, stratifié statut. */
 export const capaciteProvider = makeCategoricalProvider(deriveCapacity, CAPACITY_CONTRASTS, 'capacité', ['secteur', 'statut', 'region'], 'statut');
-/** Fiche 8 — temporel (S1 réf) ; ajusté sur secteur + statut + région, stratifié statut. */
-export const semestreProvider = makeCategoricalProvider(deriveSemestre, SEMESTRE_CONTRASTS, 'semestre', ['secteur', 'statut', 'region'], 'statut');
+/** Fiche 8 — temporel (S1 réf) ; ajusté sur secteur + statut + région + ANNÉE (neutralise
+ *  la tendance séculaire qui confond S1/S2), stratifié statut. */
+export const semestreProvider = makeCategoricalProvider(deriveSemestre, SEMESTRE_CONTRASTS, 'semestre', ['secteur', 'statut', 'region', 'annee'], 'statut');
 /** Fiche 9 — établissement vs service (établissement réf) ; ajusté sur secteur + statut + région, stratifié statut. */
 export const etabServiceProvider = makeCategoricalProvider(deriveEtabService, ETAB_SERVICE_CONTRASTS, 'étab/service', ['secteur', 'statut', 'region'], 'statut');
 /** Fiche 11 — DROM vs métropole (métropole réf) ; ajusté sur secteur + statut (PAS région, colinéaire), stratifié statut. */

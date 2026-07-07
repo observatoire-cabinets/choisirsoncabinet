@@ -308,6 +308,26 @@ export function studentTTwoSidedP(t: number, df: number): number {
   return regIncBeta(x, df / 2, 0.5);
 }
 
+/**
+ * Quantile bilatéral de Student : renvoie t* tel que P(|T| <= t*) = conf, à `df`
+ * degrés de liberté (inverse de studentTTwoSidedP), par bissection monotone.
+ * Quand df → ∞, tend vers invNorm((1+conf)/2). Sert à bâtir un IC dans la MÊME
+ * loi que la p de Welch — sinon l'IC (normal, plus étroit) exclut 0 quand p ≥ α.
+ */
+export function studentTQuantile(conf: number, df: number): number {
+  if (!(df > 0) || !(conf > 0) || !(conf < 1)) return NaN;
+  const targetTail = 1 - conf; // P(|T| > t*) visé
+  let lo = 0;
+  let hi = 1e4;
+  for (let i = 0; i < 100; i++) {
+    const mid = (lo + hi) / 2;
+    // studentTTwoSidedP décroît quand t croît :
+    if (studentTTwoSidedP(mid, df) > targetTail) lo = mid;
+    else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
 /** Quantile normal inverse (Acklam). Pour les bornes d'IC. */
 export function invNorm(p: number): number {
   const a = [-39.6968302866538, 220.946098424521, -275.928510446969, 138.357751867269, -30.6647980661472, 2.50662827745924];

@@ -85,8 +85,11 @@ describe('analyzeAxisByCabinet — Cohen’s d, IC, p (M3)', () => {
     const k = analyzeAxisByCabinet(data)[0];
     expect(k.gap).toBeCloseTo(10, 6);
     expect(k.cohensD).toBeCloseTo(3.5355, 3); // 10 / sqrt(8)
-    expect(k.ciLow).toBeCloseTo(2.714, 2); // 10 - 2.576*sqrt(8) (IC 99 %, α=0,01 explicite)
-    expect(k.ciHigh).toBeCloseTo(17.286, 2);
+    // IC dans la loi de Student (cohérent avec la p) : t*(0,99 ; df=2) = 9,9248,
+    // soit 10 ± 9,9248·√8. Avec n=2+2, l'IC est large et INCLUT 0 — cohérent avec
+    // p>0,01 (l'ancien IC normal z=2,576 excluait 0 à tort, contredisant la p).
+    expect(k.ciLow).toBeCloseTo(-18.07, 1);
+    expect(k.ciHigh).toBeCloseTo(38.07, 1);
     expect(k.p).toBeGreaterThan(0);
     expect(k.p).toBeLessThan(0.2); // t≈3.54, df=2
   });

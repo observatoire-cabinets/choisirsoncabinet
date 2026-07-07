@@ -22,6 +22,8 @@ import {
   deriveSemestre,
   deriveEtabService,
   deriveGroupeLucratif,
+  adjustedNationalGapsForAxis,
+  type ControlDim,
   type Secteur,
 } from './fiche-categorical-axes';
 import type { RawMonoMultiExtractRow } from './mono-multi-extract';
@@ -124,8 +126,34 @@ function toCategorical(raw: RawMonoMultiExtractRow[], derive: Deriver): Categori
   return out;
 }
 
-function isSignificant(r: CabinetAxisResult): boolean {
-  return r.reliability === 'fiable' && r.p !== null && r.p < significanceAlpha() && r.gap !== null && r.gap !== 0;
+/** Plancher de taille d'effet (Cohen's d) : « petit » effet minimal, repère cité par le guide. */
+export const EFFECT_SIZE_FLOOR = 0.2;
+
+/** Contrôles d'ajustement NATIONAL par axe phare (excluent l'axe lui-même + colinéaires). */
+const AXIS_CONTROLS: Record<string, ControlDim[]> = {
+  mono_multi: ['secteur', 'statut', 'region'],
+  statut: ['secteur', 'region'],
+  secteur: ['statut', 'region'],
+  capacite: ['secteur', 'statut', 'region'],
+  groupe_lucratif: ['secteur', 'region'],
+  temporel: ['secteur', 'statut', 'region', 'annee'],
+  etab_service: ['secteur', 'statut', 'region'],
+};
+
+/**
+ * Holm-Bonferroni : pour chaque p-value (indexée), true si rejetée au niveau
+ * familywise `alpha`. Contrôle la multiplicité des ~7 tests par cabinet (sinon des
+ * dizaines de faux « non conforme » par hasard sur ~1000 tests cabinets×axes).
+ */
+function holmReject(pvals: number[], alpha: number): boolean[] {
+  const order = pvals.map((p, i) => ({ p, i })).sort((a, b) => a.p - b.p);
+  const m = pvals.length;
+  const rej = new Array<boolean>(m).fill(false);
+  for (let k = 0; k < m; k++) {
+    if (order[k].p <= alpha / (m - k)) rej[order[k].i] = true;
+    else break; // dès qu'un rang échoue, tous les suivants aussi (Holm)
+  }
+  return rej;
 }
 
 /** Construit le profil de chaque cabinet, classé par niveau global décroissant. */
@@ -138,6 +166,22 @@ export function buildCabinetProfiles(raw: RawMonoMultiExtractRow[]): CabinetProf
   for (const p of PHARE_CONTRASTS) {
     const results = analyzeContrastByCabinet(toCategorical(raw, p.derive), p.contrast);
     axisIndex.set(p.axisId, new Map(results.map((r) => [r.cabinet, r])));
+  }
+
+  // Signe de l'écart AJUSTÉ national par axe (garde-fou d'inversion) : un écart brut
+  // par cabinet dont le sens se retourne après neutralisation de la composition
+  // (cf. secteur, établissement/service) n'est PAS compté « non conforme ».
+  const nationalAdjSign = new Map<string, number>();
+  for (const p of PHARE_CONTRASTS) {
+    let sign = 0;
+    try {
+      const [g] = adjustedNationalGapsForAxis(raw, p.derive, [p.contrast], AXIS_CONTROLS[p.axisId] ?? []);
+      const ref = g?.gapAdj ?? g?.gapRaw ?? null;
+      if (ref != null && ref !== 0) sign = Math.sign(ref);
+    } catch {
+      sign = 0;
+    }
+    nationalAdjSign.set(p.axisId, sign);
   }
 
   const byCabinet = new Map<string, RawMonoMultiExtractRow[]>();
@@ -174,16 +218,35 @@ export function buildCabinetProfiles(raw: RawMonoMultiExtractRow[]): CabinetProf
       specialized: dominantShare >= SPECIALIZED_DOMINANT_SHARE,
     };
 
-    const axes: AxisHeadline[] = PHARE_CONTRASTS.map((p) => {
-      const res = axisIndex.get(p.axisId)!.get(cabinet) ?? null;
-      return {
-        axisId: p.axisId,
-        label: p.label,
-        gap: res?.gap ?? null,
-        reliability: res?.reliability ?? null,
-        significant: res ? isSignificant(res) : false,
-      };
-    });
+    // Significativité DURCIE (cœur du méta-classement) : un axe est « non conforme »
+    // seulement s'il est (a) fiable (≥30/30), (b) d'ampleur ≥ EFFECT_SIZE_FLOOR
+    // (Cohen d — pas juste significatif : sinon le classement récompense la taille du
+    // cabinet), (c) de MÊME sens que l'écart ajusté national (garde-fou inversion), et
+    // (d) survivant à Holm-Bonferroni sur la famille des axes testés du cabinet.
+    const perAxis = PHARE_CONTRASTS.map((p) => ({
+      axisId: p.axisId,
+      label: p.label,
+      res: axisIndex.get(p.axisId)!.get(cabinet) ?? null,
+    }));
+    const family = perAxis.filter((a) => a.res && a.res.reliability === 'fiable' && a.res.p != null);
+    const holm = holmReject(family.map((a) => a.res!.p as number), significanceAlpha());
+    const holmOk = new Map<string, boolean>();
+    family.forEach((a, i) => holmOk.set(a.axisId, holm[i]));
+
+    const axes: AxisHeadline[] = perAxis.map(({ axisId, label, res }) => ({
+      axisId,
+      label,
+      gap: res?.gap ?? null,
+      reliability: res?.reliability ?? null,
+      significant:
+        !!res &&
+        res.reliability === 'fiable' &&
+        res.gap !== null && res.gap !== 0 &&
+        res.cohensD !== null && Math.abs(res.cohensD) >= EFFECT_SIZE_FLOOR &&
+        (nationalAdjSign.get(axisId) ?? 0) !== 0 &&
+        Math.sign(res.gap) === nationalAdjSign.get(axisId) &&
+        (holmOk.get(axisId) ?? false),
+    }));
     const nSignificantAxes = axes.filter((a) => a.significant).length;
 
     profiles.push({ cabinet, n, niveauGlobal, axes, portfolio, nSignificantAxes });

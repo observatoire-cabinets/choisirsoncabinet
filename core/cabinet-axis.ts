@@ -9,7 +9,7 @@
  *   - M1  écart brut sous-groupe : gap = moy_exposé − moy_non-exposé
  *   - M2  palier de fiabilité    : 🟢≥30/30, 🟡≥10/10, sinon 🔴
  *   - M3  significativité        : Cohen's d (pooled), IC au niveau de confiance
- *                                  courant (Welch ±z·se — cf. significance.ts),
+ *                                  courant (Welch ±t·se, MÊME loi que la p),
  *                                  p (test de Welch, df Welch-Satterthwaite)
  * Le registre est EXTENSIBLE : `extraMethods` exécute des méthodes supplémentaires
  * (ex. M4 multiniveau) dont les indicateurs sont empilés sans toucher au cœur.
@@ -18,7 +18,7 @@
  * exposé − non-exposé (multi − mono), comme la note de référence.
  */
 
-import { studentTTwoSidedP, invNorm } from './ols';
+import { studentTTwoSidedP, studentTQuantile } from './ols';
 import { confidenceLevel } from './significance';
 
 export type Reliability = 'fiable' | 'tendance' | 'descriptif';
@@ -98,7 +98,7 @@ interface Significance {
   p: number | null;
 }
 
-/** M3 — Cohen's d (pooled), IC au niveau de confiance courant (Welch ±z·se), p (test de Welch). */
+/** M3 — Cohen's d (pooled), IC au niveau de confiance courant (Welch ±t·se), p (test de Welch). */
 function significance(unexposed: number[], exposed: number[], gap: number | null): Significance {
   const nU = unexposed.length;
   const nE = exposed.length;
@@ -112,9 +112,6 @@ function significance(unexposed: number[], exposed: number[], gap: number | null
 
   const se = Math.sqrt((sU * sU) / nU + (sE * sE) / nE);
   if (!(se > 0)) return { cohensD, ciLow: null, ciHigh: null, p: null };
-  const z = invNorm((1 + confidenceLevel()) / 2); // 0,05→95 %≈1,96 ; 0,01→99 %≈2,576
-  const ciLow = gap - z * se;
-  const ciHigh = gap + z * se;
 
   // Test de Welch : t = gap/se, df Welch-Satterthwaite.
   const t = gap / se;
@@ -122,6 +119,13 @@ function significance(unexposed: number[], exposed: number[], gap: number | null
   const vE = (sE * sE) / nE;
   const df = (vU + vE) ** 2 / (vU ** 2 / (nU - 1) + vE ** 2 / (nE - 1));
   const p = studentTTwoSidedP(t, df);
+
+  // IC dans la MÊME loi que la p (Student à df de Welch), pas le quantile normal :
+  // sinon l'IC (plus étroit) exclut 0 alors que p >= alpha → IC et p se contredisent
+  // sur la même ligne. Avec ce t*, l'équivalence « IC exclut 0 ⟺ p < alpha » tient.
+  const tCrit = studentTQuantile(confidenceLevel(), df);
+  const ciLow = gap - tCrit * se;
+  const ciHigh = gap + tCrit * se;
 
   return { cohensD, ciLow, ciHigh, p };
 }

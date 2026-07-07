@@ -247,7 +247,7 @@ export async function renderFichePdf(
   // Seuil de significativité imprimé : lu au moment du RENDU
   // (pas d'import-time capture) pour refléter le réglage 0,01/0,05 en vigueur.
   // `alphaLabel()` est WinAnsi-safe (« alpha » épelé, cf. significance.ts).
-  const seuilFooter = `Seuil de significativité ${alphaLabel()} — les valeurs p exactes sont affichées ; réglage 0,01/0,05 disponible.`;
+  const seuilFooter = `Seuil de significativité ${alphaLabel()} — les valeurs p (exactes, ou bornées si extrêmement petites) sont affichées ; réglage 0,01/0,05 disponible.`;
   const pages = doc.getPages();
   const total = pages.length;
   pages.forEach((p, i) => {

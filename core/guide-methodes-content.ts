@@ -32,8 +32,9 @@ export function guideMethodesSections(): GuideSection[] {
       heading: 'Niveau national',
       body:
         'Écart brut = différence des moyennes de score entre le groupe cible et le groupe de référence. Une version ' +
-        'ajustée (régression OLS, erreurs-standards robustes) neutralisant région, statut et catégorie est ' +
-        'l’amélioration prévue ; écart brut et écart ajusté vont dans le même sens.',
+        'ajustée (régression OLS, erreurs-standards robustes) neutralisant région, statut et catégorie ' +
+        'corrige le biais de composition. Sur certains axes (secteur, établissement/service), l’ajustement ' +
+        'peut réduire, voire inverser, l’écart brut : c’est l’écart ajusté qui fait foi.',
     },
     {
       heading: 'M1 — Écart brut (par cabinet)',

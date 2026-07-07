@@ -452,9 +452,9 @@ export const CONTRAST_FICHE_CONFIGS: Readonly<Record<number, ContrastFicheConfig
     questionSpecific:
       'Hypothèse : la cotation HAS diffère selon le moment de l’année où l’évaluation est clôturée (premier vs second semestre).',
     methodeAxis:
-      'Axe : semestre de la date de clôture technique de l’évaluation (S1 janvier–juin / S2 juillet–décembre), un contraste S2 vs S1.',
+      'Axe : semestre de la date de clôture technique de l’évaluation (S1 janvier–juin / S2 juillet–décembre), un contraste S2 vs S1. L’écart est AJUSTÉ DE L’ANNÉE de clôture : sans cela, S1/S2 serait confondu par la baisse pluriannuelle des scores (le brut, quasi nul, masque un effet intra-année).',
     limitesExtra: [
-      'Le semestre repose sur la date de clôture technique, qui peut différer de la date de la visite. Une lecture pluriannuelle (effet millésime) n’est pas faite ici.',
+      'L’écart S1/S2 est ajusté de l’année de clôture (la baisse pluriannuelle des scores, sinon confondante, est neutralisée) ; l’effet propre restant est de FAIBLE AMPLEUR même s’il est statistiquement net. Le semestre repose sur la date de clôture technique, qui peut différer de la date de la visite.',
     ],
     implicationsSpecific:
       'Pour les cabinets : repère sur une éventuelle dérive de sévérité en cours d’année (montée en charge, fin d’année). Pour le régulateur : piste de contrôle de stabilité temporelle.',

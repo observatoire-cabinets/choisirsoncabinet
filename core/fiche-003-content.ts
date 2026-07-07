@@ -63,8 +63,9 @@ export function buildFiche003Content(
         'dimensions (mono/multi, statut, secteur, capacité, groupe lucratif, temporel, établissement/service).',
         'Objectif : rendre visible l’hétérogénéité des cabinets et identifier d’éventuelles pratiques NON',
         'CONFORMES à l’égalité de traitement attendue lors de l’évaluation externe — volontaires ou',
-        'involontaires. « Non conforme » s’entend ici au sens strictement statistique (écart systématique et',
-        'significatif entre groupes), non au sens d’une non-conformité d’accréditation. Le score mesure la',
+        'involontaires. « Non conforme » s’entend ici au sens strictement statistique (écart fiable, d’ampleur',
+        'notable — Cohen d ≥ 0,2 —, significatif après correction Holm-Bonferroni et de même sens qu’au national',
+        'ajusté), non au sens d’une non-conformité d’accréditation. Le score mesure la',
         'conformité méthodologique au référentiel, pas la qualité réelle des soins.',
       ].join(' '),
       question: [
@@ -96,6 +97,7 @@ export function buildFiche003Content(
       limites: [
         'Niveau global NON ajusté (portefeuille non neutralisé) — une version ajustée (effets fixes cabinet) est une',
         'amélioration prévue. Région et DROM exclus de la matrice. Cohorte non exhaustive (seuls les évalués figurent).',
+        'L’axe « groupe lucratif » est un PROXY (statut privé commercial croisé avec une grande entité juridique FINESS), pas un vrai groupe corporate.',
         'Outcome = conformité méthodologique, pas qualité de soin. Effectifs souvent faibles par cabinet → beaucoup de',
         'paliers descriptifs.',
       ].join(' '),
