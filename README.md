@@ -10,20 +10,19 @@ sont embarquées : l'application fonctionne entièrement sur votre machine.
 ## Ce qu'elle fait
 
 - **Fiches** — 12 fiches statistiques (mono / multi-établissements, statut juridique,
-  secteur, capacité, territoire…) générées en PDF, hors-ligne.
-- **Cabinet choisi** — écart d'un cabinet au niveau national + établissements les moins
-  bien notés (nom + adresse, données publiques), présentation factuelle.
+  secteur, territoire…) générées en PDF, hors-ligne.
+- **Cabinet choisi** — écart d'un cabinet au niveau national + identification de structures afin de prendre connaissance de la manière dont l'évaluation s'est déroulé et avec qui elle a été faite (nom + adresse, données publiques), présentation factuelle.
 - **Registre** — lignes de vie des cabinets (première apparition, dernière évaluation
   publiée), reconstituées à partir des évaluations publiées.
-- **Réglages** — seuil de significativité **α = 0,05 par défaut** (bascule 0,01),
-  p-value toujours affichée, mise à jour depuis les sources publiques, dossier de sortie.
+- **Réglages** statistique classique — seuil de significativité **α = 0,05 par défaut** (bascule 0,01),
+  p-value toujours affichée, avec mise à jour depuis les sources publiques, dossier de sortie.
 
 ## Méthode & seuil
 
 Les écarts sont estimés par régression linéaire (moindres carrés ordinaires) avec
 erreurs-types robustes, puis qualifiés par un palier de fiabilité (effectifs), une taille
 d'effet (Cohen's d) et une p-value. Le seuil par défaut est **α = 0,05 (IC 95 %)** ; une
-bascule **0,01 (IC 99 %)** est disponible dans les Réglages. Le seuil retenu est imprimé
+bascule **0,01 (IC 99 %)** statistique est disponible dans les Réglages. Le seuil retenu est imprimé
 sur chaque PDF.
 
 > Une association statistique n'est pas une causalité : un écart systématique et
