@@ -9,6 +9,11 @@ sont embarquées : l'application fonctionne entièrement sur votre machine.
 
 ## Ce qu'elle fait
 
+- **Cotations** (écran d'accueil) — vue générale de tous les cabinets : répartition des
+  grades **A/B/C/D** de leurs rapports, cotations moyennes par **chapitre** (échelle 1 à 4),
+  synthèse des **critères impératifs**, palier de fiabilité ; profil détaillé par cabinet
+  (18 critères impératifs, structures évaluées) ; exports **CSV** et **PDF**. Les cotations
+  sont descriptives : elles reflètent la notation portée par l'évaluateur, telle que publiée.
 - **Fiches** — 12 fiches statistiques (mono / multi-établissements, statut juridique,
   secteur, territoire…) générées en PDF, hors-ligne.
 - **Cabinet choisi** — écart d'un cabinet au niveau national + identification de structures afin de prendre connaissance de la manière dont l'évaluation s'est déroulé et avec qui elle a été faite (nom + adresse, données publiques), présentation factuelle.
