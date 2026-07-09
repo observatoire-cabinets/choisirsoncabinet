@@ -304,6 +304,9 @@ export function buildContrastFicheContent(
 
       resultats: [
         `${adjusted ? 'Au national (écarts ajustés ; brut en contexte)' : 'Au national (écarts bruts)'} : ${list}.`,
+        adjusted
+          ? 'Comment lire chaque contraste : l’écart « ajusté » est la meilleure estimation, en points sur 100, à conditions comparables (facteurs neutralisés) ; la fourchette entre crochets (intervalle de confiance) encadre le vrai écart le plus vraisemblable — si elle contient 0, l’écart n’est pas établi ; l’écart « brut » entre parenthèses est celui observé avant neutralisation des autres facteurs.'
+          : 'Comment lire : chaque écart est exprimé en points sur 100 ; positif = le groupe cible est mieux noté que la référence, négatif = moins bien noté.',
         'La dispersion entre cabinets est l’information centrale : certains notent nettement plus haut',
         'tel groupe, d’autres l’inverse. Le détail nominatif — rang, effectifs, écart, intervalle de',
         'confiance, p-value, palier de fiabilité — figure dans le ou les fichiers joints, et la',

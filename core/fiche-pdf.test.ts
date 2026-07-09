@@ -93,8 +93,10 @@ describe('renderFichePdf — section « Données de calcul et vérification »',
     expect(text).toContain('Écart brut = 85,00 - 70,00 = +15,00');
     // Guide des méthodes (rendu dans chaque fiche) : M1 et Δ vs national.
     // (fragments courts : le wrapping PDF coupe les lignes, l'extraction concatène sans espace)
-    expect(text).toContain('groupe cible - moyenne du');
-    expect(text).toContain('écart du cabinet - écart national brut');
+    // Tolérant au wrapping : la coupure de ligne peut tomber après le tiret
+    // (l'extraction concatène alors sans espace).
+    expect(text).toMatch(/groupe cible - ?moyenne du/);
+    expect(text).toMatch(/écart du cabinet - ?écart national brut/);
     // « Principes » : « Association ≠ causalité » (≠ strippé → sens inversé) reformulé épelé.
     expect(text).toMatch(/Une association n'est ?pas ?une ?causalité/);
   });

@@ -89,7 +89,10 @@ export function buildCabinetsBloc(contrasts: CabinetContrastSummary[]): string {
     );
   }
   parts.push(
-    `Comment lire : chaque cabinet est mesuré sur SES seules évaluations (écart brut M1), qualifié par un palier de fiabilité (M2) et un test de significativité (M3) — voir le guide des méthodes statistiques joint/référencé.`,
+    `Comment lire : chaque cabinet est mesuré sur SES seules évaluations (écart brut M1 : moyenne du groupe cible moins moyenne du groupe de référence, chez lui), qualifié par un palier de fiabilité (M2 : assez d'évaluations pour conclure ?) et un test de significativité (M3 : l'écart dépasse-t-il le hasard ?) — détail dans le guide des méthodes statistiques joint/référencé.`,
+  );
+  parts.push(
+    `Ce que veulent dire ces chiffres : « pro-cible » signifie que le cabinet note mieux le groupe cible que le groupe de référence ; « pro-référence », l'inverse ; « neutre », un écart quasi nul. La médiane est l'écart du cabinet du milieu (la moitié des cabinets fait plus, l'autre moitié moins) ; [Q1 ; Q3] encadre la moitié centrale des cabinets — plus cet intervalle est large, plus les pratiques divergent d'un cabinet à l'autre.`,
   );
   parts.push(
     `Le classement complet nominatif figure dans le(s) fichier(s) joint(s) (rang, effectifs, écart, IC, p, palier, Δ vs national).`,
@@ -290,7 +293,11 @@ export function buildFiche001Content(
       resultats: [
         `Scores moyens : multi ${f.meanMulti} / 100 ; mono ${f.meanMono} / 100 ; écart brut ${f.gapSigned} points.`,
         `Écart ajusté (région, statut, catégorie contrôlés) : ${f.beta} points [IC ${ciPct} : ${f.ciLow} à ${f.ciHigh}] ;`,
-        `p ${f.pResult}. Indice qualité A/B/C/D : les mono sont 2,9 fois plus souvent classés D`,
+        `p ${f.pResult}. Lecture : la meilleure estimation de l'écart, à profil comparable, est ${f.beta} points`,
+        `sur 100, et le vrai écart se situe très vraisemblablement entre ${f.ciLow} et ${f.ciHigh} points ; la`,
+        'p-value est la probabilité d\'observer un tel écart s\'il n\'existait en réalité aucune différence',
+        '(plus elle est petite, plus l\'écart est crédible).',
+        'Indice qualité A/B/C/D : les mono sont 2,9 fois plus souvent classés D',
         '(9,6 % vs 3,3 %). Toutes choses égales par ailleurs, l’appartenance à un groupe multiplie par',
         '1,8 la probabilité d’obtenir A ou B et divise par 2,6 la probabilité d’être classé D.',
         'Relation monotone : chaque doublement de la taille du gestionnaire ajoute en moyenne +0,85 point',
