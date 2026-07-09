@@ -16,23 +16,28 @@ describe('cabinetDetail', () => {
     // (aucun choix du picker ne mène à un cabinetDetail null).
     expect(list).not.toContain('CAB BETA');
   });
-  it('comparaison nationale + bottom-5 nominatif avec adresse', async () => {
+  it('comparaison nationale + liste COMPLÈTE nominative avec adresse, du score le plus bas au plus élevé', async () => {
     const ds = await loadDataset(FIX);
     const d = cabinetDetail(ds, 'CAB_DETAIL')!;
     expect(d.nEvaluations).toBe(7);
     expect(d.meanCabinet).toBeGreaterThan(0);
     expect(d.gapVsNational).toBeTypeOf('number');
-    expect(d.lowestScored).toHaveLength(5);              // 7 étabs → bottom 5
-    expect(d.lowestScored[0].score).toBeLessThanOrEqual(d.lowestScored[1].score);
-    const first = d.lowestScored[0];
+    // Toutes les structures, plus de coupe à 5.
+    expect(d.establishments).toHaveLength(7);
+    expect(d.establishments.length).toBe(d.nEvaluations);
+    // Ordre : score croissant (la 1re = la moins bien notée, la dernière = la mieux notée).
+    for (let i = 1; i < d.establishments.length; i++) {
+      expect(d.establishments[i - 1].score).toBeLessThanOrEqual(d.establishments[i].score);
+    }
+    const first = d.establishments[0];
     expect(first.name).toBeTruthy();                      // officialLabel ou raisonSociale
     expect(first.address).toMatch(/\d{5}/);               // code postal présent
   });
   it('repli terminal : raisonSociale null + aucune ligne base-doc → nom FINESS, adresse vide', async () => {
     const ds = await loadDataset(FIX);
     const d = cabinetDetail(ds, 'CAB_DETAIL')!;
-    // 700000007 (score 55) : dans le bottom-5 (index ≠ 0), sans base-doc NI raisonSociale.
-    const seven = d.lowestScored.find((e) => e.finessGeo === '700000007')!;
+    // 700000007 (score 55) : sans base-doc NI raisonSociale.
+    const seven = d.establishments.find((e) => e.finessGeo === '700000007')!;
     expect(seven.name).toBe('FINESS 700000007');
     expect(seven.address).toBe('');
   });
@@ -45,11 +50,11 @@ describe('cabinetDetail', () => {
     const ds = await loadDataset(FIX);
     const d = cabinetDetail(ds, 'CAB_DETAIL')!;
     // 700000004 : addressLine2 = "75004 PARIS" duplique postalCode+commune (casse différente).
-    const four = d.lowestScored.find((e) => e.finessGeo === '700000004')!;
+    const four = d.establishments.find((e) => e.finessGeo === '700000004')!;
     expect((four.address.match(/75004 Paris/gi) ?? []).length).toBe(1);
     expect(four.address).toBe('4 rue Detail, 75004 Paris');
     // 700000002 : addressLine2 = "2 Rue Detail" duplique addressLine1 (casse différente).
-    const two = d.lowestScored.find((e) => e.finessGeo === '700000002')!;
+    const two = d.establishments.find((e) => e.finessGeo === '700000002')!;
     expect((two.address.match(/2 rue Detail/gi) ?? []).length).toBe(1);
     expect(two.address).toBe('2 rue Detail, 75002 Paris');
   });

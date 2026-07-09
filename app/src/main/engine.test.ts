@@ -27,12 +27,23 @@ describe.skipIf(!has)('EngineService (données réelles)', () => {
     expect([...c]).toEqual([...c].sort((a, b) => a.localeCompare(b, 'fr')));
   });
 
-  it('cabinetDetail : comparaison nationale + ≤5 structures nominatives', () => {
+  it('cabinetDetail : comparaison nationale + liste COMPLÈTE triée par score croissant', () => {
     const d = eng.cabinetDetail(eng.listCabinets()[0]);
     expect(d).not.toBeNull();
-    expect(d!.lowestScored.length).toBeLessThanOrEqual(5);
+    // Toutes les structures évaluées (plus de coupe à 5).
+    expect(d!.establishments.length).toBe(d!.nEvaluations);
+    for (let i = 1; i < d!.establishments.length; i++) {
+      expect(d!.establishments[i - 1].score).toBeLessThanOrEqual(d!.establishments[i].score);
+    }
     expect(typeof d!.gapVsNational).toBe('number');
   });
+
+  it('exportCabinetRanking écrit un PDF de classement hors ligne', async () => {
+    const out = mkdtempSync(join(tmpdir(), 'obs-cab-'));
+    const p = await eng.exportCabinetRanking(eng.listCabinets()[0], out);
+    expect(p.endsWith('.pdf')).toBe(true);
+    expect(existsSync(p)).toBe(true);
+  }, 60_000);
 
   it('registry : lignes de vie', () => {
     expect(eng.registry().length).toBeGreaterThan(100);

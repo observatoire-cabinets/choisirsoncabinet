@@ -11,6 +11,7 @@ const api: ObsApi = {
   setSettings: (s) => ipcRenderer.invoke('setSettings', s),
   pickOutputDir: () => ipcRenderer.invoke('pickOutputDir'),
   generateFiches: (a) => ipcRenderer.invoke('generateFiches', a),
+  exportCabinetRanking: (cabinet, outDir) => ipcRenderer.invoke('exportCabinetRanking', { cabinet, outDir }),
   refresh: () => ipcRenderer.invoke('refresh'),
   onRefreshProgress: (cb) => {
     ipcRenderer.on('refresh:progress', (_e, msg: string) => cb(msg));

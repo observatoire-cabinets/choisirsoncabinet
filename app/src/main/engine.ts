@@ -4,6 +4,7 @@ import { loadDataset } from '../../../store/load';
 import { refreshDataset } from '../../../store/refresh';
 import { makeStoreProxy } from '../../../store/proxy';
 import { listCabinets, cabinetDetail } from '../../../store/cabinet-detail';
+import { renderCabinetRankingPdf } from '../../../core/cabinet-ranking-pdf';
 import { cabinetRegistry } from '../../../store/registry';
 import { generateFiche } from '../../../core/generate';
 import { setSignificanceAlpha } from '../../../core/significance';
@@ -53,6 +54,30 @@ export class EngineService {
   }
   registry() {
     return cabinetRegistry(this.req().evalHistory);
+  }
+
+  /** Exporte la liste complète des structures d'un cabinet en PDF (hors ligne). Renvoie le chemin écrit. */
+  async exportCabinetRanking(cabinet: string, outDir: string): Promise<string> {
+    const ds = this.req();
+    const detail = cabinetDetail(ds, cabinet);
+    if (!detail) throw new Error(`Aucune donnée pour le cabinet « ${cabinet} ».`);
+    const fmt = (iso: string | null | undefined): string => {
+      const m = iso ? /^(\d{4})-(\d{2})-(\d{2})/.exec(iso) : null;
+      return m ? `${m[3]}/${m[2]}/${m[1]}` : '(date inconnue)';
+    };
+    const period = `HAS du ${fmt(ds.meta.hasSyncedAt)} · FINESS du ${fmt(ds.meta.finessSnapshotMax)}`;
+    const buf = await renderCabinetRankingPdf(detail, period);
+    // Slug de fichier : tout caractère non alphanumérique ASCII (accents inclus)
+    // devient un séparateur — suffisant et robuste pour un nom de fichier.
+    const slug =
+      cabinet
+        .replace(/[^a-zA-Z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .toLowerCase()
+        .slice(0, 60) || 'cabinet';
+    const p = join(outDir, `classement-cabinet-${slug}.pdf`);
+    await writeFile(p, buf);
+    return p;
   }
 
   /** Sérialisé : alpha est un état global module — jamais muter pendant une génération. */

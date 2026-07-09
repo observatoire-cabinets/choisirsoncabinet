@@ -26,6 +26,8 @@ export interface ObsApi {
   setSettings(s: Settings): Promise<void>;
   pickOutputDir(): Promise<string | null>;
   generateFiches(a: GenerateArgs): Promise<GenerateResult>;
+  /** Exporte la liste complète des structures d'un cabinet en PDF ; renvoie le chemin écrit. */
+  exportCabinetRanking(cabinet: string, outDir: string): Promise<string>;
   refresh(): Promise<RefreshSummary>;
   onRefreshProgress(cb: (msg: string) => void): void;
 }

@@ -21,5 +21,8 @@ export function registerIpc(engine: EngineService): void {
   });
 
   ipcMain.handle('generateFiches', (_e, a: GenerateArgs) => engine.generateFiches(a));
+  ipcMain.handle('exportCabinetRanking', (_e, a: { cabinet: string; outDir: string }) =>
+    engine.exportCabinetRanking(a.cabinet, a.outDir),
+  );
   ipcMain.handle('refresh', () => engine.refresh(resolveDataDir(), resolveArchiveRoot()));
 }

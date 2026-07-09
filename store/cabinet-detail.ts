@@ -1,14 +1,15 @@
 /**
- * Vue « cabinet choisi » : comparaison nationale + les 5
- * établissements notés le plus bas par ce cabinet (nom officiel + adresse,
- * données publiques HAS/FINESS). Présentation STRICTEMENT factuelle — aucun
- * qualificatif dans la structure produite (charte anti-dénigrement) : le
- * consommateur (fiche/PDF) porte la formulation, pas ce module.
+ * Vue « cabinet choisi » : comparaison nationale + la liste COMPLÈTE des
+ * structures évaluées par ce cabinet (nom officiel + adresse, données publiques
+ * HAS/FINESS), triée du score le plus bas au plus élevé. Présentation
+ * STRICTEMENT factuelle — aucun qualificatif dans la structure produite (charte
+ * anti-dénigrement) : le consommateur (écran/PDF) porte la formulation, pas ce
+ * module.
  */
 
 import type { Dataset, BaseDocRow } from './types';
 
-export interface LowScoredEstablishment {
+export interface EvaluatedEstablishment {
   finessGeo: string;
   name: string;
   address: string;
@@ -22,7 +23,9 @@ export interface CabinetDetail {
   meanCabinet: number;
   meanNational: number;
   gapVsNational: number;
-  lowestScored: LowScoredEstablishment[]; // « les 5 scores les plus bas attribués par ce cabinet »
+  /** Toutes les structures évaluées par ce cabinet, triées par score croissant
+   *  (la première = la moins bien notée, la dernière = la mieux notée). */
+  establishments: EvaluatedEstablishment[];
 }
 
 /** Égalité de contenu : trim, espaces multiples réduits, casse ignorée. */
@@ -68,9 +71,8 @@ export function cabinetDetail(ds: Dataset, cabinet: string): CabinetDetail | nul
   const meanCabinet = mean(mine.map((e) => e.score!));
   const meanNational = mean(scored.map((e) => e.score!));
   const docByGeo = new Map(ds.baseDoc.map((b) => [b.finessGeo, b]));
-  const lowestScored = [...mine]
+  const establishments = [...mine]
     .sort((a, b) => a.score! - b.score! || (a.evalDate ?? '').localeCompare(b.evalDate ?? ''))
-    .slice(0, 5)
     .map((e) => {
       const doc = docByGeo.get(e.finessGeo);
       return {
@@ -87,6 +89,6 @@ export function cabinetDetail(ds: Dataset, cabinet: string): CabinetDetail | nul
     meanCabinet,
     meanNational,
     gapVsNational: meanCabinet - meanNational,
-    lowestScored,
+    establishments,
   };
 }
