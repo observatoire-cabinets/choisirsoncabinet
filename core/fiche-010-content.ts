@@ -53,8 +53,8 @@ export function buildFiche010Content(
         '« spécialisé » si un secteur représente au moins 60 % de ses évaluations, sinon « généraliste ». Elle',
         'compare ensuite le comportement de notation des spécialisés et des généralistes. Objectif : repérer',
         'd’éventuelles pratiques non conformes à l’égalité de traitement (écart systématique et significatif',
-        'entre groupes) liées à la spécialisation. Le score mesure la conformité',
-        'méthodologique, pas la qualité réelle des soins.',
+        'entre groupes) liées à la spécialisation. Le score mesure le niveau de satisfaction',
+        'des exigences du référentiel par la structure, tel que coté par l’évaluateur, pas la qualité réelle des soins.',
       ].join(' '),
       question: [
         'Hypothèse : la spécialisation d’un cabinet est associée à un comportement de notation particulier',
@@ -86,13 +86,13 @@ export function buildFiche010Content(
         'du territoire) et purement descriptive — une association, pas une preuve causale. Chaque cabinet',
         'compte pour UN point (son profil agrégé), pas pour une distribution : la fiche ne dit rien de la',
         'dispersion interne d’un cabinet ni de la trajectoire d’une évaluation prise isolément. Et le score',
-        'mesure la conformité méthodologique au référentiel, pas la qualité réelle des soins.',
+        'mesure le niveau de satisfaction des exigences du référentiel par la structure, tel que coté par l’évaluateur, pas la qualité réelle des soins.',
       ].join(' '),
       limites: [
         'Spécialisation mesurée par le volume, pas par l’expertise déclarée. Seuil 60 % conventionnel (paramétrable).',
         'Regroupement sectoriel des catégories FINESS (le niveau « Autres » est hétérogène). Écarts BRUTS,',
         // « sans preuve de » épelé (pas ≠ U+2260, strippé par sanitizeForWinAnsi → sens inversé dans le PDF)
-        'association sans preuve de causalité ; cohorte non exhaustive ; outcome = conformité méthodologique.',
+        'association sans preuve de causalité ; cohorte non exhaustive ; outcome = cotation de la structure par l’évaluateur (satisfaction des exigences du référentiel).',
       ].join(' '),
       misePerspective: [
         'Aucune statistique officielle ne relie spécialisation du cabinet et notation. Cette fiche ouvre la question',

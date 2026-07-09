@@ -155,8 +155,8 @@ export function buildFiche002Content(
           ? 'L’ajustement (OLS, secteur + région) isole l’effet propre du statut de la composition. Surtout, ces écarts varient'
           : 'Ces écarts sont BRUTS (non ajustés des autres facteurs) et descriptifs. Surtout, ils varient',
         'fortement d’un cabinet évaluateur à l’autre — la fiche révèle, pour chacun, comment il note',
-        'le privé par rapport au public. Le score mesure la conformité méthodologique au référentiel,',
-        'pas directement la qualité réelle des soins.',
+        'le privé par rapport au public. Le score mesure le niveau de satisfaction des exigences du référentiel par la structure,',
+        'tel que coté par l’évaluateur, pas directement la qualité réelle des soins.',
       ].join(' '),
 
       question: [
@@ -204,8 +204,8 @@ export function buildFiche002Content(
       ceQueNeDitPas: [
         'Elle n’établit pas de lien de cause à effet : c’est une association mesurée sur données',
         'publiques, pas une preuve causale — un écart par statut peut refléter d’autres facteurs.',
-        'Elle ne mesure pas la qualité réelle des soins, seulement la conformité méthodologique au',
-        'référentiel. Et elle ne tranche pas POURQUOI un cabinet note un secteur plus haut ou plus bas',
+        'Elle ne mesure pas la qualité réelle des soins, seulement la cotation de la structure par',
+        'l’évaluateur (satisfaction des exigences du référentiel). Et elle ne tranche pas POURQUOI un cabinet note un secteur plus haut ou plus bas',
         'qu’un autre : elle décrit l’écart, sans dire s’il traduit des différences réelles de',
         'fonctionnement ou un biais de l’exercice d’évaluation.',
       ].join(' '),
@@ -216,7 +216,7 @@ export function buildFiche002Content(
           : 'Écarts BRUTS non ajustés : un écart par statut peut refléter d’autres facteurs corrélés (taille, secteur, territoire). Une version ajustée (OLS multivarié) est une amélioration prévue.',
         'Causalité non démontrée ; association sur données publiques.',
         'Cohorte non exhaustive : seuls les établissements déjà évalués figurent.',
-        'Outcome = conformité méthodologique, pas qualité de soin réelle.',
+        'Outcome = cotation de la structure par l’évaluateur (satisfaction des exigences du référentiel), pas la qualité de soin réelle.',
         'Effectifs par cabinet souvent faibles → beaucoup de paliers descriptifs, à ne pas',
         'sur-interpréter.',
       ].join(' '),

@@ -54,8 +54,8 @@ export function buildFiche012Content(
         'dimension (taille, statut, secteur, capacité, groupe lucratif, temporel, établissement/service)',
         'et un MÉTA-CLASSEMENT des cabinets selon le nombre de dimensions où leur notation s’écarte',
         'significativement de l’égalité de traitement. Objectif : une vue d’ensemble des pratiques s’écartant',
-        'le plus de cette égalité — volontaires ou involontaires. Le score mesure la conformité',
-        'méthodologique au référentiel, pas la qualité réelle des soins.',
+        'le plus de cette égalité — volontaires ou involontaires. Le score mesure le niveau de satisfaction',
+        'des exigences du référentiel par la structure, tel que coté par l’évaluateur, pas la qualité réelle des soins.',
       ].join(' '),
       question: [
         'Hypothèse : certains cabinets concentrent des écarts significatifs sur plusieurs dimensions à la fois.',
@@ -82,15 +82,15 @@ export function buildFiche012Content(
         'Elle ne dit PAS pourquoi un cabinet s’écarte : « non conforme » s’entend au sens statistique (écart',
         'systématique et significatif d’égalité de traitement entre groupes), pas au sens d’une non-conformité',
         'd’accréditation, et il s’agit d’une association sur données publiques, jamais d’une preuve causale.',
-        'Elle ne mesure pas la qualité réelle des soins, seulement la conformité méthodologique au référentiel.',
+        'Elle ne mesure pas la qualité réelle des soins, seulement la cotation de la structure par l’évaluateur (satisfaction des exigences du référentiel).',
         'Enfin, c’est la photographie d’UN snapshot annuel : ni tendance pluriannuelle, ni évolution, ni',
         'comparaison de l’intensité des dimensions entre elles (toutes ne se valent pas).',
       ].join(' '),
       limites: [
         // « sans preuve de » épelé (pas ≠ U+2260, strippé par sanitizeForWinAnsi → sens inversé dans le PDF)
         'Le compte agrège des dimensions hétérogènes (toutes ne se valent pas). Association sans preuve de causalité. L’axe « groupe lucratif » est un PROXY (statut privé commercial croisé avec une grande entité juridique FINESS), pas l’appartenance à un groupe corporate réel.',
-        'Cohorte non exhaustive ; région/DROM non inclus dans les contrastes phares ; outcome = conformité',
-        'méthodologique. Synthèse annuelle = photographie d’un snapshot, pas une tendance pluriannuelle.',
+        'Cohorte non exhaustive ; région/DROM non inclus dans les contrastes phares ; outcome = cotation de la',
+        'structure par l’évaluateur (satisfaction des exigences du référentiel). Synthèse annuelle = photographie d’un snapshot, pas une tendance pluriannuelle.',
       ].join(' '),
       misePerspective: [
         'Le bilan annuel HAS publie des moyennes nationales sans synthèse par cabinet. Cette méta-fiche propose une',

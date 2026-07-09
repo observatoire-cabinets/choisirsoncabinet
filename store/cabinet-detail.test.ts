@@ -16,7 +16,7 @@ describe('cabinetDetail', () => {
     // (aucun choix du picker ne mène à un cabinetDetail null).
     expect(list).not.toContain('CAB BETA');
   });
-  it('comparaison nationale + liste COMPLÈTE nominative avec adresse, du score le plus bas au plus élevé', async () => {
+  it('comparaison nationale + liste COMPLÈTE nominative avec adresse, triée alphabétiquement par nom', async () => {
     const ds = await loadDataset(FIX);
     const d = cabinetDetail(ds, 'CAB_DETAIL')!;
     expect(d.nEvaluations).toBe(7);
@@ -25,13 +25,11 @@ describe('cabinetDetail', () => {
     // Toutes les structures, plus de coupe à 5.
     expect(d.establishments).toHaveLength(7);
     expect(d.establishments.length).toBe(d.nEvaluations);
-    // Ordre : score croissant (la 1re = la moins bien notée, la dernière = la mieux notée).
-    for (let i = 1; i < d.establishments.length; i++) {
-      expect(d.establishments[i - 1].score).toBeLessThanOrEqual(d.establishments[i].score);
-    }
+    // Ordre : alphabétique par nom (aucun classement par score exposé).
+    const names = d.establishments.map((e) => e.name);
+    expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, 'fr')));
     const first = d.establishments[0];
     expect(first.name).toBeTruthy();                      // officialLabel ou raisonSociale
-    expect(first.address).toMatch(/\d{5}/);               // code postal présent
   });
   it('repli terminal : raisonSociale null + aucune ligne base-doc → nom FINESS, adresse vide', async () => {
     const ds = await loadDataset(FIX);

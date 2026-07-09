@@ -28,8 +28,10 @@ export function guideMethodesSections(): GuideSection[] {
       body:
         // « n’est pas » épelé (pas ≠ U+2260, strippé par sanitizeForWinAnsi → sens inversé dans le PDF)
         'Chaque fiche étudie un axe (taille, statut, région, secteur...) et son lien avec le score HAS ' +
-        'consolidé (échelle 0–100). Trois repères avant toute lecture. 1) Le score mesure la conformité ' +
-        'méthodologique au référentiel d’évaluation, pas directement la qualité réelle des soins : un ' +
+        'consolidé (échelle 0–100). Trois repères avant toute lecture. 1) Le score mesure le niveau de ' +
+        'satisfaction des exigences du référentiel par la structure, tel que coté par l’évaluateur, pas ' +
+        'directement la qualité réelle des soins — et comme l’open data ne fournit que le score, pas le ' +
+        'contenu du rapport, la justesse de la cotation elle-même n’y est pas vérifiable : un ' +
         'établissement peut bien accompagner et mal documenter, ou l’inverse. 2) Une association ' +
         'n’est pas une causalité : on mesure des écarts statistiques sur données publiques, on n’établit ' +
         'pas de lien de cause à effet — constater que deux choses vont ensemble ne dit ni que l’une ' +

@@ -197,7 +197,8 @@ export function renderCabinetMatrixPdf(profiles: CabinetProfile[], periodLabel: 
       'sur cette dimension, suivi du palier de fiabilité : F = Fiable (≥30/30), T = Tendance (≥10/10), D = Descriptif (sinon, ' +
       // « n’est pas » épelé (pas ≠ U+2260, strippé par sanitizeForWinAnsi → sens inversé dans le PDF)
       'à ne pas sur-interpréter). « — » = non calculable. Écarts BRUTS, non ajustés ; une association n’est pas une causalité ; le score mesure ' +
-      'la conformité méthodologique, pas la qualité réelle des soins. Région et DROM exclus (souvent non calculables par cabinet).',
+      'le niveau de satisfaction des exigences du référentiel par la structure, tel que coté par l’évaluateur, pas la qualité réelle des soins ; ' +
+      'l’open data ne fournit que le score, pas le contenu du rapport, donc la justesse de la cotation n’y est pas vérifiable. Région et DROM exclus (souvent non calculables par cabinet).',
   );
 }
 

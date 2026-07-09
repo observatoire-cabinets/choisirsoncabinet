@@ -31,7 +31,7 @@ describe('buildFiche003Content', () => {
     const c = buildFiche003Content().blocs.ceQueNeDitPas!.toLowerCase();
     expect(c).toMatch(/descriptif/);
     expect(c).toMatch(/brut/);
-    expect(c).toMatch(/conformité méthodologique/);
+    expect(c).toMatch(/satisfaction des exigences du référentiel/);
     expect(c).toMatch(/pas la qualité réelle des soins/);
   });
 

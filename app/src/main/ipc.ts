@@ -25,4 +25,13 @@ export function registerIpc(engine: EngineService): void {
     engine.exportCabinetRanking(a.cabinet, a.outDir),
   );
   ipcMain.handle('refresh', () => engine.refresh(resolveDataDir(), resolveArchiveRoot()));
+
+  ipcMain.handle('cotationGeneralView', () => engine.cotationGeneralView());
+  ipcMain.handle('cotationCabinetProfile', (_e, cabinet: string) => engine.cotationCabinetProfile(cabinet));
+  ipcMain.handle('exportCotationsGeneral', (_e, a: { outDir: string; format: 'csv' | 'pdf' }) =>
+    engine.exportCotationsGeneral(a.outDir, a.format),
+  );
+  ipcMain.handle('exportCotationCabinet', (_e, a: { cabinet: string; outDir: string; format: 'csv' | 'pdf' }) =>
+    engine.exportCotationCabinet(a.cabinet, a.outDir, a.format),
+  );
 }

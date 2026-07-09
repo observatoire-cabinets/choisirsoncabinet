@@ -234,8 +234,10 @@ export async function renderRankingPdf(report: ContrastReport, periodLabel: stri
   }
   y -= 8;
   para(
-    'Lecture descriptive : association sur données publiques, pas de preuve causale ; le score mesure la ' +
-      'conformité méthodologique au référentiel, pas la qualité réelle des soins. Comparaisons brutes, non ' +
+    'Lecture descriptive : association sur données publiques, pas de preuve causale ; le score mesure le ' +
+      'niveau de satisfaction des exigences du référentiel par la structure, tel que coté par l’évaluateur, ' +
+      'pas la qualité réelle des soins — et l’open data ne fournit que le score, pas le contenu du rapport, ' +
+      'donc la justesse de la cotation elle-même n’y est pas vérifiable. Comparaisons brutes, non ' +
       'ajustées des autres facteurs (taille, statut, secteur, territoire).',
     8.5,
     font,

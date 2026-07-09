@@ -51,6 +51,33 @@ function asDate(v: unknown): Date | null {
   return null;
 }
 
+function asNum(v: unknown): number | null {
+  if (v === null || v === undefined || v === '') return null;
+  const n = Number(v as number | string);
+  return Number.isFinite(n) ? n : null;
+}
+
+function asGrade(v: unknown): 'A' | 'B' | 'C' | 'D' | null {
+  const s = asString(v);
+  return s === 'A' || s === 'B' || s === 'C' || s === 'D' ? s : null;
+}
+
+/** Bornage véracité : une cotation HAS est sur l'échelle 1–4 ; hors plage → null. */
+function asCotation(v: unknown): number | null {
+  const n = asNum(v);
+  return n !== null && n >= 1 && n <= 4 ? n : null;
+}
+
+/** Toutes les colonnes cotation_critere_imperatif_* dans l'échelle 1–4, triées par code (numériquement). */
+function imperativesFromRaw(raw: RawParquetRow): { code: string; value: number }[] {
+  const prefix = 'cotation_critere_imperatif_';
+  return Object.keys(raw)
+    .filter((k) => k.startsWith(prefix))
+    .map((k) => ({ code: k.slice(prefix.length), value: asCotation(raw[k]) }))
+    .filter((e): e is { code: string; value: number } => e.value !== null)
+    .sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }));
+}
+
 /**
  * YYYY-MM-DD en UTC. Miroir de `to_char((ts AT TIME ZONE 'UTC')::date,'YYYY-MM-DD')`
  * de l'export : les valeurs DATE du parquet sont décodées à minuit UTC par
@@ -88,6 +115,16 @@ export function essmsRowFromRaw(raw: RawParquetRow): EssmsRow {
     categCode: asString(raw.essms_categ_finess_code) ?? '',
     departement: asString(raw.departement_code) ?? '',
     evalDate: toUtcDateString(asDate(raw.eval_date_cloture_tech)),
+    grade: asGrade(raw.indice_qualite),
+    chapters: [
+      asCotation(raw.cotation_chapitre_1),
+      asCotation(raw.cotation_chapitre_2),
+      asCotation(raw.cotation_chapitre_3),
+    ],
+    imperatives: imperativesFromRaw(raw),
+    ciEvaluated: asNum(raw.nb_ci),
+    ciMet: asNum(raw.nb_ci_atteints),
+    ciAbove35: asNum(raw.nb_ci_sup_3_5),
   };
 }
 

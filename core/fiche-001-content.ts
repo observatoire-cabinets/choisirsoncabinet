@@ -98,7 +98,7 @@ export function buildCabinetsBloc(contrasts: CabinetContrastSummary[]): string {
     `Le classement complet nominatif figure dans le(s) fichier(s) joint(s) (rang, effectifs, écart, IC, p, palier, Δ vs national).`,
   );
   parts.push(
-    `Lecture descriptive : ces écarts par cabinet sont BRUTS (non ajustés des facteurs de composition — secteur, statut, taille, territoire) et descriptifs ; à lire avec le palier de fiabilité, jamais comme un classement de qualité. Association sur données publiques, pas de preuve causale ; le score mesure la conformité méthodologique, pas la qualité réelle des soins.`,
+    `Lecture descriptive : ces écarts par cabinet sont BRUTS (non ajustés des facteurs de composition — secteur, statut, taille, territoire) et descriptifs ; à lire avec le palier de fiabilité, jamais comme un classement de qualité. Association sur données publiques, pas de preuve causale ; le score mesure le niveau de satisfaction des exigences du référentiel par la structure, tel que coté par l’évaluateur, pas la qualité réelle des soins.`,
   );
   return parts.join(' ');
 }
@@ -264,8 +264,8 @@ export function buildFiche001Content(
         `moyenne ${f.gapAbs} points de plus sur 100 au score HAS consolidé que les établissements`,
         'indépendants (mono). Après neutralisation de la région, du statut juridique et de la',
         `catégorie d’établissement, l’écart reste de ${f.beta} points et reste très solide statistiquement`,
-        `(p ${f.pPhrase}), mesuré sur ${f.n} établissements évalués. Le score HAS mesure la conformité`,
-        'méthodologique au référentiel, pas directement la qualité réelle des soins. Trois mécanismes',
+        `(p ${f.pPhrase}), mesuré sur ${f.n} établissements évalués. Le score HAS reflète le niveau de`,
+        'satisfaction des exigences du référentiel par la structure, tel que coté par l’évaluateur, pas directement la qualité réelle des soins. Trois mécanismes',
         'plausibles coexistent — mutualisation des ressources qualité, sélection des portefeuilles, et',
         'familiarité avec l’exercice d’évaluation — sans que la présente fiche tranche entre eux.',
       ].join(' '),
@@ -309,7 +309,7 @@ export function buildFiche001Content(
         'd’environ +4 points sur 100 en défaveur des établissements indépendants — soit, statistiquement,',
         'l’écart typique entre un B et un C, ou entre un C et un D.',
         'Ce qu’il ne montre pas : il n’établit pas de causalité, et ne mesure pas la qualité réelle des',
-        'soins — seulement la conformité méthodologique.',
+        'soins — seulement la cotation de la structure par l’évaluateur (satisfaction des exigences du référentiel).',
         'Hypothèses alternatives : mutualisation des ressources qualité (effet maximal dans le public',
         '+7,2 pts et l’associatif +6,0 pts, nul dans le privé commercial +2,0 pts non significatif),',
         'sélection des portefeuilles à l’intégration, et familiarité accrue des groupes avec l’exercice.',
@@ -318,7 +318,7 @@ export function buildFiche001Content(
       ceQueNeDitPas: [
         'Elle n’établit pas de lien de cause à effet : c’est une association mesurée sur données',
         'publiques, pas une preuve causale. Elle ne mesure pas la qualité réelle des soins, seulement la',
-        'conformité méthodologique au référentiel. Et elle ne dit pas POURQUOI l’écart existe :',
+        'cotation de la structure par l’évaluateur (satisfaction des exigences du référentiel). Et elle ne dit pas POURQUOI l’écart existe :',
         'plusieurs mécanismes plausibles coexistent (évoqués plus haut) sans qu’elle puisse trancher.',
       ].join(' '),
 
@@ -326,7 +326,7 @@ export function buildFiche001Content(
         'Causalité non démontrée : association robuste, pas preuve de cause à effet.',
         `Cohorte non exhaustive : ${f.n} ESSMS évalués sur ~103 000 référencés — les non encore évalués`,
         'peuvent présenter une distribution différente.',
-        'Outcome = conformité méthodologique, pas qualité de soin réelle.',
+        'Outcome = cotation de la structure par l’évaluateur (satisfaction des exigences du référentiel), pas la qualité de soin réelle.',
         'Effet hétérogène par segment : nul dans le privé commercial, +1,5 pt sur les EHPAD, +7,0 pts sur',
         'les résidences autonomie, +5,6 pts sur les services autonomie — à lire segment par segment.',
         'Confondants non testés : capacité, ancienneté, urbain/rural, identité du cabinet évaluateur.',

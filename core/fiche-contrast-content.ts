@@ -218,14 +218,14 @@ function buildPourquoi(cfg: ContrastFicheConfig): string {
 
 /**
  * Ce que ne dit pas (N2) — limites de PORTÉE. Association ≠ causalité ; score =
- * conformité méthodologique, PAS la qualité réelle des soins ; ce que la fiche ne
+ * cotation de la structure par l'évaluateur (satisfaction des exigences), PAS la qualité réelle des soins ; ce que la fiche ne
  * tranche pas (mécanisme, niveau cabinet brut). Reprend le caveat de l'axe si présent.
  */
 function buildCeQueNeDitPas(cfg: ContrastFicheConfig, adjusted: boolean): string {
   const parts = [
     'Elle n’établit pas de lien de cause à effet : c’est une association mesurée sur données publiques,',
-    'pas une preuve causale. Elle ne mesure pas la qualité réelle des soins, seulement la conformité',
-    'méthodologique au référentiel.',
+    'pas une preuve causale. Elle ne mesure pas la qualité réelle des soins, seulement la cotation',
+    'de la structure par l’évaluateur (satisfaction des exigences du référentiel).',
     adjusted
       ? 'L’écart national est ajusté des confondants observables, mais le niveau cabinet reste BRUT (non ajusté) — à lire comme descriptif, jamais comme un classement de qualité.'
       : 'Les écarts sont BRUTS (non ajustés des facteurs corrélés : taille, statut, secteur, territoire) et restent descriptifs, jamais un classement de qualité.',
@@ -276,8 +276,8 @@ export function buildContrastFicheContent(
           ? 'L’ajustement isole l’effet propre de l’axe du biais de composition (qui, sur certains axes, inverse le signe de l’écart brut).'
           : 'Ces écarts sont BRUTS (non ajustés des autres facteurs) et descriptifs.',
         'Surtout, ils varient fortement d’un cabinet évaluateur à l’autre — la fiche révèle, pour chacun,',
-        'comment il note les différents groupes. Le score mesure la conformité méthodologique au',
-        'référentiel, pas directement la qualité réelle des soins.',
+        'comment il note les différents groupes. Le score mesure le niveau de satisfaction des exigences du',
+        'référentiel par la structure, tel que coté par l’évaluateur, pas directement la qualité réelle des soins.',
       ].join(' '),
 
       question: [
@@ -329,7 +329,7 @@ export function buildContrastFicheContent(
           : 'Écarts BRUTS non ajustés : un écart peut refléter d’autres facteurs corrélés (taille, statut, secteur, territoire). Une version ajustée (OLS multivarié) est une amélioration prévue.',
         'Causalité non démontrée ; association sur données publiques.',
         'Cohorte non exhaustive : seuls les établissements déjà évalués figurent.',
-        'Outcome = conformité méthodologique, pas qualité de soin réelle.',
+        'Outcome = cotation de la structure par l’évaluateur (satisfaction des exigences du référentiel), pas la qualité de soin réelle.',
         'Effectifs par cabinet souvent faibles → beaucoup de paliers descriptifs, à ne pas',
         'sur-interpréter.',
         ...cfg.limitesExtra,

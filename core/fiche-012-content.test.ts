@@ -59,7 +59,7 @@ describe('buildFiche012Content', () => {
   it('ceQueNeDitPas : limites de portée (pas de causalité, conformité ≠ qualité, snapshot)', () => {
     const c = (buildFiche012Content().blocs.ceQueNeDitPas ?? '').toLowerCase();
     expect(c).toMatch(/causal|preuve causale/);
-    expect(c).toMatch(/conformité méthodologique/);
+    expect(c).toMatch(/satisfaction des exigences du référentiel/);
     expect(c).toMatch(/snapshot|pluriannuel/);
   });
 

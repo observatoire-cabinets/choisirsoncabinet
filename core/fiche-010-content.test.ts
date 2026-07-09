@@ -31,7 +31,7 @@ describe('buildFiche010Content', () => {
     const { ceQueNeDitPas, interpretation } = buildFiche010Content().blocs;
     expect(ceQueNeDitPas).toMatch(/UN point/);
     expect(ceQueNeDitPas).toMatch(/non ajust|brute/i);
-    expect(ceQueNeDitPas).toMatch(/conformit[ée] m[ée]thodologique/i);
+    expect(ceQueNeDitPas).toMatch(/satisfaction des exigences du référentiel/i);
     expect(ceQueNeDitPas).toMatch(/pas la qualit[ée] r[ée]elle des soins/i);
     // Dé-doublonnage : ceQueNeDitPas ne recopie pas une phrase entière d'interpretation.
     expect(ceQueNeDitPas).not.toContain(interpretation ?? '###');

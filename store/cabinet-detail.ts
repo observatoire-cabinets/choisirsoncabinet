@@ -1,7 +1,8 @@
 /**
  * Vue « cabinet choisi » : comparaison nationale + la liste COMPLÈTE des
  * structures évaluées par ce cabinet (nom officiel + adresse, données publiques
- * HAS/FINESS), triée du score le plus bas au plus élevé. Présentation
+ * HAS/FINESS), triée alphabétiquement par nom. Le score par établissement n'est
+ * PAS exposé (fragile et non vérifiable depuis l'open data). Présentation
  * STRICTEMENT factuelle — aucun qualificatif dans la structure produite (charte
  * anti-dénigrement) : le consommateur (écran/PDF) porte la formulation, pas ce
  * module.
@@ -13,7 +14,6 @@ export interface EvaluatedEstablishment {
   finessGeo: string;
   name: string;
   address: string;
-  score: number;
   evalDate: string | null;
 }
 
@@ -23,8 +23,7 @@ export interface CabinetDetail {
   meanCabinet: number;
   meanNational: number;
   gapVsNational: number;
-  /** Toutes les structures évaluées par ce cabinet, triées par score croissant
-   *  (la première = la moins bien notée, la dernière = la mieux notée). */
+  /** Toutes les structures évaluées par ce cabinet, triées alphabétiquement par nom. */
   establishments: EvaluatedEstablishment[];
 }
 
@@ -71,18 +70,17 @@ export function cabinetDetail(ds: Dataset, cabinet: string): CabinetDetail | nul
   const meanCabinet = mean(mine.map((e) => e.score!));
   const meanNational = mean(scored.map((e) => e.score!));
   const docByGeo = new Map(ds.baseDoc.map((b) => [b.finessGeo, b]));
-  const establishments = [...mine]
-    .sort((a, b) => a.score! - b.score! || (a.evalDate ?? '').localeCompare(b.evalDate ?? ''))
+  const establishments = mine
     .map((e) => {
       const doc = docByGeo.get(e.finessGeo);
       return {
         finessGeo: e.finessGeo,
         name: doc?.officialLabel || e.raisonSociale || `FINESS ${e.finessGeo}`,
         address: fmtAddress(doc),
-        score: e.score!,
         evalDate: e.evalDate,
       };
-    });
+    })
+    .sort((a, b) => a.name.localeCompare(b.name, 'fr'));
   return {
     cabinet,
     nEvaluations: mine.length,

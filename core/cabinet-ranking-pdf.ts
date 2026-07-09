@@ -1,11 +1,12 @@
 /**
  * Rendu PDF LISIBLE de la liste COMPLÈTE des structures évaluées par un cabinet,
- * triée du score le plus bas au plus élevé (nom officiel + adresse + score + date,
- * données publiques HAS/FINESS). Un tableau paysage paginé.
+ * triée alphabétiquement par nom (nom officiel + adresse + date, données publiques
+ * HAS/FINESS). Le score par établissement n'est PAS exposé (fragile et non
+ * vérifiable depuis l'open data). Un tableau paysage paginé.
  *
- * Charte anti-dénigrement : cadrage strictement factuel — « du score le plus bas
- * au plus élevé », jamais de qualificatif. ANONYME : aucune marque productrice.
- * Pur pdf-lib, polices standard (encodage WinAnsi via sanitizeForWinAnsi).
+ * Charte anti-dénigrement : cadrage strictement factuel, jamais de qualificatif
+ * ni de classement chiffré d'établissements nommés. ANONYME : aucune marque
+ * productrice. Pur pdf-lib, polices standard (encodage WinAnsi via sanitizeForWinAnsi).
  */
 
 import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from 'pdf-lib';
@@ -13,11 +14,6 @@ import { Buffer } from 'node:buffer';
 import { sanitizeForWinAnsi } from './winansi';
 import { frDec, frSigned } from './fiche-001-content';
 import type { CabinetDetail } from '../store/cabinet-detail';
-
-/** Score : entier tel quel, sinon une décimale (virgule FR). */
-function fmtScore(n: number): string {
-  return frDec(n, 1).replace(/,0$/, '');
-}
 
 /** "YYYY-MM-DD"(...) -> "JJ/MM/AAAA" ; null / non-ISO -> tiret. */
 function fmtDate(iso: string | null): string {
@@ -31,16 +27,10 @@ export interface CabinetRankingTable {
   rows: string[][];
 }
 
-/** Données du tableau (testable indépendamment du rendu PDF). Rang 1 = score le plus bas. */
+/** Données du tableau (testable indépendamment du rendu PDF). Liste triée par nom, sans score. */
 export function buildCabinetRankingTable(detail: CabinetDetail): CabinetRankingTable {
-  const rows = detail.establishments.map((e, i) => [
-    String(i + 1),
-    e.name,
-    e.address,
-    fmtScore(e.score),
-    fmtDate(e.evalDate),
-  ]);
-  return { columns: ['Rang', 'Structure', 'Adresse', 'Score /100', 'Date'], rows };
+  const rows = detail.establishments.map((e) => [e.name, e.address, fmtDate(e.evalDate)]);
+  return { columns: ['Structure', 'Adresse', 'Date'], rows };
 }
 
 const PAGE_W = 841.89; // A4 paysage
@@ -50,8 +40,8 @@ const MARGIN_TOP = 50;
 const MARGIN_BOTTOM = 44;
 const ROW_H = 15;
 
-// Rang / Structure / Adresse / Score / Date
-const COL_WEIGHTS = [36, 250, 330, 66, 74];
+// Structure / Adresse / Date
+const COL_WEIGHTS = [300, 380, 90];
 
 const COLOR_TITLE = rgb(0.106, 0.165, 0.29);
 const COLOR_HEAD = rgb(0.16, 0.24, 0.4);
@@ -104,7 +94,7 @@ export async function renderCabinetRankingPdf(detail: CabinetDetail, periodLabel
 
   const gap = frSigned(detail.gapVsNational);
   const subtitle =
-    `Classement du score le plus bas au plus élevé  ·  ${rows.length} structures  ·  ` +
+    `${rows.length} structures évaluées  ·  ` +
     `moyenne du cabinet ${frDec(detail.meanCabinet)} / 100 vs moyenne nationale ${frDec(detail.meanNational)} ` +
     `(écart ${gap})  ·  ${periodLabel}`;
 
@@ -114,7 +104,7 @@ export async function renderCabinetRankingPdf(detail: CabinetDetail, periodLabel
   const drawHeader = () => {
     page = doc.addPage([PAGE_W, PAGE_H]);
     y = PAGE_H - MARGIN_TOP;
-    page.drawText(fit(`Scores HAS publiés — structures évaluées par ${detail.cabinet}`, fontBold, 13, usableW), {
+    page.drawText(fit(`Structures évaluées par ${detail.cabinet}`, fontBold, 13, usableW), {
       x: MARGIN_X, y, size: 13, font: fontBold, color: COLOR_TITLE,
     });
     y -= 16;
@@ -137,8 +127,10 @@ export async function renderCabinetRankingPdf(detail: CabinetDetail, periodLabel
 
   // Cadrage factuel — APRÈS les données.
   const note =
-    'Le score HAS (échelle 0 à 100) mesure la conformité méthodologique au référentiel d’évaluation, pas ' +
-    'directement la qualité réelle des soins. Une évaluation par structure (la plus récente publiée). Faits ' +
+    'Le score HAS (échelle 0 à 100) mesure le niveau de satisfaction des exigences du référentiel par la ' +
+    'structure, tel que coté par l’évaluateur, pas directement la qualité réelle des soins ; l’open data ne ' +
+    'fournit que le score, pas le contenu du rapport, donc la justesse de la cotation elle-même n’y est pas ' +
+    'vérifiable. Une évaluation par structure (la plus récente publiée). Faits ' +
     'bruts issus de données publiques (HAS via data.gouv.fr, ODbL ; FINESS). Un score n’est ni un jugement ' +
     'sur l’établissement ni sur le travail du cabinet ; une association observée n’établit pas de lien de ' +
     'cause à effet.';

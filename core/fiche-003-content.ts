@@ -53,7 +53,7 @@ export function buildFiche003Content(
         'palmarès. Le niveau global est un écart BRUT, non ajusté de la composition du portefeuille',
         '(secteur, statut, taille, territoire). Elle ne dit pas POURQUOI un cabinet se distingue ni si l’écart est délibéré :',
         'c’est une association observée sur données publiques, pas une preuve de cause à effet. Enfin, le',
-        'score mesure la conformité méthodologique au référentiel, pas la qualité réelle des soins ;',
+        'score mesure le niveau de satisfaction des exigences du référentiel par la structure, tel que coté par l’évaluateur, pas la qualité réelle des soins ;',
         'beaucoup de paliers sont descriptifs (effectifs faibles par cabinet) et ne valent pas verdict.',
       ].join(' '),
 
@@ -65,8 +65,8 @@ export function buildFiche003Content(
         'CONFORMES à l’égalité de traitement attendue lors de l’évaluation externe — volontaires ou',
         'involontaires. « Non conforme » s’entend ici au sens strictement statistique (écart fiable, d’ampleur',
         'notable — Cohen d ≥ 0,2 —, significatif après correction Holm-Bonferroni et de même sens qu’au national',
-        'ajusté), non au sens d’une non-conformité d’accréditation. Le score mesure la',
-        'conformité méthodologique au référentiel, pas la qualité réelle des soins.',
+        'ajusté), non au sens d’une non-conformité d’accréditation. Le score mesure le niveau de',
+        'satisfaction des exigences du référentiel par la structure, tel que coté par l’évaluateur, pas la qualité réelle des soins.',
       ].join(' '),
       question: [
         'Hypothèse : à profil d’établissements comparable, le choix du cabinet évaluateur influence le score.',
@@ -98,7 +98,7 @@ export function buildFiche003Content(
         'Niveau global NON ajusté (portefeuille non neutralisé) — une version ajustée (effets fixes cabinet) est une',
         'amélioration prévue. Région et DROM exclus de la matrice. Cohorte non exhaustive (seuls les évalués figurent).',
         'L’axe « groupe lucratif » est un PROXY (statut privé commercial croisé avec une grande entité juridique FINESS), pas un vrai groupe corporate.',
-        'Outcome = conformité méthodologique, pas qualité de soin. Effectifs souvent faibles par cabinet → beaucoup de',
+        'Outcome = cotation de la structure par l’évaluateur (satisfaction des exigences du référentiel), pas la qualité de soin. Effectifs souvent faibles par cabinet → beaucoup de',
         'paliers descriptifs.',
       ].join(' '),
       misePerspective: [

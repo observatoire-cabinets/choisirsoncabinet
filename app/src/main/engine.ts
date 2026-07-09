@@ -5,6 +5,9 @@ import { refreshDataset } from '../../../store/refresh';
 import { makeStoreProxy } from '../../../store/proxy';
 import { listCabinets, cabinetDetail } from '../../../store/cabinet-detail';
 import { renderCabinetRankingPdf } from '../../../core/cabinet-ranking-pdf';
+import { cotationGeneralView, cotationCabinetProfile } from '../../../core/cotations';
+import { buildGeneralCsv, buildCabinetCsv } from '../../../core/cotations-csv';
+import { renderCotationsGeneralPdf, renderCotationCabinetPdf } from '../../../core/cotations-pdf';
 import { cabinetRegistry } from '../../../store/registry';
 import { generateFiche } from '../../../core/generate';
 import { setSignificanceAlpha } from '../../../core/significance';
@@ -54,6 +57,44 @@ export class EngineService {
   }
   registry() {
     return cabinetRegistry(this.req().evalHistory);
+  }
+
+  cotationGeneralView() {
+    return cotationGeneralView(this.req());
+  }
+  cotationCabinetProfile(cabinet: string) {
+    return cotationCabinetProfile(this.req(), cabinet);
+  }
+
+  private periodLabel(): string {
+    const d = this.req().meta.hasSyncedAt?.slice(0, 10) ?? '';
+    return d ? `Données HAS au ${d}` : 'Données publiques HAS';
+  }
+  private slug(s: string): string {
+    return (
+      s
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '') || 'cabinet'
+    );
+  }
+
+  async exportCotationsGeneral(outDir: string, format: 'csv' | 'pdf'): Promise<string> {
+    const rows = cotationGeneralView(this.req());
+    const p = join(outDir, `cotations-generales.${format}`);
+    if (format === 'csv') await writeFile(p, buildGeneralCsv(rows), 'utf8');
+    else await writeFile(p, await renderCotationsGeneralPdf(rows, this.periodLabel()));
+    return p;
+  }
+  async exportCotationCabinet(cabinet: string, outDir: string, format: 'csv' | 'pdf'): Promise<string> {
+    const profile = cotationCabinetProfile(this.req(), cabinet);
+    if (!profile) throw new Error(`Cabinet introuvable : ${cabinet}`);
+    const p = join(outDir, `cotations-cabinet-${this.slug(cabinet)}.${format}`);
+    if (format === 'csv') await writeFile(p, buildCabinetCsv(profile), 'utf8');
+    else await writeFile(p, await renderCotationCabinetPdf(profile, this.periodLabel()));
+    return p;
   }
 
   /** Exporte la liste complète des structures d'un cabinet en PDF (hors ligne). Renvoie le chemin écrit. */

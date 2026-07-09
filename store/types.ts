@@ -10,6 +10,12 @@ export interface EssmsRow {
   categCode: string;            // essms_categ_finess_code
   departement: string;          // departement_code
   evalDate: string | null;      // ISO, eval_date_cloture_tech
+  grade: 'A' | 'B' | 'C' | 'D' | null;            // indice_qualite (recalculé)
+  chapters: (number | null)[];                     // cotation_chapitre_1..3, échelle 1–4
+  imperatives: { code: string; value: number }[];  // cotation_critere_imperatif_* non nuls
+  ciEvaluated: number | null;                       // nb_ci
+  ciMet: number | null;                             // nb_ci_atteints
+  ciAbove35: number | null;                         // nb_ci_sup_3_5
 }
 /** Mapping FINESS daté (pruné à la cohorte HAS ; ejSize calculé sur le répertoire NATIONAL avant prune). */
 export interface EjSnapshotRow { snapshotDate: string; finessGeo: string; ejSize: number; }

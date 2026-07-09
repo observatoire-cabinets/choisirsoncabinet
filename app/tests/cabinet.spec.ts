@@ -16,7 +16,7 @@ test('vue cabinet : écart national + liste complète triée + filtre + export',
 
   // Le filtre réduit l'affichage.
   if (rows > 1) {
-    const firstName = (await win.locator('#cabinet-list tbody tr').first().locator('td').nth(1).textContent()) ?? '';
+    const firstName = (await win.locator('#cabinet-list tbody tr').first().locator('td').nth(0).textContent()) ?? '';
     await win.locator('#cabinet-filter').fill(firstName.slice(0, 4));
     expect(await win.locator('#cabinet-list tbody tr').count()).toBeLessThanOrEqual(rows);
     await win.locator('#cabinet-filter').fill('');

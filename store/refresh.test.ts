@@ -174,7 +174,7 @@ const PREV: Dataset = {
     sources: [{ name: 'src', url: 'u', license: 'Licence Ouverte 2.0', retrievedAt: '2026-05-01T00:00:00.000Z' }],
   },
   essms: [
-    { finessGeo: '000000001', score: 50, cabinet: 'OLD CAB', raisonSociale: 'OLD', region: 'R', statut: 'S', categ: 'C', categCode: 'CC', departement: '01', evalDate: '2024-01-01' },
+    { finessGeo: '000000001', score: 50, cabinet: 'OLD CAB', raisonSociale: 'OLD', region: 'R', statut: 'S', categ: 'C', categCode: 'CC', departement: '01', evalDate: '2024-01-01', grade: null, chapters: [null, null, null], imperatives: [], ciEvaluated: null, ciMet: null, ciAbove35: null },
   ],
   ejSnapshots: [
     { snapshotDate: '2021-12-31', finessGeo: '000000001', ejSize: 1 },
@@ -261,6 +261,12 @@ describe('has-parse (mappers purs)', () => {
       categCode: '500',
       departement: '01',
       evalDate: '2024-05-12',
+      grade: null,
+      chapters: [null, null, null],
+      imperatives: [],
+      ciEvaluated: null,
+      ciMet: null,
+      ciAbove35: null,
     });
   });
   it('score null quand moy_objectifs_100 absent ; COALESCE → "" pour region/statut/categ', () => {
@@ -428,7 +434,7 @@ describe('writeDatasetTwoPhase — staging complet PUIS renames en rafale', () =
     ...PREV,
     meta: { ...PREV.meta, builtAt: '2026-07-05T00:00:00.000Z', finessSnapshotMax: '2026-06-15' },
     essms: [
-      { finessGeo: '000000002', score: 88, cabinet: 'NEW CAB', raisonSociale: 'NEW', region: 'R2', statut: 'S2', categ: 'C2', categCode: 'CC2', departement: '02', evalDate: '2026-01-01' },
+      { finessGeo: '000000002', score: 88, cabinet: 'NEW CAB', raisonSociale: 'NEW', region: 'R2', statut: 'S2', categ: 'C2', categCode: 'CC2', departement: '02', evalDate: '2026-01-01', grade: null, chapters: [null, null, null], imperatives: [], ciEvaluated: null, ciMet: null, ciAbove35: null },
     ],
     evalHistory: [{ evalCode: 'NEW1', cabinet: 'NEW CAB', dateCloture: '2026-01-01', region: 'R2' }],
   };

@@ -6,6 +6,7 @@ import type { DatasetMeta } from '../../../store/types';
 import type { CabinetDetail } from '../../../store/cabinet-detail';
 import type { CabinetLifeline } from '../../../store/registry';
 import type { FICHE_CALENDAR } from '../../../core/fiche-calendar';
+import type { CotationCabinetRow, CotationCabinetProfile } from '../../../core/cotations';
 
 export type FicheEntry = (typeof FICHE_CALENDAR)[number];
 
@@ -30,6 +31,10 @@ export interface ObsApi {
   exportCabinetRanking(cabinet: string, outDir: string): Promise<string>;
   refresh(): Promise<RefreshSummary>;
   onRefreshProgress(cb: (msg: string) => void): void;
+  cotationGeneralView(): Promise<CotationCabinetRow[]>;
+  cotationCabinetProfile(cabinet: string): Promise<CotationCabinetProfile | null>;
+  exportCotationsGeneral(outDir: string, format: 'csv' | 'pdf'): Promise<string>;
+  exportCotationCabinet(cabinet: string, outDir: string, format: 'csv' | 'pdf'): Promise<string>;
 }
 
 declare global {
