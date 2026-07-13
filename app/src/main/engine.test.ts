@@ -38,7 +38,7 @@ describe.skipIf(!has)('EngineService (données réelles)', () => {
     expect(typeof d!.gapVsNational).toBe('number');
   });
 
-  it('exportCabinetRanking écrit un PDF de classement hors ligne', async () => {
+  it('exportCabinetRanking écrit un PDF des structures hors ligne', async () => {
     const out = mkdtempSync(join(tmpdir(), 'obs-cab-'));
     const p = await eng.exportCabinetRanking(eng.listCabinets()[0], out);
     expect(p.endsWith('.pdf')).toBe(true);

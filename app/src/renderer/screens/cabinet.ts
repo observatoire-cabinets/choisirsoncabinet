@@ -62,7 +62,7 @@ function renderDetail(detail: HTMLElement, cabinet: string, d: CabinetDetail): v
     <div style="margin:8px 0; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
       <input id="cabinet-filter" type="search" placeholder="Filtrer par nom ou commune…"
              style="min-width:260px;" />
-      <button id="cabinet-export">Exporter le classement (PDF)</button>
+      <button id="cabinet-export">Exporter les structures (PDF)</button>
       <span id="cabinet-export-status" class="note"></span>
     </div>
     <table id="cabinet-list">

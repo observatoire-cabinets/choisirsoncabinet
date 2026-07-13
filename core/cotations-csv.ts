@@ -6,7 +6,7 @@ const BOM = '﻿';
 function cell(v: string | number | null, decimals?: number): string {
   if (v === null || v === undefined) return '';
   let s = typeof v === 'number' ? v.toFixed(decimals ?? 0).replace('.', ',') : v;
-  if (/[;"\n]/.test(s)) s = `"${s.replace(/"/g, '""')}"`;
+  if (/[;"\n\r]/.test(s)) s = `"${s.replace(/"/g, '""')}"`;
   return s;
 }
 const pct = (x: number | null): string => (x === null ? '' : (x * 100).toFixed(1).replace('.', ','));

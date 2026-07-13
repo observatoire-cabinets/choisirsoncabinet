@@ -116,7 +116,7 @@ export class EngineService {
         .replace(/^-+|-+$/g, '')
         .toLowerCase()
         .slice(0, 60) || 'cabinet';
-    const p = join(outDir, `classement-cabinet-${slug}.pdf`);
+    const p = join(outDir, `structures-cabinet-${slug}.pdf`);
     await writeFile(p, buf);
     return p;
   }

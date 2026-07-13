@@ -102,11 +102,9 @@ export function toUtcDateString(d: Date | null): string | null {
 export function essmsRowFromRaw(raw: RawParquetRow): EssmsRow {
   const finessGeo = asString(raw.finess_geo);
   if (!finessGeo) throw new Error('essmsRowFromRaw: finess_geo requis mais absent');
-  const moy = raw.moy_objectifs_100;
-  const score = moy === null || moy === undefined ? null : Number(moy as number | string);
   return {
     finessGeo,
-    score: score !== null && Number.isFinite(score) ? score : null,
+    score: asNum(raw.moy_objectifs_100),
     cabinet: asString(raw.oe_nom), // oe_nom : PAS de COALESCE (null passe tel quel)
     raisonSociale: asString(raw.raison_sociale),
     region: asString(raw.region_libelle) ?? '',
