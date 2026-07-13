@@ -18,6 +18,10 @@ const api: ObsApi = {
   exportCotationsGeneral: (outDir, format) => ipcRenderer.invoke('exportCotationsGeneral', { outDir, format }),
   exportCotationCabinet: (cabinet, outDir, format) =>
     ipcRenderer.invoke('exportCotationCabinet', { cabinet, outDir, format }),
+  ficheCabinet: (cabinet) => ipcRenderer.invoke('ficheCabinet', cabinet),
+  ficheCabinetHistory: (cabinet) => ipcRenderer.invoke('ficheCabinetHistory', cabinet),
+  exportFicheCabinet: (cabinet, outDir, asOfMonth) =>
+    ipcRenderer.invoke('exportFicheCabinet', { cabinet, outDir, asOfMonth }),
   onRefreshProgress: (cb) => {
     ipcRenderer.on('refresh:progress', (_e, msg: string) => cb(msg));
   },

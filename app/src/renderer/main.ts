@@ -1,6 +1,7 @@
 import { renderCotations } from './screens/cotations';
 import { renderFiches } from './screens/fiches';
 import { renderCabinet } from './screens/cabinet';
+import { renderFicheCabinet } from './screens/fiche-cabinet';
 import { renderRegistre } from './screens/registre';
 import { renderReglages } from './screens/reglages';
 import { frDate } from './util';
@@ -9,6 +10,7 @@ const screens: Record<string, (root: HTMLElement) => void | Promise<void>> = {
   cotations: renderCotations,
   cabinet: renderCabinet,
   fiches: renderFiches,
+  'fiche-cabinet': renderFicheCabinet,
   registre: renderRegistre,
   reglages: renderReglages,
 };

@@ -45,7 +45,7 @@ const BLOCS: ReadonlyArray<{ key: keyof FicheBlocs; heading: string }> = [
   { key: 'annexe', heading: 'Annexe — Métadonnées' },
 ];
 
-function wrap(text: string, font: PDFFont, size: number, maxW: number): string[] {
+export function wrap(text: string, font: PDFFont, size: number, maxW: number): string[] {
   const lines: string[] = [];
   for (const para of text.split('\n')) {
     const words = para.split(/\s+/).filter(Boolean);

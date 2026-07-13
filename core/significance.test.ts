@@ -5,6 +5,7 @@ import {
   setSignificanceAlpha,
   ciLabel,
   alphaLabel,
+  alphaLabelFor,
   alphaValueLabel,
   ciPercentLabel,
 } from './significance';
@@ -44,5 +45,10 @@ describe('significance config', () => {
       setSignificanceAlpha(a);
       expect(alphaLabel()).not.toMatch(/[^\x20-\x7E\xA0-\xFF]/);
     }
+  });
+  it('alphaLabelFor : libellé PUR par valeur, indépendant de l\'état global', () => {
+    setSignificanceAlpha(0.01); // le global ne doit avoir AUCUNE influence
+    expect(alphaLabelFor(0.05)).toBe('alpha = 0,05');
+    expect(alphaLabelFor(0.01)).toBe('alpha = 0,01');
   });
 });

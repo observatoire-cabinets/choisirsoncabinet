@@ -45,14 +45,21 @@ export function ciLabel(): string {
 }
 
 /**
- * Libellé court du seuil courant, ex. « alpha = 0,05 » / « alpha = 0,01 ».
+ * Libellé court d'un seuil donné, ex. « alpha = 0,05 » / « alpha = 0,01 ».
+ * Fonction PURE (aucune lecture de l'état global) : à utiliser quand le seuil
+ * est passé en paramètre (rendu insensible aux mutations concurrentes du global).
  * « alpha » ÉPELÉ (pas le glyphe grec α) : ce libellé part dans des PDF
  * WinAnsi (StandardFonts pdf-lib) où `sanitizeForWinAnsi` SUPPRIME α
  * (hors plage 0x20-0xFF, non translittéré) — le glyphe rendait
  * « seuil  = 0,05 » (espace double orphelin) dans le document final.
  */
+export function alphaLabelFor(alpha: Alpha): string {
+  return alpha === 0.01 ? 'alpha = 0,01' : 'alpha = 0,05';
+}
+
+/** Libellé court du seuil courant (délègue à alphaLabelFor — zéro duplication). */
 export function alphaLabel(): string {
-  return current === 0.01 ? 'alpha = 0,01' : 'alpha = 0,05';
+  return alphaLabelFor(current);
 }
 
 /** Valeur nue du seuil α courant en rendu FR, ex. « 0,05 » / « 0,01 ». */

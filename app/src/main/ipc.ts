@@ -34,4 +34,12 @@ export function registerIpc(engine: EngineService): void {
   ipcMain.handle('exportCotationCabinet', (_e, a: { cabinet: string; outDir: string; format: 'csv' | 'pdf' }) =>
     engine.exportCotationCabinet(a.cabinet, a.outDir, a.format),
   );
+
+  ipcMain.handle('ficheCabinet', (_e, cabinet: string) =>
+    engine.ficheCabinet(cabinet, readSettings(userData).alpha),
+  );
+  ipcMain.handle('ficheCabinetHistory', (_e, cabinet: string) => engine.ficheCabinetHistory(cabinet));
+  ipcMain.handle('exportFicheCabinet', (_e, a: { cabinet: string; outDir: string; asOfMonth?: string }) =>
+    engine.exportFicheCabinet(a.cabinet, a.outDir, readSettings(userData).alpha, a.asOfMonth ?? null),
+  );
 }

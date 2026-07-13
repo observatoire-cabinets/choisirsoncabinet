@@ -10,8 +10,13 @@ import { buildGeneralCsv, buildCabinetCsv } from '../../../core/cotations-csv';
 import { renderCotationsGeneralPdf, renderCotationCabinetPdf } from '../../../core/cotations-pdf';
 import { cabinetRegistry } from '../../../store/registry';
 import { generateFiche } from '../../../core/generate';
-import { setSignificanceAlpha } from '../../../core/significance';
+import { setSignificanceAlpha, alphaLabelFor } from '../../../core/significance';
 import { FICHE_CALENDAR } from '../../../core/fiche-calendar';
+import { buildFicheCabinet, type FicheCabinetData } from '../../../core/cabinet-fiche';
+import { cabinetFicheHistory, type FicheCabinetHistory } from '../../../core/cabinet-fiche-history';
+import { renderFicheCabinetPdf } from '../../../core/cabinet-fiche-pdf';
+import { buildCabinetProfiles, type CabinetProfile } from '../../../core/cabinet-profile';
+import { extractRows } from '../../../store/extract';
 import type { Dataset } from '../../../store/types';
 
 export interface GenerateArgs {
@@ -32,10 +37,13 @@ export class EngineService {
   private ds: Dataset | null = null;
   private proxy: ReturnType<typeof makeStoreProxy> | null = null;
   private generating = false;
+  /** Profils 7 axes de TOUS les cabinets, par alpha — invalidé au load/refresh. */
+  private profileCache: { alpha: 0.05 | 0.01; profiles: CabinetProfile[] } | null = null;
 
   async load(dir: string): Promise<void> {
     this.ds = await loadDataset(dir);
     this.proxy = makeStoreProxy(this.ds);
+    this.profileCache = null;
   }
 
   private req(): Dataset {
@@ -64,6 +72,59 @@ export class EngineService {
   }
   cotationCabinetProfile(cabinet: string) {
     return cotationCabinetProfile(this.req(), cabinet);
+  }
+
+  /**
+   * Profils courants par alpha (calcul ~secondes sur le jeu réel → cache).
+   * alpha est un état global module : refusé pendant une génération de fiches.
+   */
+  private profilesFor(alpha: 0.05 | 0.01): CabinetProfile[] {
+    if (this.generating) throw new Error('génération de fiches en cours — réessayer ensuite');
+    // Inconditionnel (même en cache-hit) : le global reste toujours cohérent
+    // avec le dernier calcul demandé — aucun lecteur ne voit un seuil divergent.
+    setSignificanceAlpha(alpha);
+    if (this.profileCache?.alpha !== alpha) {
+      this.profileCache = { alpha, profiles: buildCabinetProfiles(extractRows(this.req())) };
+    }
+    return this.profileCache.profiles;
+  }
+
+  ficheCabinet(cabinet: string, alpha: 0.05 | 0.01): FicheCabinetData | null {
+    return buildFicheCabinet(this.req(), cabinet, null, this.profilesFor(alpha));
+  }
+
+  ficheCabinetHistory(cabinet: string): FicheCabinetHistory | null {
+    return cabinetFicheHistory(this.req(), cabinet);
+  }
+
+  /** Fiche courante (avec historique) ou fiche d'un mois donné (asOfMonth 'YYYY-MM'). */
+  async exportFicheCabinet(
+    cabinet: string,
+    outDir: string,
+    alpha: 0.05 | 0.01,
+    asOfMonth: string | null,
+  ): Promise<string> {
+    if (asOfMonth !== null && !/^\d{4}-(0[1-9]|1[0-2])$/.test(asOfMonth)) {
+      throw new Error(`Mois invalide : ${asOfMonth}`);
+    }
+    const ds = this.req();
+    let fiche: FicheCabinetData | null;
+    let history: FicheCabinetHistory | null = null;
+    if (asOfMonth) {
+      if (this.generating) throw new Error('génération de fiches en cours — réessayer ensuite');
+      // Synchrone jusqu'au build : pas de course avec generateFiches sur le CALCUL.
+      // Le seuil IMPRIMÉ, lui, ne dépend plus du global : alphaLabelFor(alpha) est
+      // passé au rendu, insensible aux mutations concurrentes pendant ses await.
+      setSignificanceAlpha(alpha);
+      fiche = buildFicheCabinet(ds, cabinet, asOfMonth);
+    } else {
+      fiche = buildFicheCabinet(ds, cabinet, null, this.profilesFor(alpha));
+      history = cabinetFicheHistory(ds, cabinet);
+    }
+    if (!fiche) throw new Error(`Aucune donnée pour le cabinet « ${cabinet} »${asOfMonth ? ` à fin ${asOfMonth}` : ''}.`);
+    const p = join(outDir, `fiche-cabinet-${this.slug(cabinet)}${asOfMonth ? `-${asOfMonth}` : ''}.pdf`);
+    await writeFile(p, await renderFicheCabinetPdf(fiche, history, this.periodLabel(), alphaLabelFor(alpha)));
+    return p;
   }
 
   private periodLabel(): string {
@@ -149,6 +210,7 @@ export class EngineService {
     const r = await refreshDataset({ currentDir, archiveRoot });
     this.ds = r.dataset;
     this.proxy = makeStoreProxy(this.ds);
+    this.profileCache = null;
     return {
       meta: this.ds.meta,
       archivedPrevious: r.archivedPrevious,

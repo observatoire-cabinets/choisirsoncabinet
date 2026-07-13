@@ -7,6 +7,8 @@ import type { CabinetDetail } from '../../../store/cabinet-detail';
 import type { CabinetLifeline } from '../../../store/registry';
 import type { FICHE_CALENDAR } from '../../../core/fiche-calendar';
 import type { CotationCabinetRow, CotationCabinetProfile } from '../../../core/cotations';
+import type { FicheCabinetData } from '../../../core/cabinet-fiche';
+import type { FicheCabinetHistory } from '../../../core/cabinet-fiche-history';
 
 export type FicheEntry = (typeof FICHE_CALENDAR)[number];
 
@@ -35,6 +37,10 @@ export interface ObsApi {
   cotationCabinetProfile(cabinet: string): Promise<CotationCabinetProfile | null>;
   exportCotationsGeneral(outDir: string, format: 'csv' | 'pdf'): Promise<string>;
   exportCotationCabinet(cabinet: string, outDir: string, format: 'csv' | 'pdf'): Promise<string>;
+  ficheCabinet(cabinet: string): Promise<FicheCabinetData | null>;
+  ficheCabinetHistory(cabinet: string): Promise<FicheCabinetHistory | null>;
+  /** Fiche courante si asOfMonth omis ; fiche du mois 'YYYY-MM' sinon. Renvoie le chemin écrit. */
+  exportFicheCabinet(cabinet: string, outDir: string, asOfMonth?: string): Promise<string>;
 }
 
 declare global {

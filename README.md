@@ -17,6 +17,16 @@ sont embarquées : l'application fonctionne entièrement sur votre machine.
 - **Fiches** — 12 fiches statistiques (mono / multi-établissements, statut juridique,
   secteur, territoire…) générées en PDF, hors-ligne.
 - **Cabinet choisi** — écart d'un cabinet au niveau national + identification de structures afin de prendre connaissance de la manière dont l'évaluation s'est déroulé et avec qui elle a été faite (nom + adresse, données publiques), présentation factuelle.
+- **Fiche cabinet** — portrait de synthèse d'un cabinet : niveau global de notation
+  (écart brut au national), profil sur les 7 axes de pratique (règle de signalement
+  durcie : effectif 30/30, ampleur d ≥ 0,2, sens cohérent avec l'écart national ajusté,
+  correction de Holm), portefeuille sectoriel (HHI), résumé des cotations publiées et
+  des structures évaluées (avec renvois vers les onglets dédiés), et historique mensuel
+  reconstitué « as-of » (évaluations closes à la fin de chaque mois) — chaque ligne
+  exportable en **PDF**, ainsi que la fiche complète. Le jeu public ne conservant que la
+  dernière évaluation par structure, la reconstitution des mois passés est approchée
+  pour les rares structures réévaluées ; les évaluations sans date de clôture sont
+  exclues de l'historique et comptées à part.
 - **Registre** — lignes de vie des cabinets (première apparition, dernière évaluation
   publiée), reconstituées à partir des évaluations publiées.
 - **Réglages** statistique classique — seuil de significativité **α = 0,05 par défaut** (bascule 0,01),

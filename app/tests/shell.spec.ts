@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 import { launchApp } from './_app';
 
-test('bandeau date des données + 5 onglets (accueil = cotations)', async () => {
+test('bandeau date des données + 6 onglets (accueil = cotations)', async () => {
   const app = await launchApp();
   const win = await app.firstWindow();
   await expect(win.locator('#data-date')).toContainText(/\d{2}\/\d{2}\/\d{4}/);
   // Onglet actif au démarrage : Cotations (1er onglet, écran d'accueil).
   await expect(win.locator('nav [data-screen="cotations"]')).toHaveClass(/active/);
-  for (const s of ['cotations', 'fiches', 'cabinet', 'registre', 'reglages']) {
+  for (const s of ['cotations', 'cabinet', 'fiches', 'fiche-cabinet', 'registre', 'reglages']) {
     await expect(win.locator(`nav [data-screen="${s}"]`)).toBeVisible();
   }
   await app.close();
