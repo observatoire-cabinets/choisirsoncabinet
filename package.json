@@ -1,6 +1,6 @@
 {
   "name": "observatoire-cabinets",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Observatoire hors-ligne des cabinets évaluateurs d'ESSMS — moteur d'analyse sur données publiques HAS/FINESS.",
   "scripts": {
