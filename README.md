@@ -1,5 +1,5 @@
 # Observatoire Cabinets Evaluateurs d'ESSMS
-
+Pour télécharcher allez dans https://github.com/observatoire-cabinets/choisirsoncabinet/releases puis dans Assets cliquer sur Observatoire-Cabinets-Evaluateurs-ESSMS-v0.3.0-windows-portable.zip (117 Mo) puis Ok
 Application de bureau **hors-ligne** qui analyse les données **publiques** d'évaluation
 des établissements et services sociaux et médico-sociaux (ESSMS) et met en regard les
 **cabinets évaluateurs** habilités par la HAS.
