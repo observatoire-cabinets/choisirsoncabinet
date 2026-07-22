@@ -6,6 +6,7 @@ des établissements et services sociaux et médico-sociaux (ESSMS) et met en reg
 
 Aucun compte, aucune connexion obligatoire, aucune IA, aucune télémétrie. Les données
 sont embarquées : l'application fonctionne entièrement sur votre machine.
+la mise à jour émet une requête vers la HAS et data.gouv.fr ; le reste fonctionne hors-ligne
 
 ## Ce qu'elle fait
 
