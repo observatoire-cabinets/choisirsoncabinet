@@ -20,6 +20,25 @@ test("app packagée : charge les données embarquées (resourcesPath) et sert l'
   await app.close();
 });
 
+test("app packagée : l'onglet Accréditations rend les trois volets sur l'amorce embarquée", async () => {
+  test.skip(!existsSync(PACKAGED), 'app packagée absente (lancer pnpm dist)');
+  // Timeout étendu : le timeout global (60 s) plafonnerait le poll de 60 s.
+  test.setTimeout(120_000);
+  const ud = mkdtempSync(join(tmpdir(), 'obs-pkg-acc-'));
+  const app = await electron.launch({
+    executablePath: PACKAGED,
+    args: ['--no-autoupdate', `--user-data-dir=${ud}`],
+  });
+  const win = await app.firstWindow();
+  await win.locator('nav [data-screen="accreditations"]').click();
+  await expect
+    .poll(async () => win.locator('#acc-statuts tbody tr').count(), { timeout: 60_000 })
+    .toBeGreaterThan(100);
+  await win.locator('#acc-v-chronologie').click();
+  await expect(win.locator('#acc-chrono tbody tr')).toHaveCount(12);
+  await app.close();
+});
+
 test("app packagée : l'onglet Fiche cabinet rend le portrait complet", async () => {
   test.skip(!existsSync(PACKAGED), 'app packagée absente (lancer pnpm dist)');
   const ud = mkdtempSync(join(tmpdir(), 'obs-pkg-fc-'));

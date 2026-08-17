@@ -22,6 +22,10 @@ const api: ObsApi = {
   ficheCabinetHistory: (cabinet) => ipcRenderer.invoke('ficheCabinetHistory', cabinet),
   exportFicheCabinet: (cabinet, outDir, asOfMonth) =>
     ipcRenderer.invoke('exportFicheCabinet', { cabinet, outDir, asOfMonth }),
+  accreditations: () => ipcRenderer.invoke('accreditations'),
+  exportAccreditations: (volet, outDir, format) =>
+    ipcRenderer.invoke('exportAccreditations', { volet, outDir, format }),
+  appUpdateState: () => ipcRenderer.invoke('appUpdateState'),
   onRefreshProgress: (cb) => {
     ipcRenderer.on('refresh:progress', (_e, msg: string) => cb(msg));
   },

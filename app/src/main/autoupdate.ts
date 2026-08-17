@@ -1,7 +1,11 @@
+/**
+ * Rafraîchissement des DONNÉES publiques (Synaé/FINESS) — la mise à jour du
+ * LOGICIEL est dans app-update.ts.
+ */
 import type { BrowserWindow } from 'electron';
 import type { EngineService } from './engine';
 
-/** Auto-update seulement si le réglage est actif ET une connexion est disponible. */
+/** Rafraîchissement des données seulement si le réglage est actif ET une connexion est disponible. */
 export function shouldAutoUpdate(s: { autoUpdate: boolean }, online: boolean): boolean {
   return s.autoUpdate && online;
 }

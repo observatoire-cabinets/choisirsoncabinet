@@ -1,4 +1,4 @@
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { loadDataset } from '../../../store/load';
 import { refreshDataset } from '../../../store/refresh';
@@ -18,6 +18,13 @@ import { renderFicheCabinetPdf } from '../../../core/cabinet-fiche-pdf';
 import { buildCabinetProfiles, type CabinetProfile } from '../../../core/cabinet-profile';
 import { extractRows } from '../../../store/extract';
 import type { Dataset } from '../../../store/types';
+import { buildAccreditationsView, type AccreditationsView } from '../../../core/accreditations';
+import { buildStatutsCsv, buildChronologieCsv, buildSortiesCsv } from '../../../core/accreditations-csv';
+import { renderAccreditationsPdf } from '../../../core/accreditations-pdf';
+import { loadListeHasSeed } from '../../../store/liste-has-load';
+import { ensureArchive, seedEtats, readAllEtats, readCofracReleves } from '../../../store/liste-has-archive';
+import { readSettings } from './settings';
+import type { ListeHasSeed } from '../../../store/liste-has-types';
 
 export interface GenerateArgs {
   numeros: number[];
@@ -39,6 +46,9 @@ export class EngineService {
   private generating = false;
   /** Profils 7 axes de TOUS les cabinets, par alpha — invalidé au load/refresh. */
   private profileCache: { alpha: 0.05 | 0.01; profiles: CabinetProfile[] } | null = null;
+  private listeHasSeed: ListeHasSeed | null = null;
+  private listeHasArchiveRoot: string | null = null;
+  private listeHasUserDataDir: string | null = null;
 
   async load(dir: string): Promise<void> {
     this.ds = await loadDataset(dir);
@@ -217,5 +227,112 @@ export class EngineService {
       finessFreshness: r.finessFreshness,
       capacityFreshness: r.capacityFreshness,
     };
+  }
+
+  /** Amorce versée dans l'archive locale (ajout seul) puis conservée en mémoire. */
+  async loadListeHas(seedDir: string, archiveRoot: string, userDataDir: string): Promise<void> {
+    this.listeHasSeed = await loadListeHasSeed(seedDir);
+    this.listeHasArchiveRoot = archiveRoot;
+    this.listeHasUserDataDir = userDataDir;
+    await ensureArchive(archiveRoot);
+    await seedEtats(archiveRoot, this.listeHasSeed.etats);
+  }
+
+  /**
+   * Signaux d'état de la collecte : dérivés de l'index
+   * (entrées `source: 'liste'`) et des réglages — le moteur core reste pur,
+   * c'est ICI que l'I/O a lieu.
+   */
+  private async collecteSignaux(): Promise<{
+    sourceIntrouvableDepuis: string | null;
+    prochaineCollecte: string | null;
+  }> {
+    let sourceIntrouvableDepuis: string | null = null;
+    try {
+      const raw = await readFile(join(this.listeHasArchiveRoot!, 'index.jsonl'), 'utf8');
+      const releves = raw
+        .trim()
+        .split('\n')
+        .flatMap((l) => {
+          try {
+            return [JSON.parse(l) as { horodatage?: string; resultat?: string; source?: string }];
+          } catch {
+            return [];
+          }
+        })
+        .filter(
+          (e) =>
+            e.source === 'liste' &&
+            (e.resultat === 'archive' || e.resultat === 'inchange' || e.resultat === 'echec'),
+        );
+      // Date du premier 'echec' de la série d'échecs consécutifs la plus
+      // récente — null dès que le dernier relevé est un succès.
+      for (let i = releves.length - 1; i >= 0; i--) {
+        if (releves[i].resultat !== 'echec') break;
+        const d = (releves[i].horodatage ?? '').slice(0, 10);
+        if (d) sourceIntrouvableDepuis = d;
+      }
+    } catch {
+      sourceIntrouvableDepuis = null;
+    }
+    const settings = readSettings(this.listeHasUserDataDir!);
+    const prochaineCollecte =
+      settings.tachePlanifiee && settings.collecteHeure
+        ? `${String(settings.collecteHeure.heure).padStart(2, '0')}:${String(settings.collecteHeure.minute).padStart(2, '0')}`
+        : null;
+    return { sourceIntrouvableDepuis, prochaineCollecte };
+  }
+
+  /** Vue complète de l'onglet — relit l'archive à chaque appel (collecte récente visible). */
+  async accreditations(): Promise<AccreditationsView> {
+    if (!this.listeHasSeed || !this.listeHasArchiveRoot || !this.listeHasUserDataDir) {
+      throw new Error('liste HAS non chargée');
+    }
+    const [etats, cofrac, collecte] = await Promise.all([
+      readAllEtats(this.listeHasArchiveRoot),
+      readCofracReleves(this.listeHasArchiveRoot),
+      this.collecteSignaux(),
+    ]);
+    return buildAccreditationsView({
+      cabinets: listCabinets(this.req()),
+      etats,
+      bilans: this.listeHasSeed.bilans,
+      faits: this.listeHasSeed.faits,
+      pistes: this.listeHasSeed.pistes,
+      alias: this.listeHasSeed.alias,
+      cofrac,
+      collecte,
+    });
+  }
+
+  async exportAccreditations(
+    volet: 'statuts' | 'chronologie' | 'sorties' | 'synthese',
+    outDir: string,
+    format: 'csv' | 'pdf',
+  ): Promise<string> {
+    const view = await this.accreditations();
+    const today = new Date();
+    const dateLabel = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
+    const stamp = today.toISOString().slice(0, 10);
+    let filename: string;
+    let content: Buffer | string;
+    if (format === 'pdf' || volet === 'synthese') {
+      // PDF par volet (une seule section) ou synthèse (les trois).
+      filename = `accreditations-${volet}-${stamp}.pdf`;
+      content = await renderAccreditationsPdf(
+        view,
+        dateLabel,
+        volet === 'synthese' ? undefined : [volet],
+      );
+    } else {
+      filename = `accreditations-${volet}-${stamp}.csv`;
+      content =
+        volet === 'statuts' ? buildStatutsCsv(view)
+        : volet === 'chronologie' ? buildChronologieCsv(view)
+        : buildSortiesCsv(view);
+    }
+    const chemin = join(outDir, filename);
+    await writeFile(chemin, content);
+    return chemin;
   }
 }

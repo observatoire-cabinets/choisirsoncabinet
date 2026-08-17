@@ -2,6 +2,36 @@ import { ipcMain, dialog, app } from 'electron';
 import type { EngineService, GenerateArgs } from './engine';
 import { readSettings, writeSettings, type Settings } from './settings';
 import { resolveArchiveRoot, resolveDataDir } from './paths';
+import { tirerHeureCollecte, registerScheduledTask, unregisterScheduledTask } from './scheduled-task';
+import { getAppUpdateState } from './app-update';
+
+// File de bascules tâche-planifiée : Register/Unregister-ScheduledTask durent
+// plusieurs secondes (PowerShell) — deux bascules rapprochées (ex. OFF puis ON
+// en moins d'une seconde) ne doivent JAMAIS s'exécuter en parallèle : sinon
+// le résultat est indéterministe (la tâche peut finir désinscrite alors que
+// tachePlanifiee reste à true — un flag menteur jamais auto-réparé, car le
+// démarrage n'enregistre que si !tachePlanifiee). Chaque maillon relit l'état
+// AU MOMENT DE SON EXÉCUTION (pas au moment de l'enfilage) : une bascule
+// devenue obsolète (dépassée par une plus récente) est un no-op.
+let chaineBascule: Promise<void> = Promise.resolve();
+
+async function basculerTachePlanifiee(userData: string, souhaite: boolean): Promise<void> {
+  const actuel = readSettings(userData);
+  if (actuel.autoUpdate !== souhaite) return; // dépassée : la bascule suivante en file porte l'état voulu
+  if (souhaite) {
+    // collecteHeure persistée = source de vérité ; tirée ici si absente.
+    let heure = actuel.collecteHeure;
+    if (!heure) {
+      heure = tirerHeureCollecte(userData);
+      writeSettings(userData, { ...readSettings(userData), collecteHeure: heure });
+    }
+    const ok = await registerScheduledTask(process.execPath, heure);
+    writeSettings(userData, { ...readSettings(userData), tachePlanifiee: ok });
+  } else {
+    await unregisterScheduledTask();
+    writeSettings(userData, { ...readSettings(userData), tachePlanifiee: false });
+  }
+}
 
 export function registerIpc(engine: EngineService): void {
   const userData = app.getPath('userData');
@@ -13,7 +43,20 @@ export function registerIpc(engine: EngineService): void {
   ipcMain.handle('registry', () => engine.registry());
 
   ipcMain.handle('getSettings', () => readSettings(userData));
-  ipcMain.handle('setSettings', (_e, s: Settings) => writeSettings(userData, s));
+  ipcMain.handle('setSettings', async (_e, s: Settings) => {
+    // Ne persiste que les champs éditables par l'écran Réglages : tachePlanifiee/
+    // collecteHeure sont pilotés par le main, jamais écrasés par un snapshot du
+    // renderer potentiellement périmé (ex. un register de démarrage abouti après
+    // l'ouverture de l'écran ne doit pas être effacé par la sauvegarde suivante).
+    const avant = readSettings(userData);
+    writeSettings(userData, { ...avant, alpha: s.alpha, autoUpdate: s.autoUpdate, outputDir: s.outputDir });
+
+    if (app.isPackaged && avant.autoUpdate !== s.autoUpdate) {
+      const souhaite = s.autoUpdate;
+      chaineBascule = chaineBascule.then(() => basculerTachePlanifiee(userData, souhaite)).catch(() => {});
+      await chaineBascule;
+    }
+  });
 
   ipcMain.handle('pickOutputDir', async () => {
     const r = await dialog.showOpenDialog({ properties: ['openDirectory', 'createDirectory'] });
@@ -42,4 +85,13 @@ export function registerIpc(engine: EngineService): void {
   ipcMain.handle('exportFicheCabinet', (_e, a: { cabinet: string; outDir: string; asOfMonth?: string }) =>
     engine.exportFicheCabinet(a.cabinet, a.outDir, readSettings(userData).alpha, a.asOfMonth ?? null),
   );
+
+  ipcMain.handle('accreditations', () => engine.accreditations());
+  ipcMain.handle(
+    'exportAccreditations',
+    (_e, a: { volet: 'statuts' | 'chronologie' | 'sorties' | 'synthese'; outDir: string; format: 'csv' | 'pdf' }) =>
+      engine.exportAccreditations(a.volet, a.outDir, a.format),
+  );
+
+  ipcMain.handle('appUpdateState', () => getAppUpdateState());
 }

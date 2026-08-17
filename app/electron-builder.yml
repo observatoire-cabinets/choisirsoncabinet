@@ -13,6 +13,10 @@ files:
 extraResources:
   - from: ../data/generated
     to: data/generated
+publish:
+  provider: github
+  owner: observatoire-cabinets
+  repo: choisirsoncabinet
 win:
   target: nsis
   # Non signé : un certificat nommerait son titulaire. SmartScreen
@@ -21,3 +25,7 @@ nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
   perMachine: false
+  # Nom d'artefact ASSAINI (sans espaces ni apostrophe) : latest.yml référence
+  # ce nom exact ; un nom d'exe différent serait renommé à l'upload GitHub et
+  # l'URL de latest.yml rendrait 404 — mise à jour silencieusement impossible.
+  artifactName: observatoire-cabinets-setup-${version}.${ext}

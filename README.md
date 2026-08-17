@@ -1,12 +1,24 @@
 # Observatoire Cabinets Evaluateurs d'ESSMS
-Pour télécharcher allez dans https://github.com/observatoire-cabinets/choisirsoncabinet/releases puis dans Assets cliquer sur Observatoire-Cabinets-Evaluateurs-ESSMS-v0.3.0-windows-portable.zip (117 Mo) puis Ok
+
+**Télécharger** : allez dans https://github.com/observatoire-cabinets/choisirsoncabinet/releases
+puis, dans « Assets » de la dernière version, cliquez sur l'un des deux fichiers :
+
+- `observatoire-cabinets-setup-0.4.0.exe` (recommandé) — installateur : le logiciel
+  se met à jour tout seul ;
+- `Observatoire-Cabinets-Evaluateurs-ESSMS-v0.4.0-windows-portable.zip` — version
+  portable : la mise à jour automatique du logiciel ne s'applique pas ; les données,
+  elles, se mettent à jour normalement.
+
 Application de bureau **hors-ligne** qui analyse les données **publiques** d'évaluation
 des établissements et services sociaux et médico-sociaux (ESSMS) et met en regard les
 **cabinets évaluateurs** habilités par la HAS.
 
-Aucun compte, aucune connexion obligatoire, aucune IA, aucune télémétrie. Les données
-sont embarquées : l'application fonctionne entièrement sur votre machine.
-la mise à jour émet une requête vers la HAS et data.gouv.fr ; le reste fonctionne hors-ligne
+Aucun compte, aucune IA, **aucune télémétrie** : rien n'est jamais envoyé, tout est
+descendant. L'application fonctionne hors-ligne sur données embarquées et, quand une
+connexion est disponible, **se met à jour toute seule** : données publiques (HAS,
+COFRAC, data.gouv.fr) et logiciel (releases GitHub). Une tâche planifiée quotidienne
+relève la liste HAS même application fermée. Tout cela se désactive d'un interrupteur
+dans les Réglages.
 
 ## Ce qu'elle fait
 
@@ -28,6 +40,14 @@ la mise à jour émet une requête vers la HAS et data.gouv.fr ; le reste foncti
   dernière évaluation par structure, la reconstitution des mois passés est approchée
   pour les rares structures réévaluées ; les évaluations sans date de clôture sont
   exclues de l'historique et comptées à part.
+- **Accréditations** — suivi de la **liste HAS des organismes autorisés** (relevés
+  archivés depuis octobre 2022) croisée avec le relevé **COFRAC** des suspensions,
+  résiliations et retraits : statut de chaque cabinet (accrédité, autorisé sans
+  accréditation, sorti de liste — motif jamais indiqué par la source), chronologie
+  des effectifs (avec les points des bilans annuels HAS et les périodes non
+  observées affichées comme telles), journal des sorties avec fenêtres
+  d'observation ; exports **CSV** et **PDF**. Chaque poste archive ses relevés
+  quotidiens en ajout seul (rien n'est jamais réécrit).
 - **Registre** — lignes de vie des cabinets (première apparition, dernière évaluation
   publiée), reconstituées à partir des évaluations publiées.
 - **Réglages** statistique classique — seuil de significativité **α = 0,05 par défaut** (bascule 0,01),
@@ -54,9 +74,15 @@ L'application embarque un instantané des sources publiques suivantes — voir
 - **FINESS — fichier national des établissements** (répertoire, capacité installée) —
   **Licence Ouverte 2.0**.
 - **HAS — base documentaire ESSMS** (nom officiel + adresse) — **Licence Ouverte 2.0**.
+- **HAS — liste des organismes autorisés pour l'évaluation des ESSMS** (PDF public) —
+  relevés archivés localement, huit états historiques embarqués (oct. 2022 → août 2026).
+- **COFRAC — suspensions, résiliations et retraits d'accréditation** (page publique) —
+  relevés archivés localement.
 
 La mise à jour (Réglages → *Mettre à jour*) retélécharge ces sources depuis data.gouv.fr
 et HAS puis reconstruit l'instantané ; les versions précédentes sont archivées localement.
+Si la tâche planifiée est supprimée manuellement dans le Planificateur Windows,
+l'application ne la recrée qu'à la prochaine bascule de l'interrupteur de mise à jour.
 
 ## Prérequis
 

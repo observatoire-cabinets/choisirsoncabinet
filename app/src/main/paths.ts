@@ -27,3 +27,27 @@ export function resolveArchiveRoot(): string {
   mkdirSync(base, { recursive: true });
   return base;
 }
+
+/**
+ * Amorce liste-HAS : TOUJOURS lue depuis les ressources embarquées de la
+ * version courante (resourcesPath en packagé, dépôt en dev) — jamais via la
+ * copie unique userData, sinon une mise à jour du logiciel n'apporterait
+ * jamais son amorce plus riche.
+ */
+export function resolveListeHasSeedDir(): string {
+  return app.isPackaged
+    ? join(process.resourcesPath, 'data', 'generated', 'liste-has')
+    : join(__dirname, '../../../data/generated/liste-has');
+}
+
+/**
+ * Archive locale liste-HAS/COFRAC du poste — dérivée du userData EFFECTIF
+ * dans les deux modes (dev et packagé). En dev comme en test, `--user-data-dir`
+ * isole donc l'archive par lancement : les specs e2e dev restent déterministes
+ * (comptes exacts sur l'amorce re-seedée à chaque launchApp).
+ */
+export function resolveListeHasArchiveRoot(): string {
+  const base = join(app.getPath('userData'), 'liste-has');
+  mkdirSync(base, { recursive: true });
+  return base;
+}

@@ -34,6 +34,10 @@ export function sanitizeForWinAnsi(text: string): string {
     .replace(/[→]/g, '->') // → -> ->
     .replace(/[←]/g, '<-') // ← -> <-
     .replace(/[Δ]/g, 'Delta') // Δ -> Delta
+    // Chiffres cerclés (numérotation de volet) hors WinAnsi.
+    .replace(/①/g, '1.') // ① -> 1.
+    .replace(/②/g, '2.') // ② -> 2.
+    .replace(/③/g, '3.') // ③ -> 3.
     // Remove any remaining characters outside WinAnsi range (0x00-0xFF minus control chars).
     // This catches edge cases from LLM outputs (emoji, CJK, arrows, narrow no-break
     // space U+202F, etc.) without breaking the PDF.

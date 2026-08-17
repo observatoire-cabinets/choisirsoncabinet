@@ -1,0 +1,4660 @@
+[
+ {
+  "date_source": "11 octobre 2022",
+  "organismes": [
+   {
+    "siren": "849526678",
+    "nom": "CIDEES CERTIFICATION",
+    "num": "",
+    "dept": "26"
+   },
+   {
+    "siren": "480506773",
+    "nom": "INGERIS INSPECTION",
+    "num": "",
+    "dept": "26"
+   },
+   {
+    "siren": "488336819",
+    "nom": "ACRITEC",
+    "num": "",
+    "dept": "38"
+   },
+   {
+    "siren": "383429891",
+    "nom": "MM2C",
+    "num": "",
+    "dept": "42"
+   },
+   {
+    "siren": "822566295",
+    "nom": "APHILIA CONSEIL",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "444104491",
+    "nom": "CABINET KHEOPS CONSULTING72",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "383925633",
+    "nom": "POLE FORMATION SANTE",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "451389928",
+    "nom": "SOCRATES",
+    "num": "",
+    "dept": "74"
+   },
+   {
+    "siren": "338138597",
+    "nom": "ASSOCIATION INFORMATIONRECHERCHE",
+    "num": "",
+    "dept": "25"
+   },
+   {
+    "siren": "519978340",
+    "nom": "BGP CONSEIL",
+    "num": "",
+    "dept": "56"
+   },
+   {
+    "siren": "903307684",
+    "nom": "IPSO FACTO CONSEIL AUDITRECRUTEMENT FORMATION",
+    "num": "",
+    "dept": "51"
+   },
+   {
+    "siren": "838113900",
+    "nom": "COQUAU",
+    "num": "",
+    "dept": "57"
+   },
+   {
+    "siren": "838339646",
+    "nom": "ASSOCIATION POUR LA FORMATIONET LA RECHERCHE EN INTERVENTIONSOCIALE",
+    "num": "",
+    "dept": "67"
+   },
+   {
+    "siren": "900921503",
+    "nom": "SOLEVA",
+    "num": "",
+    "dept": "971"
+   },
+   {
+    "siren": "911464824",
+    "nom": "ACCOMPANY PERFORMANCES YANAQUALITY",
+    "num": "",
+    "dept": "973"
+   },
+   {
+    "siren": "448721746",
+    "nom": "BIOCONSULTANTS",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "878950963",
+    "nom": "CABINET OULAD",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "823462676",
+    "nom": "AM CONSULTANTS NORD",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "499129997",
+    "nom": "T.L.C.",
+    "num": "",
+    "dept": "80"
+   },
+   {
+    "siren": "841210040",
+    "nom": "ACTIVCERT",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "414513275",
+    "nom": "AB CERTIFICATION",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "528530264",
+    "nom": "AMPLEA",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "834096497",
+    "nom": "SOCOTEC ENVIRONNEMENT5 PL DES FRERES MONTGOLFIER",
+    "num": "",
+    "dept": "78"
+   },
+   {
+    "siren": "827917352",
+    "nom": "ENYS CONSEIL",
+    "num": "",
+    "dept": "91"
+   },
+   {
+    "siren": "527573141",
+    "nom": "APAVE",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "399851609",
+    "nom": "BUREAU VERITAS CERTIFICATION",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "479076002",
+    "nom": "AFNOR CERTIFICATION",
+    "num": "",
+    "dept": "93"
+   },
+   {
+    "siren": "501332712",
+    "nom": "4 AS",
+    "num": "",
+    "dept": "94"
+   },
+   {
+    "siren": "403293103",
+    "nom": "SGS INTERNATIONAL CERTIFICATIONSERVICE",
+    "num": "",
+    "dept": "94"
+   },
+   {
+    "siren": "439995994",
+    "nom": "O TRADING & CONSULTING",
+    "num": "",
+    "dept": "14"
+   },
+   {
+    "siren": "494837115",
+    "nom": "CESAM FORMATION",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "440249175",
+    "nom": "CFER SANTE",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "835149824",
+    "nom": "MEDICONSEIL FORMATION",
+    "num": "",
+    "dept": "64"
+   },
+   {
+    "siren": "478824329",
+    "nom": "CABINET COUPIAT",
+    "num": "",
+    "dept": "64"
+   },
+   {
+    "siren": "905103362",
+    "nom": "A+EVAL",
+    "num": "",
+    "dept": "34"
+   },
+   {
+    "siren": "914584446",
+    "nom": "CELAE",
+    "num": "",
+    "dept": "44"
+   },
+   {
+    "siren": "850779844",
+    "nom": "CÉPHÉE CONSULTING / CABINETCOIRIER ALLARD",
+    "num": "",
+    "dept": "85"
+   },
+   {
+    "siren": "794653444",
+    "nom": "ISY CONSEIL",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "383916392",
+    "nom": "ELSE CONSULTANTS",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "493603153",
+    "nom": "AS CONSULTING",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "379227937",
+    "nom": "ACS CONSULTANTS",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "809919384",
+    "nom": "EULALIA CONSEIL",
+    "num": "",
+    "dept": "83"
+   }
+  ],
+  "date_releve": "2022-10-11",
+  "sha256": "a2779168d94e6a51f08c5c0f3330cb9eeebe8ac22c1b10b42fe67f5cbffc8bf9"
+ },
+ {
+  "date_source": "17 octobre 2022",
+  "organismes": [
+   {
+    "siren": "849526678",
+    "nom": "CIDEES CERTIFICATION",
+    "num": "",
+    "dept": "26"
+   },
+   {
+    "siren": "480506773",
+    "nom": "INGERIS INSPECTION",
+    "num": "",
+    "dept": "26"
+   },
+   {
+    "siren": "488336819",
+    "nom": "ACRITEC",
+    "num": "",
+    "dept": "38"
+   },
+   {
+    "siren": "383429891",
+    "nom": "MM2C",
+    "num": "",
+    "dept": "42"
+   },
+   {
+    "siren": "822566295",
+    "nom": "APHILIA CONSEIL",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "444104491",
+    "nom": "CABINET KHEOPS CONSULTING72",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "383925633",
+    "nom": "POLE FORMATION SANTE",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "451389928",
+    "nom": "SOCRATES",
+    "num": "",
+    "dept": "74"
+   },
+   {
+    "siren": "338138597",
+    "nom": "ASSOCIATION INFORMATIONRECHERCHE",
+    "num": "",
+    "dept": "25"
+   },
+   {
+    "siren": "519978340",
+    "nom": "BGP CONSEIL",
+    "num": "",
+    "dept": "56"
+   },
+   {
+    "siren": "903307684",
+    "nom": "IPSO FACTO CONSEIL AUDITRECRUTEMENT FORMATION",
+    "num": "",
+    "dept": "51"
+   },
+   {
+    "siren": "838113900",
+    "nom": "COQUAU",
+    "num": "",
+    "dept": "57"
+   },
+   {
+    "siren": "838339646",
+    "nom": "ASSOCIATION POUR LA FORMATIONET LA RECHERCHE EN INTERVENTIONSOCIALE",
+    "num": "",
+    "dept": "67"
+   },
+   {
+    "siren": "900921503",
+    "nom": "SOLEVA",
+    "num": "",
+    "dept": "971"
+   },
+   {
+    "siren": "911464824",
+    "nom": "ACCOMPANY PERFORMANCES YANAQUALITY",
+    "num": "",
+    "dept": "973"
+   },
+   {
+    "siren": "448721746",
+    "nom": "BIOCONSULTANTS",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "878950963",
+    "nom": "CABINET OULAD",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "823462676",
+    "nom": "AM CONSULTANTS NORD",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "499129997",
+    "nom": "T.L.C.",
+    "num": "",
+    "dept": "80"
+   },
+   {
+    "siren": "893730044",
+    "nom": "INITIATIVES & DYNAMIQUESPLURIELLES",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "528530264",
+    "nom": "AMPLEA",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "841210040",
+    "nom": "ACTIVCERT",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "414513275",
+    "nom": "AB CERTIFICATION",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "834096497",
+    "nom": "SOCOTEC ENVIRONNEMENT5 PL DES FRERES MONTGOLFIER",
+    "num": "",
+    "dept": "78"
+   },
+   {
+    "siren": "827917352",
+    "nom": "ENYS CONSEIL",
+    "num": "",
+    "dept": "91"
+   },
+   {
+    "siren": "527573141",
+    "nom": "APAVE",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "399851609",
+    "nom": "BUREAU VERITAS CERTIFICATION",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "479076002",
+    "nom": "AFNOR CERTIFICATION",
+    "num": "",
+    "dept": "93"
+   },
+   {
+    "siren": "501332712",
+    "nom": "4 AS",
+    "num": "",
+    "dept": "94"
+   },
+   {
+    "siren": "403293103",
+    "nom": "SGS INTERNATIONAL CERTIFICATIONSERVICE",
+    "num": "",
+    "dept": "94"
+   },
+   {
+    "siren": "439995994",
+    "nom": "O TRADING & CONSULTING",
+    "num": "",
+    "dept": "14"
+   },
+   {
+    "siren": "494837115",
+    "nom": "CESAM FORMATION",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "440249175",
+    "nom": "CFER SANTE",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "478824329",
+    "nom": "CABINET COUPIAT",
+    "num": "",
+    "dept": "64"
+   },
+   {
+    "siren": "835149824",
+    "nom": "MEDICONSEIL FORMATION",
+    "num": "",
+    "dept": "64"
+   },
+   {
+    "siren": "905103362",
+    "nom": "A+EVAL",
+    "num": "",
+    "dept": "34"
+   },
+   {
+    "siren": "914584446",
+    "nom": "CELAE",
+    "num": "",
+    "dept": "44"
+   },
+   {
+    "siren": "850779844",
+    "nom": "CÉPHÉE CONSULTING / CABINETCOIRIER ALLARD",
+    "num": "",
+    "dept": "85"
+   },
+   {
+    "siren": "379227937",
+    "nom": "ACS CONSULTANTS",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "794653444",
+    "nom": "ISY CONSEIL",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "383916392",
+    "nom": "ELSE CONSULTANTS",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "493603153",
+    "nom": "AS CONSULTING",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "809919384",
+    "nom": "EULALIA CONSEIL",
+    "num": "",
+    "dept": "83"
+   }
+  ],
+  "date_releve": "2022-10-17",
+  "sha256": "22b23e4cffd57ed609109ade5fb68126e49edbedae13b7fe0f3b1598214aa20a"
+ },
+ {
+  "date_source": "07 avril 2023",
+  "organismes": [
+   {
+    "siren": "480506773",
+    "nom": "INGERIS INSPECTION",
+    "num": "",
+    "dept": "26"
+   },
+   {
+    "siren": "849526678",
+    "nom": "CIDEES CERTIFICATION",
+    "num": "",
+    "dept": "26"
+   },
+   {
+    "siren": "507739795",
+    "nom": "QUALITE ET PRATIQUES PROFESSIONNELLES",
+    "num": "",
+    "dept": "26"
+   },
+   {
+    "siren": "488336819",
+    "nom": "ACRITEC",
+    "num": "",
+    "dept": "38"
+   },
+   {
+    "siren": "791210719",
+    "nom": "CONVENANCE CONSULT",
+    "num": "",
+    "dept": "38"
+   },
+   {
+    "siren": "423705912",
+    "nom": "CENTRE RESSOURCES AROBASE",
+    "num": "",
+    "dept": "38"
+   },
+   {
+    "siren": "383429891",
+    "nom": "MM2C",
+    "num": "",
+    "dept": "42"
+   },
+   {
+    "siren": "808274591",
+    "nom": "BAROT CONSEIL",
+    "num": "",
+    "dept": "63"
+   },
+   {
+    "siren": "383925633",
+    "nom": "POLE FORMATION SANTE",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "444104491",
+    "nom": "CABINET KHEOPS CONSULTING",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "822566295",
+    "nom": "APHILIA CONSEIL",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "414862672",
+    "nom": "GRIEPS GROUPE DE RECHERCHE ET D'INTERVENTION POUR L' EDUCATION DES PROFESSIONS SANITAIRES ET SOCIALES",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "403419930",
+    "nom": "ABAQ CONSEIL EN MANAGEMENT",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "430485201",
+    "nom": "R.H.& ORGANISATION",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "533398491",
+    "nom": "ID&ES",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "411588619",
+    "nom": "CABINET GK Conseil",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "451389928",
+    "nom": "SOCRATES",
+    "num": "",
+    "dept": "74"
+   },
+   {
+    "siren": "338138597",
+    "nom": "ACTION INFORMATION RECHERCHE",
+    "num": "",
+    "dept": "25"
+   },
+   {
+    "siren": "793911454",
+    "nom": "Cabinet Makars",
+    "num": "",
+    "dept": "22"
+   },
+   {
+    "siren": "351503412",
+    "nom": "GALATA ORGANISATION PARC D'ACTIVITE BEAUJARDIN",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "432990638",
+    "nom": "MANAGEMENT DE LA QUALITE EN SANTE",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "442490306",
+    "nom": "SOCIETE NOUVELLE CATALYS",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "497968479",
+    "nom": "JEUDEVI - JEUNESSE DEVELOPPEMENT INTELLIGENTS LE RUISSEAU",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "511569857",
+    "nom": "PERINOVE",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "519978340",
+    "nom": "BGP CONSEIL",
+    "num": "",
+    "dept": "56"
+   },
+   {
+    "siren": "889415246",
+    "nom": "QOANIX",
+    "num": "",
+    "dept": "45"
+   },
+   {
+    "siren": "903307684",
+    "nom": "IPSO FACTO CONSEIL AUDIT RECRUTEMENT FORMATION",
+    "num": "",
+    "dept": "51"
+   },
+   {
+    "siren": "808526057",
+    "nom": "DUNAMIS CONSEIL",
+    "num": "",
+    "dept": "54"
+   },
+   {
+    "siren": "838339646",
+    "nom": "ASSOCIATION POUR LA FORMATION ET LA RECHERCHE EN INTERVENTION SOCIALE (AFRIS)",
+    "num": "",
+    "dept": "67"
+   },
+   {
+    "siren": "533546974",
+    "nom": "CJM CONSULTING",
+    "num": "",
+    "dept": "971"
+   },
+   {
+    "siren": "900921503",
+    "nom": "SOLEVA 4 LES HAUTS DE GRIPPIERE",
+    "num": "",
+    "dept": "971"
+   },
+   {
+    "siren": "911464824",
+    "nom": "ACCOMPANY PERFORMANCES YANA QUALITY",
+    "num": "",
+    "dept": "973"
+   },
+   {
+    "siren": "823462676",
+    "nom": "AM CONSULTANTS NORD",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "878950963",
+    "nom": "CABINET OULAD",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "448721746",
+    "nom": "BIOCONSULTANTS",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "329070809",
+    "nom": "CONSEIL EN PRATIQUES & ANALYSES SOCIALES",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "442928826",
+    "nom": "STRATELYS",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "499129997",
+    "nom": "T.L.C.",
+    "num": "",
+    "dept": "80"
+   },
+   {
+    "siren": "827514613",
+    "nom": "EIRL Céline LISEK Formation Conseil",
+    "num": "",
+    "dept": "80"
+   },
+   {
+    "siren": "829590546",
+    "nom": "PRONEO CERTIFICATION",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "799898408",
+    "nom": "Cabinet UWAMARIYA Chantal",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "893730044",
+    "nom": "Pluriel Formation Conseil",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "528530264",
+    "nom": "AMPLEA",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "414513275",
+    "nom": "AB CERTIFICATION",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "841210040",
+    "nom": "ACTIVCERT",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "518991294",
+    "nom": "A-AMCOS",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "524893237",
+    "nom": "RESIDEAL SANTE",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "898061155",
+    "nom": "PARMENTIER BLEU SOCIAL",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "398210997",
+    "nom": "JRH CONSULTANTS",
+    "num": "",
+    "dept": "77"
+   },
+   {
+    "siren": "834096497",
+    "nom": "SOCOTEC ENVIRONNEMENT",
+    "num": "",
+    "dept": "78"
+   },
+   {
+    "siren": "827917352",
+    "nom": "ENYS CONSEIL",
+    "num": "",
+    "dept": "91"
+   },
+   {
+    "siren": "399851609",
+    "nom": "BUREAU VERITAS CERTIFICATION",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "850223843",
+    "nom": "ACACIA-ETHIQUE ET QUALITE",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "853093425",
+    "nom": "HANDEO SERVICES",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "527573141",
+    "nom": "APAVE",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "920343571",
+    "nom": "ETIKEVAL",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "377505565",
+    "nom": "MAZARS SAS",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "479076002",
+    "nom": "AFNOR CERTIFICATION",
+    "num": "",
+    "dept": "93"
+   },
+   {
+    "siren": "403293103",
+    "nom": "SGS INTERNATIONAL CERTIFICATION SERVICE",
+    "num": "",
+    "dept": "94"
+   },
+   {
+    "siren": "501332712",
+    "nom": "4 AS",
+    "num": "",
+    "dept": "94"
+   },
+   {
+    "siren": "800719262",
+    "nom": "AUTONOMII",
+    "num": "",
+    "dept": "94"
+   },
+   {
+    "siren": "802740233",
+    "nom": "2 VOUS A NOUS",
+    "num": "",
+    "dept": "95"
+   },
+   {
+    "siren": "831624705",
+    "nom": "ESSMS EVALUATION",
+    "num": "",
+    "dept": "14"
+   },
+   {
+    "siren": "439995994",
+    "nom": "O TRADING & CONSULTING",
+    "num": "",
+    "dept": "14"
+   },
+   {
+    "siren": "400360988",
+    "nom": "ARFOS",
+    "num": "",
+    "dept": "14"
+   },
+   {
+    "siren": "412261018",
+    "nom": "CERTIPAQ",
+    "num": "",
+    "dept": "76"
+   },
+   {
+    "siren": "341929750",
+    "nom": "REALITES ET PROJETS CONSULTANTS",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "440249175",
+    "nom": "CFER SANTE",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "494837115",
+    "nom": "CESAM FORMATION",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "504216227",
+    "nom": "ABRAS STRATEGIE",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "901057620",
+    "nom": "RESEAU JANNOY",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "410218754",
+    "nom": "Cabinet GRANGER Consultant",
+    "num": "",
+    "dept": "64"
+   },
+   {
+    "siren": "478824329",
+    "nom": "CABINET COUPIAT",
+    "num": "",
+    "dept": "64"
+   },
+   {
+    "siren": "835149824",
+    "nom": "MEDICONSEIL FORMATION",
+    "num": "",
+    "dept": "64"
+   },
+   {
+    "siren": "411047913",
+    "nom": "ACTIONS FORMATIONS",
+    "num": "",
+    "dept": "12"
+   },
+   {
+    "siren": "805184371",
+    "nom": "AVIANCE",
+    "num": "",
+    "dept": "30"
+   },
+   {
+    "siren": "529545683",
+    "nom": "AD-VENIR",
+    "num": "",
+    "dept": "31"
+   },
+   {
+    "siren": "919133132",
+    "nom": "QUALITIA INSPECTION",
+    "num": "",
+    "dept": "31"
+   },
+   {
+    "siren": "502292758",
+    "nom": "IN TEAM",
+    "num": "",
+    "dept": "31"
+   },
+   {
+    "siren": "905103362",
+    "nom": "A+EVAL",
+    "num": "",
+    "dept": "34"
+   },
+   {
+    "siren": "914584446",
+    "nom": "CELAE",
+    "num": "",
+    "dept": "44"
+   },
+   {
+    "siren": "948563069",
+    "nom": "RICHARD PARCKER",
+    "num": "",
+    "dept": "44"
+   },
+   {
+    "siren": "388765901",
+    "nom": "TECHNE CONSEIL",
+    "num": "",
+    "dept": "53"
+   },
+   {
+    "siren": "513253138",
+    "nom": "ETIQ MANAGEMENT",
+    "num": "",
+    "dept": "72"
+   },
+   {
+    "siren": "786428979",
+    "nom": "CENTRE DE FORMATION ET DE PROMOTION LE MESLAY",
+    "num": "",
+    "dept": "85"
+   },
+   {
+    "siren": "304600885",
+    "nom": "CEAS DE LA VENDEE",
+    "num": "",
+    "dept": "85"
+   },
+   {
+    "siren": "921933388",
+    "nom": "CEPHEE EXPERTISE ET CONSULTING",
+    "num": "",
+    "dept": "85"
+   },
+   {
+    "siren": "922631189",
+    "nom": "ABC SYNACTION",
+    "num": "",
+    "dept": "06"
+   },
+   {
+    "siren": "442026811",
+    "nom": "ALEOZ",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "479246845",
+    "nom": "PREISO",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "379227937",
+    "nom": "ACS CONSULTANTS",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "493603153",
+    "nom": "AS CONSULTING",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "383916392",
+    "nom": "ELSE CONSULTANTS",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "794653444",
+    "nom": "ISY CONSEIL",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "847823754",
+    "nom": "SANTEPREV",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "809919384",
+    "nom": "EULALIA CONSEIL",
+    "num": "",
+    "dept": "83"
+   },
+   {
+    "siren": "530545847",
+    "nom": "IN AURIS",
+    "num": "",
+    "dept": "83"
+   },
+   {
+    "siren": "800456980",
+    "nom": "CABINET D'EXPERTISE ET D'INGENIERIE SANTE ET SOCIAL VAR CONSULTANT",
+    "num": "",
+    "dept": "83"
+   }
+  ],
+  "date_releve": "2023-04-07",
+  "sha256": "aaee517afe266d3d66ee53f508bc2845bec2bb6d1dd0f1c934c3ee9247a0e4c5"
+ },
+ {
+  "date_source": "24 septembre 2023",
+  "organismes": [
+   {
+    "siren": "507739795",
+    "nom": "QUALITE ET PRATIQUES PROFESSIONNELLES",
+    "num": "",
+    "dept": "26"
+   },
+   {
+    "siren": "849526678",
+    "nom": "CIDEES CERTIFICATION",
+    "num": "",
+    "dept": "26"
+   },
+   {
+    "siren": "480506773",
+    "nom": "INGERIS INSPECTION",
+    "num": "",
+    "dept": "26"
+   },
+   {
+    "siren": "423705912",
+    "nom": "CENTRE RESSOURCES AROBASE",
+    "num": "",
+    "dept": "38"
+   },
+   {
+    "siren": "791210719",
+    "nom": "CONVENANCE CONSULT",
+    "num": "",
+    "dept": "38"
+   },
+   {
+    "siren": "488336819",
+    "nom": "ACRITEC",
+    "num": "",
+    "dept": "38"
+   },
+   {
+    "siren": "383429891",
+    "nom": "MM2C",
+    "num": "",
+    "dept": "42"
+   },
+   {
+    "siren": "829452499",
+    "nom": "CABINET BROUSSEAUD",
+    "num": "",
+    "dept": "63"
+   },
+   {
+    "siren": "808274591",
+    "nom": "BAROT CONSEIL",
+    "num": "",
+    "dept": "63"
+   },
+   {
+    "siren": "414862672",
+    "nom": "GRIEPS GROUPE DE RECHERCHE ET D'INTERVENTION POUR L' EDUCATION DES PROFESSIONS SANITAIRES ET SOCIALES",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "411588619",
+    "nom": "CABINET GK Conseil",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "533398491",
+    "nom": "ID&ES",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "430485201",
+    "nom": "R.H.& ORGANISATION",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "403419930",
+    "nom": "ABAQ CONSEIL EN MANAGEMENT",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "822566295",
+    "nom": "APHILIA CONSEIL",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "444104491",
+    "nom": "CABINET KHEOPS CONSULTING",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "383925633",
+    "nom": "POLE FORMATION SANTE",
+    "num": "",
+    "dept": "69"
+   },
+   {
+    "siren": "451389928",
+    "nom": "SOCRATES",
+    "num": "",
+    "dept": "74"
+   },
+   {
+    "siren": "410475081",
+    "nom": "INSTITUT REGIONAL SUPERIEUR DU TRAVAIL EDUCATIF ET SOCIAL - IRTESS",
+    "num": "",
+    "dept": "21"
+   },
+   {
+    "siren": "338138597",
+    "nom": "ACTION INFORMATION RECHERCHE",
+    "num": "",
+    "dept": "25"
+   },
+   {
+    "siren": "793911454",
+    "nom": "Cabinet Makars",
+    "num": "",
+    "dept": "22"
+   },
+   {
+    "siren": "351503412",
+    "nom": "GALATA ORGANISATION PARC D'ACTIVITE BEAUJARDIN",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "511569857",
+    "nom": "PERINOVE",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "497968479",
+    "nom": "JEUDEVI - JEUNESSE DEVELOPPEMENT INTELLIGENTS 501 LE RUISSEAU",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "442490306",
+    "nom": "SOCIETE NOUVELLE CATALYS",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "432990638",
+    "nom": "MANAGEMENT DE LA QUALITE EN SANTE",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "519978340",
+    "nom": "BGP CONSEIL",
+    "num": "",
+    "dept": "56"
+   },
+   {
+    "siren": "951655109",
+    "nom": "SAS AB QUAL",
+    "num": "",
+    "dept": "37"
+   },
+   {
+    "siren": "529426116",
+    "nom": "SOPAS CONSULTING",
+    "num": "",
+    "dept": "37"
+   },
+   {
+    "siren": "477974398",
+    "nom": "Cabinet Sylvie CHEVESSIER 2 LA THIELLERIE",
+    "num": "",
+    "dept": "37"
+   },
+   {
+    "siren": "889415246",
+    "nom": "QOANIX",
+    "num": "",
+    "dept": "45"
+   },
+   {
+    "siren": "903307684",
+    "nom": "IPSO FACTO CONSEIL AUDIT RECRUTEMENT FORMATION",
+    "num": "",
+    "dept": "51"
+   },
+   {
+    "siren": "808526057",
+    "nom": "DUNAMIS CONSEIL",
+    "num": "",
+    "dept": "54"
+   },
+   {
+    "siren": "838339646",
+    "nom": "ASSOCIATION POUR LA FORMATION ET LA RECHERCHE EN INTERVENTION SOCIALE (AFRIS)",
+    "num": "",
+    "dept": "67"
+   },
+   {
+    "siren": "753089424",
+    "nom": "CABINET LUDOVIC SORIS 3,",
+    "num": "",
+    "dept": "68"
+   },
+   {
+    "siren": "900921503",
+    "nom": "SOLEVA 4 LES HAUTS DE GRIPPIERE",
+    "num": "",
+    "dept": "971"
+   },
+   {
+    "siren": "533546974",
+    "nom": "CJM CONSULTING",
+    "num": "",
+    "dept": "971"
+   },
+   {
+    "siren": "911464824",
+    "nom": "ACCOMPANY PERFORMANCES YANA QUALITY",
+    "num": "",
+    "dept": "973"
+   },
+   {
+    "siren": "878950963",
+    "nom": "CABINET OULAD",
+    "num": "3-1972",
+    "dept": "59"
+   },
+   {
+    "siren": "479667735",
+    "nom": "STRATELYS",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "329070809",
+    "nom": "CONSEIL EN PRATIQUES & ANALYSES SOCIALES",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "448721746",
+    "nom": "BIOCONSULTANTS",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "823462676",
+    "nom": "AM CONSULTANTS NORD",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "892613076",
+    "nom": "CEOS'CONSULT",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "827514613",
+    "nom": "EIRL Céline LISEK Formation Conseil",
+    "num": "3-2049",
+    "dept": "80"
+   },
+   {
+    "siren": "499129997",
+    "nom": "T.L.C.",
+    "num": "",
+    "dept": "80"
+   },
+   {
+    "siren": "518991294",
+    "nom": "A-AMCOS",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "898061155",
+    "nom": "PARMENTIER BLEU SOCIAL",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "524893237",
+    "nom": "RESIDEAL SANTE",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "841210040",
+    "nom": "ACTIVCERT",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "414513275",
+    "nom": "AB CERTIFICATION",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "528530264",
+    "nom": "AMPLEA",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "893730044",
+    "nom": "Pluriel Formation Conseil",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "799898408",
+    "nom": "Cabinet UWAMARIYA Chantal",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "829590546",
+    "nom": "PRONEO CERTIFICATION",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "801531971",
+    "nom": "NTG CONSEIL",
+    "num": "",
+    "dept": "77"
+   },
+   {
+    "siren": "398210997",
+    "nom": "JRH CONSULTANTS",
+    "num": "",
+    "dept": "77"
+   },
+   {
+    "siren": "834096497",
+    "nom": "SOCOTEC ENVIRONNEMENT",
+    "num": "3-1595",
+    "dept": "78"
+   },
+   {
+    "siren": "953761608",
+    "nom": "FORCIS CONSEILS ET FORMATIONS",
+    "num": "",
+    "dept": "91"
+   },
+   {
+    "siren": "827917352",
+    "nom": "ENYS CONSEIL",
+    "num": "",
+    "dept": "91"
+   },
+   {
+    "siren": "451303549",
+    "nom": "ELIANE CONSEIL",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "853093425",
+    "nom": "HANDEO SERVICES",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "850223843",
+    "nom": "ACACIA-ETHIQUE ET QUALITE",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "377505565",
+    "nom": "MAZARS SAS",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "920343571",
+    "nom": "ETIKEVAL",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "527573141",
+    "nom": "APAVE",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "399851609",
+    "nom": "BUREAU VERITAS CERTIFICATION",
+    "num": "",
+    "dept": "92"
+   },
+   {
+    "siren": "479076002",
+    "nom": "AFNOR CERTIFICATION",
+    "num": "3-2014",
+    "dept": "93"
+   },
+   {
+    "siren": "800719262",
+    "nom": "AUTONOMII",
+    "num": "",
+    "dept": "94"
+   },
+   {
+    "siren": "501332712",
+    "nom": "4 AS",
+    "num": "",
+    "dept": "94"
+   },
+   {
+    "siren": "403293103",
+    "nom": "SGS INTERNATIONAL CERTIFICATION SERVICE",
+    "num": "",
+    "dept": "94"
+   },
+   {
+    "siren": "802740233",
+    "nom": "2 VOUS A NOUS",
+    "num": "",
+    "dept": "95"
+   },
+   {
+    "siren": "884436585",
+    "nom": "CAPCERT",
+    "num": "",
+    "dept": "95"
+   },
+   {
+    "siren": "831624705",
+    "nom": "ESSMS EVALUATION",
+    "num": "",
+    "dept": "14"
+   },
+   {
+    "siren": "400360988",
+    "nom": "ARFOS",
+    "num": "",
+    "dept": "14"
+   },
+   {
+    "siren": "439995994",
+    "nom": "O TRADING & CONSULTING",
+    "num": "",
+    "dept": "14"
+   },
+   {
+    "siren": "412261018",
+    "nom": "CERTIPAQ",
+    "num": "",
+    "dept": "76"
+   },
+   {
+    "siren": "901057620",
+    "nom": "RESEAU JANNOY",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "504216227",
+    "nom": "ABRAS STRATEGIE",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "494837115",
+    "nom": "CESAM FORMATION",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "440249175",
+    "nom": "CFER SANTE",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "341929750",
+    "nom": "REALITES ET PROJETS CONSULTANTS",
+    "num": "",
+    "dept": "33"
+   },
+   {
+    "siren": "835149824",
+    "nom": "CABINET CHANTAL MORNET-PÉRIER",
+    "num": "",
+    "dept": "64"
+   },
+   {
+    "siren": "478824329",
+    "nom": "CABINET COUPIAT",
+    "num": "",
+    "dept": "64"
+   },
+   {
+    "siren": "410218754",
+    "nom": "Cabinet GRANGER Consultant",
+    "num": "",
+    "dept": "64"
+   },
+   {
+    "siren": "411047913",
+    "nom": "ACTIONS FORMATIONS",
+    "num": "",
+    "dept": "12"
+   },
+   {
+    "siren": "805184371",
+    "nom": "AVIANCE",
+    "num": "",
+    "dept": "30"
+   },
+   {
+    "siren": "948248240",
+    "nom": "PLUS VALUE ESMS",
+    "num": "",
+    "dept": "31"
+   },
+   {
+    "siren": "502292758",
+    "nom": "IN TEAM",
+    "num": "",
+    "dept": "31"
+   },
+   {
+    "siren": "919133132",
+    "nom": "QUALITIA INSPECTION",
+    "num": "",
+    "dept": "31"
+   },
+   {
+    "siren": "529545683",
+    "nom": "AD-VENIR",
+    "num": "",
+    "dept": "31"
+   },
+   {
+    "siren": "892375270",
+    "nom": "NYL FORMANYL",
+    "num": "",
+    "dept": "34"
+   },
+   {
+    "siren": "905103362",
+    "nom": "A+EVAL",
+    "num": "",
+    "dept": "34"
+   },
+   {
+    "siren": "951826189",
+    "nom": "INAES",
+    "num": "",
+    "dept": "34"
+   },
+   {
+    "siren": "914584446",
+    "nom": "CELAE",
+    "num": "",
+    "dept": "44"
+   },
+   {
+    "siren": "948563069",
+    "nom": "RICHARD PARCKER",
+    "num": "",
+    "dept": "44"
+   },
+   {
+    "siren": "388765901",
+    "nom": "TECHNE CONSEIL",
+    "num": "",
+    "dept": "53"
+   },
+   {
+    "siren": "513253138",
+    "nom": "ETIQ MANAGEMENT",
+    "num": "",
+    "dept": "72"
+   },
+   {
+    "siren": "786428979",
+    "nom": "CENTRE DE FORMATION ET DE PROMOTION LE MESLAY",
+    "num": "",
+    "dept": "85"
+   },
+   {
+    "siren": "921933388",
+    "nom": "CEPHEE EXPERTISE ET CONSULTING",
+    "num": "",
+    "dept": "85"
+   },
+   {
+    "siren": "304600885",
+    "nom": "CEAS DE LA VENDEE",
+    "num": "",
+    "dept": "85"
+   },
+   {
+    "siren": "922631189",
+    "nom": "ABC SYNACTION",
+    "num": "",
+    "dept": "06"
+   },
+   {
+    "siren": "949184964",
+    "nom": "ANALYSE LES BESOINS ALB",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "484549779",
+    "nom": "MISSIA CONSEIL",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "847823754",
+    "nom": "SANTEPREV",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "794653444",
+    "nom": "ISY CONSEIL",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "383916392",
+    "nom": "ELSE CONSULTANTS",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "493603153",
+    "nom": "AS CONSULTING",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "379227937",
+    "nom": "ACS CONSULTANTS",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "479246845",
+    "nom": "PREISO",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "442026811",
+    "nom": "ALEOZ",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "800456980",
+    "nom": "CABINET D'EXPERTISE ET D'INGENIERIE SANTE ET SOCIAL VAR CONSULTANT",
+    "num": "",
+    "dept": "83"
+   },
+   {
+    "siren": "530545847",
+    "nom": "IN AURIS",
+    "num": "",
+    "dept": "83"
+   },
+   {
+    "siren": "809919384",
+    "nom": "EULALIA CONSEIL",
+    "num": "",
+    "dept": "83"
+   },
+   {
+    "siren": "494225980",
+    "nom": "CABINET PROETHIQUE CONSEIL",
+    "num": "",
+    "dept": "84"
+   }
+  ],
+  "date_releve": "2023-09-24",
+  "sha256": "ede535aa104d36bad314297e2e42bbb3810e68c88c7c9ebb5418793eba13fbbb"
+ },
+ {
+  "date_source": "06 mars 2026",
+  "organismes": [
+   {
+    "siren": "849526678",
+    "nom": "CIDEES CERTIFICATION",
+    "num": "3-1971",
+    "dept": "26"
+   },
+   {
+    "siren": "480506773",
+    "nom": "INGERIS INSPECTION",
+    "num": "3-2106",
+    "dept": "26"
+   },
+   {
+    "siren": "791210719",
+    "nom": "CONVENANCE CONSULT",
+    "num": "3-2070",
+    "dept": "38"
+   },
+   {
+    "siren": "488336819",
+    "nom": "ACRITEC",
+    "num": "3-212",
+    "dept": "38"
+   },
+   {
+    "siren": "923837538",
+    "nom": "AROBASE INGENIERIE",
+    "num": "",
+    "dept": "38"
+   },
+   {
+    "siren": "383429891",
+    "nom": "MM2C",
+    "num": "3-1975",
+    "dept": "42"
+   },
+   {
+    "siren": "444104491",
+    "nom": "CABINET KHEOPS CONSULTING",
+    "num": "3-2010",
+    "dept": "63"
+   },
+   {
+    "siren": "829452499",
+    "nom": "CABINET BROUSSEAUD",
+    "num": "3-2124",
+    "dept": "63"
+   },
+   {
+    "siren": "533398491",
+    "nom": "ID&ES",
+    "num": "3-2086",
+    "dept": "69"
+   },
+   {
+    "siren": "383925633",
+    "nom": "POLE FORMATION SANTE",
+    "num": "3-2031",
+    "dept": "69"
+   },
+   {
+    "siren": "403419930",
+    "nom": "ABAQ CONSEIL EN MANAGEMENT",
+    "num": "3-2039",
+    "dept": "69"
+   },
+   {
+    "siren": "430485201",
+    "nom": "R.H.& ORGANISATION",
+    "num": "3-2053",
+    "dept": "69"
+   },
+   {
+    "siren": "822566295",
+    "nom": "APHILIA CONSEIL",
+    "num": "3-1985",
+    "dept": "69"
+   },
+   {
+    "siren": "414862672",
+    "nom": "GRIEPS GROUPE DE RECHERCHE ET D'INTERVENTION POUR L' EDUCATION DES PROFESSIONS SANITAIRES ET SOCIALES",
+    "num": "3-2091",
+    "dept": "69"
+   },
+   {
+    "siren": "928991629",
+    "nom": "GK CONSEIL AUDIT",
+    "num": "3-2382",
+    "dept": "69"
+   },
+   {
+    "siren": "512511577",
+    "nom": "NICOMAK",
+    "num": "3-2203",
+    "dept": "73"
+   },
+   {
+    "siren": "988683801",
+    "nom": "LA COOPERATIVE DE L'EVALUATION SCOP SARL",
+    "num": "",
+    "dept": "73"
+   },
+   {
+    "siren": "451389928",
+    "nom": "SOCRATES",
+    "num": "3-1986",
+    "dept": "74"
+   },
+   {
+    "siren": "978178002",
+    "nom": "AVENIR EVALUATION",
+    "num": "3-2233",
+    "dept": "21"
+   },
+   {
+    "siren": "410475081",
+    "nom": "INSTITUT REGIONAL SUPERIEUR DU TRAVAIL EDUCATIF ET SOCIAL - IRTESS rev 0",
+    "num": "3-2177",
+    "dept": "21"
+   },
+   {
+    "siren": "929494755",
+    "nom": "ETHIQUALITE",
+    "num": "",
+    "dept": "21"
+   },
+   {
+    "siren": "338138597",
+    "nom": "ACTION INFORMATION RECHERCHE",
+    "num": "3-1992",
+    "dept": "25"
+   },
+   {
+    "siren": "349432443",
+    "nom": "IRTS",
+    "num": "",
+    "dept": "25"
+   },
+   {
+    "siren": "444539332",
+    "nom": "CABINET CHRISTIAN GUITTON",
+    "num": "",
+    "dept": "22"
+   },
+   {
+    "siren": "442490306",
+    "nom": "SOCIETE NOUVELLE CATALYS",
+    "num": "3-2071",
+    "dept": "35"
+   },
+   {
+    "siren": "351503412",
+    "nom": "GALATA ORGANISATION",
+    "num": "3-2165",
+    "dept": "35"
+   },
+   {
+    "siren": "511569857",
+    "nom": "PERINOVE",
+    "num": "3-2018",
+    "dept": "35"
+   },
+   {
+    "siren": "497968479",
+    "nom": "JEUDEVI - JEUNESSE DEVELOPPEMENT INTELLIGENTS",
+    "num": "3-2074",
+    "dept": "35"
+   },
+   {
+    "siren": "432990638",
+    "nom": "MANAGEMENT DE LA QUALITE EN SANTE",
+    "num": "3-2105",
+    "dept": "35"
+   },
+   {
+    "siren": "388986895",
+    "nom": "AUDIT ASSISTANCE CONTROLE CONSEIL EN ENVIRONNEMENT ET SANTE PUBLIQUE",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "519978340",
+    "nom": "BGP CONSEIL",
+    "num": "3-1989",
+    "dept": "56"
+   },
+   {
+    "siren": "477974398",
+    "nom": "Cabinet Sylvie CHEVESSIER",
+    "num": "3-2153",
+    "dept": "37"
+   },
+   {
+    "siren": "951655109",
+    "nom": "SAS AB QUAL",
+    "num": "3-2194",
+    "dept": "37"
+   },
+   {
+    "siren": "889415246",
+    "nom": "QOANIX",
+    "num": "3-2115",
+    "dept": "45"
+   },
+   {
+    "siren": "987912441",
+    "nom": "A STRADA EVALUATION ET CONSEIL",
+    "num": "",
+    "dept": "2B"
+   },
+   {
+    "siren": "903307684",
+    "nom": "IPSO FACTO CONSEIL AUDIT RECRUTEMENT FORMATION",
+    "num": "3-1976",
+    "dept": "51"
+   },
+   {
+    "siren": "908577828",
+    "nom": "SANTE2D",
+    "num": "",
+    "dept": "54"
+   },
+   {
+    "siren": "838339646",
+    "nom": "AFRIS-CIFAL-ECE (ESEIS)",
+    "num": "3-1987",
+    "dept": "67"
+   },
+   {
+    "siren": "753089424",
+    "nom": "CABINET LUDOVIC SORIS",
+    "num": "3-2155",
+    "dept": "68"
+   },
+   {
+    "siren": "900921503",
+    "nom": "SOLEVA",
+    "num": "3-1998",
+    "dept": "971"
+   },
+   {
+    "siren": "533546974",
+    "nom": "CJM CONSULTING",
+    "num": "3-2138",
+    "dept": "971"
+   },
+   {
+    "siren": "892613076",
+    "nom": "CEOS'CONSULT",
+    "num": "3-2154",
+    "dept": "59"
+   },
+   {
+    "siren": "448721746",
+    "nom": "BIOCONSULTANTS",
+    "num": "3-1959",
+    "dept": "59"
+   },
+   {
+    "siren": "878950963",
+    "nom": "CABINET OULAD",
+    "num": "3-1972",
+    "dept": "59"
+   },
+   {
+    "siren": "823462676",
+    "nom": "AM CONSULTANTS NORD",
+    "num": "3-2003",
+    "dept": "59"
+   },
+   {
+    "siren": "479667735",
+    "nom": "STRATELYS",
+    "num": "3-2089",
+    "dept": "59"
+   },
+   {
+    "siren": "329070809",
+    "nom": "CONSEIL EN PRATIQUES & ANALYSES SOCIALES",
+    "num": "3-2036",
+    "dept": "59"
+   },
+   {
+    "siren": "377631593",
+    "nom": "SAINT ANDRE SOLIDARITE FORMATION",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "499129997",
+    "nom": "T.L.C.",
+    "num": "3-2008",
+    "dept": "80"
+   },
+   {
+    "siren": "827514613",
+    "nom": "EIRL Céline LISEK Formation Conseil",
+    "num": "3-2049",
+    "dept": "80"
+   },
+   {
+    "siren": "898061155",
+    "nom": "PARMENTIER BLEU SOCIAL",
+    "num": "3-2028",
+    "dept": "75"
+   },
+   {
+    "siren": "518991294",
+    "nom": "A-AMCOS",
+    "num": "3-2040",
+    "dept": "75"
+   },
+   {
+    "siren": "528530264",
+    "nom": "AMPLEA",
+    "num": "3-2023",
+    "dept": "75"
+   },
+   {
+    "siren": "414513275",
+    "nom": "AB CERTIFICATION",
+    "num": "3-2000",
+    "dept": "75"
+   },
+   {
+    "siren": "524893237",
+    "nom": "RESIDEAL SANTE",
+    "num": "3-2002",
+    "dept": "75"
+   },
+   {
+    "siren": "949930309",
+    "nom": "EVAL'EXT",
+    "num": "3-2220",
+    "dept": "75"
+   },
+   {
+    "siren": "905009668",
+    "nom": "MEDIA-SOIN",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "933107864",
+    "nom": "QUALISANTE CERTIFICATION",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "414009928",
+    "nom": "BAQIMEHP",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "980895270",
+    "nom": "NCU CONSULTING",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "801531971",
+    "nom": "NTG CONSEIL",
+    "num": "3-2183",
+    "dept": "77"
+   },
+   {
+    "siren": "398210997",
+    "nom": "JRH CONSULTANTS",
+    "num": "3-1984",
+    "dept": "77"
+   },
+   {
+    "siren": "930879549",
+    "nom": "SYNOTEA",
+    "num": "",
+    "dept": "77"
+   },
+   {
+    "siren": "451303549",
+    "nom": "ELIANE CONSEIL",
+    "num": "3-2187",
+    "dept": "78"
+   },
+   {
+    "siren": "834096497",
+    "nom": "SOCOTEC ENVIRONNEMENT",
+    "num": "3-1595",
+    "dept": "78"
+   },
+   {
+    "siren": "802212720",
+    "nom": "VALDOR",
+    "num": "",
+    "dept": "78"
+   },
+   {
+    "siren": "827917352",
+    "nom": "ENYS CONSEIL",
+    "num": "3-1965",
+    "dept": "91"
+   },
+   {
+    "siren": "377505565",
+    "nom": "FORVIS MAZARS SAS",
+    "num": "3-2273",
+    "dept": "92"
+   },
+   {
+    "siren": "850223843",
+    "nom": "ACACIA-ETHIQUE ET QUALITE",
+    "num": "3-2126",
+    "dept": "92"
+   },
+   {
+    "siren": "399851609",
+    "nom": "BUREAU VERITAS CERTIFICATION",
+    "num": "3-2024",
+    "dept": "92"
+   },
+   {
+    "siren": "527573141",
+    "nom": "APAVE",
+    "num": "3-2025",
+    "dept": "92"
+   },
+   {
+    "siren": "920343571",
+    "nom": "ETIKEVAL",
+    "num": "3-2118",
+    "dept": "92"
+   },
+   {
+    "siren": "479076002",
+    "nom": "AFNOR CERTIFICATION",
+    "num": "3-2014",
+    "dept": "93"
+   },
+   {
+    "siren": "501332712",
+    "nom": "4 AS",
+    "num": "3-1988",
+    "dept": "94"
+   },
+   {
+    "siren": "403293103",
+    "nom": "SGS INTERNATIONAL CERTIFICATION SERVICE",
+    "num": "3-2019",
+    "dept": "94"
+   },
+   {
+    "siren": "934830639",
+    "nom": "AUTONOMII EVALUATION",
+    "num": "3-2361",
+    "dept": "94"
+   },
+   {
+    "siren": "802740233",
+    "nom": "2 VOUS A NOUS",
+    "num": "3-2112",
+    "dept": "95"
+   },
+   {
+    "siren": "988410742",
+    "nom": "CEISS ANTILLES GUYANE CONSULTANT",
+    "num": "",
+    "dept": "972"
+   },
+   {
+    "siren": "400360988",
+    "nom": "ARFOS",
+    "num": "3-2108",
+    "dept": "14"
+   },
+   {
+    "siren": "439995994",
+    "nom": "O TRADING & CONSULTING",
+    "num": "3-1978",
+    "dept": "14"
+   },
+   {
+    "siren": "412261018",
+    "nom": "CERTIPAQ",
+    "num": "3-0676",
+    "dept": "76"
+   },
+   {
+    "siren": "440249175",
+    "nom": "CFER SANTE",
+    "num": "3-2001",
+    "dept": "33"
+   },
+   {
+    "siren": "341929750",
+    "nom": "REALITES ET PROJETS CONSULTANTS",
+    "num": "3-2035",
+    "dept": "33"
+   },
+   {
+    "siren": "901057620",
+    "nom": "RESEAU JANNOY",
+    "num": "3-2103",
+    "dept": "33"
+   },
+   {
+    "siren": "929484897",
+    "nom": "CAP'ES",
+    "num": "3-2322",
+    "dept": "33"
+   },
+   {
+    "siren": "835149824",
+    "nom": "MEDICONSEIL FORMATION",
+    "num": "3-1993",
+    "dept": "64"
+   },
+   {
+    "siren": "939988499",
+    "nom": "MEDICONSEIL EVALUATION",
+    "num": "3-2446",
+    "dept": "64"
+   },
+   {
+    "siren": "410218754",
+    "nom": "Cabinet GRANGER Consultant",
+    "num": "3-1996",
+    "dept": "64"
+   },
+   {
+    "siren": "420272973",
+    "nom": "CABINET CHANTAL MORNET-PÉRIER",
+    "num": "3-2052",
+    "dept": "64"
+   },
+   {
+    "siren": "411047913",
+    "nom": "ACTIONS FORMATIONS",
+    "num": "3-2030",
+    "dept": "12"
+   },
+   {
+    "siren": "805184371",
+    "nom": "AVIANCE",
+    "num": "3-2114",
+    "dept": "30"
+   },
+   {
+    "siren": "529545683",
+    "nom": "AD-VENIR",
+    "num": "3-1981",
+    "dept": "31"
+   },
+   {
+    "siren": "919133132",
+    "nom": "QUALITIA INSPECTION",
+    "num": "3-2088",
+    "dept": "31"
+   },
+   {
+    "siren": "948248240",
+    "nom": "PLUS VALUE ESMS",
+    "num": "3-2179",
+    "dept": "31"
+   },
+   {
+    "siren": "905103362",
+    "nom": "A+EVAL",
+    "num": "3-1974",
+    "dept": "34"
+   },
+   {
+    "siren": "951826189",
+    "nom": "INAES",
+    "num": "3-2205",
+    "dept": "34"
+   },
+   {
+    "siren": "914584446",
+    "nom": "CELAE",
+    "num": "3-2037",
+    "dept": "44"
+   },
+   {
+    "siren": "930853080",
+    "nom": "AURORA CABINET",
+    "num": "3-2334",
+    "dept": "49"
+   },
+   {
+    "siren": "388765901",
+    "nom": "TECHNE CONSEIL",
+    "num": "3-1990",
+    "dept": "53"
+   },
+   {
+    "siren": "513253138",
+    "nom": "ETIQ MANAGEMENT",
+    "num": "3-2102",
+    "dept": "72"
+   },
+   {
+    "siren": "304600885",
+    "nom": "CEAS DE LA VENDEE",
+    "num": "3-2101",
+    "dept": "85"
+   },
+   {
+    "siren": "921933388",
+    "nom": "CEPHEE EXPERTISE ET CONSULTING",
+    "num": "3-2137",
+    "dept": "85"
+   },
+   {
+    "siren": "786428979",
+    "nom": "CFP MESLAY",
+    "num": "3-2085",
+    "dept": "85"
+   },
+   {
+    "siren": "953438330",
+    "nom": "QUALIPREVYS",
+    "num": "3-2212",
+    "dept": "04"
+   },
+   {
+    "siren": "922631189",
+    "nom": "ABC SYNACTION",
+    "num": "3-2152",
+    "dept": "06"
+   },
+   {
+    "siren": "981666787",
+    "nom": "MAJEVAL",
+    "num": "",
+    "dept": "06"
+   },
+   {
+    "siren": "479246845",
+    "nom": "PREISO",
+    "num": "3-2032",
+    "dept": "13"
+   },
+   {
+    "siren": "493603153",
+    "nom": "AS CONSULTING",
+    "num": "3-2011",
+    "dept": "13"
+   },
+   {
+    "siren": "794653444",
+    "nom": "ISY CONSEIL",
+    "num": "3-2012",
+    "dept": "13"
+   },
+   {
+    "siren": "383916392",
+    "nom": "ELSE CONSULTANTS",
+    "num": "3-2009",
+    "dept": "13"
+   },
+   {
+    "siren": "442026811",
+    "nom": "ALEOZ",
+    "num": "3-2029",
+    "dept": "13"
+   },
+   {
+    "siren": "379227937",
+    "nom": "ACS CONSULTANTS",
+    "num": "3-2021",
+    "dept": "13"
+   },
+   {
+    "siren": "484549779",
+    "nom": "MISSIA CONSEIL",
+    "num": "3-2175",
+    "dept": "13"
+   },
+   {
+    "siren": "949184964",
+    "nom": "ANALYSE LES BESOINS ALB",
+    "num": "3-2181",
+    "dept": "13"
+   },
+   {
+    "siren": "434520573",
+    "nom": "INTERNATIONAL HUMAN RESOURCES MANAGEMENT",
+    "num": "",
+    "dept": "13"
+   },
+   {
+    "siren": "800456980",
+    "nom": "CABINET D’EXPERTISE ET D’INGENIERIE SOCIALE- CEISS VAR CONSULTANT",
+    "num": "3-2084",
+    "dept": "83"
+   },
+   {
+    "siren": "809919384",
+    "nom": "EULALIA CONSEIL",
+    "num": "3-1970",
+    "dept": "83"
+   },
+   {
+    "siren": "530545847",
+    "nom": "IN AURIS",
+    "num": "3-0895",
+    "dept": "83"
+   }
+  ],
+  "date_releve": "2026-03-06",
+  "sha256": "f2219e45effb69fc33b777bab98bfb26104b050fd51513ee316175ddf07d26e9"
+ },
+ {
+  "date_source": "07 mai 2026",
+  "organismes": [
+   {
+    "siren": "849526678",
+    "nom": "CIDEES CERTIFICATION",
+    "num": "3-1971",
+    "dept": "26"
+   },
+   {
+    "siren": "480506773",
+    "nom": "INGERIS INSPECTION",
+    "num": "3-2106",
+    "dept": "26"
+   },
+   {
+    "siren": "791210719",
+    "nom": "CONVENANCE CONSULT",
+    "num": "3-2070",
+    "dept": "38"
+   },
+   {
+    "siren": "488336819",
+    "nom": "ACRITEC",
+    "num": "3-212",
+    "dept": "38"
+   },
+   {
+    "siren": "923837538",
+    "nom": "AROBASE INGENIERIE",
+    "num": "",
+    "dept": "38"
+   },
+   {
+    "siren": "383429891",
+    "nom": "MM2C",
+    "num": "3-1975",
+    "dept": "42"
+   },
+   {
+    "siren": "444104491",
+    "nom": "CABINET KHEOPS CONSULTING",
+    "num": "3-2010",
+    "dept": "63"
+   },
+   {
+    "siren": "829452499",
+    "nom": "CABINET BROUSSEAUD",
+    "num": "3-2124",
+    "dept": "63"
+   },
+   {
+    "siren": "533398491",
+    "nom": "ID&ES",
+    "num": "3-2086",
+    "dept": "69"
+   },
+   {
+    "siren": "383925633",
+    "nom": "POLE FORMATION SANTE",
+    "num": "3-2031",
+    "dept": "69"
+   },
+   {
+    "siren": "403419930",
+    "nom": "ABAQ CONSEIL EN MANAGEMENT",
+    "num": "3-2039",
+    "dept": "69"
+   },
+   {
+    "siren": "430485201",
+    "nom": "R.H.& ORGANISATION",
+    "num": "3-2053",
+    "dept": "69"
+   },
+   {
+    "siren": "822566295",
+    "nom": "APHILIA CONSEIL",
+    "num": "3-1985",
+    "dept": "69"
+   },
+   {
+    "siren": "414862672",
+    "nom": "GRIEPS GROUPE DE RECHERCHE ET D'INTERVENTION POUR L' EDUCATION DES PROFESSIONS SANITAIRES ET SOCIALES",
+    "num": "3-2091",
+    "dept": "69"
+   },
+   {
+    "siren": "928991629",
+    "nom": "GK CONSEIL AUDIT",
+    "num": "3-2382",
+    "dept": "69"
+   },
+   {
+    "siren": "512511577",
+    "nom": "NICOMAK",
+    "num": "3-2203",
+    "dept": "73"
+   },
+   {
+    "siren": "988683801",
+    "nom": "LA COOPERATIVE DE L'EVALUATION SCOP SARL",
+    "num": "",
+    "dept": "73"
+   },
+   {
+    "siren": "451389928",
+    "nom": "SOCRATES",
+    "num": "3-1986",
+    "dept": "74"
+   },
+   {
+    "siren": "978178002",
+    "nom": "AVENIR EVALUATION",
+    "num": "3-2233",
+    "dept": "21"
+   },
+   {
+    "siren": "410475081",
+    "nom": "INSTITUT REGIONAL SUPERIEUR DU TRAVAIL EDUCATIF ET SOCIAL - IRTESS rev 0",
+    "num": "3-2177",
+    "dept": "21"
+   },
+   {
+    "siren": "929494755",
+    "nom": "ETHIQUALITE",
+    "num": "3-2327",
+    "dept": "21"
+   },
+   {
+    "siren": "434009973",
+    "nom": "KIWO",
+    "num": "",
+    "dept": "21"
+   },
+   {
+    "siren": "338138597",
+    "nom": "ACTION INFORMATION RECHERCHE",
+    "num": "3-1992",
+    "dept": "25"
+   },
+   {
+    "siren": "349432443",
+    "nom": "IRTS",
+    "num": "3-2222",
+    "dept": "25"
+   },
+   {
+    "siren": "444539332",
+    "nom": "CABINET CHRISTIAN GUITTON",
+    "num": "",
+    "dept": "22"
+   },
+   {
+    "siren": "511569857",
+    "nom": "PERINOVE",
+    "num": "3-2018",
+    "dept": "35"
+   },
+   {
+    "siren": "351503412",
+    "nom": "GALATA ORGANISATION",
+    "num": "3-2165",
+    "dept": "35"
+   },
+   {
+    "siren": "432990638",
+    "nom": "MANAGEMENT DE LA QUALITE EN SANTE",
+    "num": "3-2105",
+    "dept": "35"
+   },
+   {
+    "siren": "497968479",
+    "nom": "JEUDEVI - JEUNESSE DEVELOPPEMENT INTELLIGENTS",
+    "num": "3-2074",
+    "dept": "35"
+   },
+   {
+    "siren": "442490306",
+    "nom": "SOCIETE NOUVELLE CATALYS",
+    "num": "3-2071",
+    "dept": "35"
+   },
+   {
+    "siren": "519978340",
+    "nom": "BGP CONSEIL",
+    "num": "3-1989",
+    "dept": "56"
+   },
+   {
+    "siren": "477974398",
+    "nom": "Cabinet Sylvie CHEVESSIER",
+    "num": "3-2153",
+    "dept": "37"
+   },
+   {
+    "siren": "951655109",
+    "nom": "SAS AB QUAL",
+    "num": "3-2194",
+    "dept": "37"
+   },
+   {
+    "siren": "889415246",
+    "nom": "QOANIX",
+    "num": "3-2115",
+    "dept": "45"
+   },
+   {
+    "siren": "987912441",
+    "nom": "A STRADA EVALUATION ET CONSEIL",
+    "num": "",
+    "dept": "2B"
+   },
+   {
+    "siren": "903307684",
+    "nom": "IPSO FACTO CONSEIL AUDIT RECRUTEMENT FORMATION",
+    "num": "3-1976",
+    "dept": "51"
+   },
+   {
+    "siren": "908577828",
+    "nom": "SANTE2D",
+    "num": "3-2286",
+    "dept": "54"
+   },
+   {
+    "siren": "838339646",
+    "nom": "AFRIS-CIFAL-ECE (ESEIS)",
+    "num": "3-1987",
+    "dept": "67"
+   },
+   {
+    "siren": "753089424",
+    "nom": "CABINET LUDOVIC SORIS",
+    "num": "3-2155",
+    "dept": "68"
+   },
+   {
+    "siren": "989393863",
+    "nom": "PROMETHEUS SANTETECH",
+    "num": "",
+    "dept": "88"
+   },
+   {
+    "siren": "900921503",
+    "nom": "SOLEVA",
+    "num": "3-1998",
+    "dept": "971"
+   },
+   {
+    "siren": "533546974",
+    "nom": "CJM CONSULTING",
+    "num": "3-2138",
+    "dept": "971"
+   },
+   {
+    "siren": "892613076",
+    "nom": "CEOS'CONSULT",
+    "num": "3-2154",
+    "dept": "59"
+   },
+   {
+    "siren": "448721746",
+    "nom": "BIOCONSULTANTS",
+    "num": "3-1959",
+    "dept": "59"
+   },
+   {
+    "siren": "878950963",
+    "nom": "CABINET OULAD",
+    "num": "3-1972",
+    "dept": "59"
+   },
+   {
+    "siren": "823462676",
+    "nom": "AM CONSULTANTS NORD",
+    "num": "3-2003",
+    "dept": "59"
+   },
+   {
+    "siren": "479667735",
+    "nom": "STRATELYS",
+    "num": "3-2089",
+    "dept": "59"
+   },
+   {
+    "siren": "329070809",
+    "nom": "CONSEIL EN PRATIQUES & ANALYSES SOCIALES",
+    "num": "3-2036",
+    "dept": "59"
+   },
+   {
+    "siren": "377631593",
+    "nom": "SAINT ANDRE SOLIDARITE FORMATION",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "499129997",
+    "nom": "T.L.C.",
+    "num": "3-2008",
+    "dept": "80"
+   },
+   {
+    "siren": "827514613",
+    "nom": "EIRL Céline LISEK Formation Conseil",
+    "num": "3-2049",
+    "dept": "80"
+   },
+   {
+    "siren": "898061155",
+    "nom": "PARMENTIER BLEU SOCIAL",
+    "num": "3-2028",
+    "dept": "75"
+   },
+   {
+    "siren": "518991294",
+    "nom": "A-AMCOS",
+    "num": "3-2040",
+    "dept": "75"
+   },
+   {
+    "siren": "528530264",
+    "nom": "AMPLEA",
+    "num": "3-2023",
+    "dept": "75"
+   },
+   {
+    "siren": "414513275",
+    "nom": "AB CERTIFICATION",
+    "num": "3-2000",
+    "dept": "75"
+   },
+   {
+    "siren": "524893237",
+    "nom": "RESIDEAL SANTE",
+    "num": "3-2002",
+    "dept": "75"
+   },
+   {
+    "siren": "949930309",
+    "nom": "EVAL'EXT",
+    "num": "3-2220",
+    "dept": "75"
+   },
+   {
+    "siren": "905009668",
+    "nom": "MEDIA-SOIN",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "933107864",
+    "nom": "QUALISANTE CERTIFICATION",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "414009928",
+    "nom": "BAQIMEHP",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "980895270",
+    "nom": "NCU CONSULTING",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "801531971",
+    "nom": "NTG CONSEIL",
+    "num": "3-2183",
+    "dept": "77"
+   },
+   {
+    "siren": "398210997",
+    "nom": "JRH CONSULTANTS",
+    "num": "3-1984",
+    "dept": "77"
+   },
+   {
+    "siren": "930879549",
+    "nom": "SYNOTEA",
+    "num": "",
+    "dept": "77"
+   },
+   {
+    "siren": "451303549",
+    "nom": "ELIANE CONSEIL",
+    "num": "3-2187",
+    "dept": "78"
+   },
+   {
+    "siren": "834096497",
+    "nom": "SOCOTEC ENVIRONNEMENT",
+    "num": "3-1595",
+    "dept": "78"
+   },
+   {
+    "siren": "802212720",
+    "nom": "VALDOR",
+    "num": "",
+    "dept": "78"
+   },
+   {
+    "siren": "827917352",
+    "nom": "ENYS CONSEIL",
+    "num": "3-1965",
+    "dept": "91"
+   },
+   {
+    "siren": "377505565",
+    "nom": "FORVIS MAZARS SAS",
+    "num": "3-2273",
+    "dept": "92"
+   },
+   {
+    "siren": "850223843",
+    "nom": "ACACIA-ETHIQUE ET QUALITE",
+    "num": "3-2126",
+    "dept": "92"
+   },
+   {
+    "siren": "399851609",
+    "nom": "BUREAU VERITAS CERTIFICATION",
+    "num": "3-2024",
+    "dept": "92"
+   },
+   {
+    "siren": "527573141",
+    "nom": "APAVE",
+    "num": "3-2025",
+    "dept": "92"
+   },
+   {
+    "siren": "920343571",
+    "nom": "ETIKEVAL",
+    "num": "3-2118",
+    "dept": "92"
+   },
+   {
+    "siren": "479076002",
+    "nom": "AFNOR CERTIFICATION",
+    "num": "3-2014",
+    "dept": "93"
+   },
+   {
+    "siren": "501332712",
+    "nom": "4 AS",
+    "num": "3-1988",
+    "dept": "94"
+   },
+   {
+    "siren": "403293103",
+    "nom": "SGS INTERNATIONAL CERTIFICATION SERVICE",
+    "num": "3-2019",
+    "dept": "94"
+   },
+   {
+    "siren": "934830639",
+    "nom": "AUTONOMII EVALUATION",
+    "num": "3-2361",
+    "dept": "94"
+   },
+   {
+    "siren": "802740233",
+    "nom": "2 VOUS A NOUS",
+    "num": "3-2112",
+    "dept": "95"
+   },
+   {
+    "siren": "988410742",
+    "nom": "CEISS ANTILLES GUYANE CONSULTANT",
+    "num": "",
+    "dept": "972"
+   },
+   {
+    "siren": "439995994",
+    "nom": "O TRADING & CONSULTING",
+    "num": "3-1978",
+    "dept": "14"
+   },
+   {
+    "siren": "400360988",
+    "nom": "ARFOS",
+    "num": "3-2108",
+    "dept": "14"
+   },
+   {
+    "siren": "412261018",
+    "nom": "CERTIPAQ",
+    "num": "3-0676",
+    "dept": "76"
+   },
+   {
+    "siren": "440249175",
+    "nom": "CFER SANTE",
+    "num": "3-2001",
+    "dept": "33"
+   },
+   {
+    "siren": "341929750",
+    "nom": "REALITES ET PROJETS CONSULTANTS",
+    "num": "3-2035",
+    "dept": "33"
+   },
+   {
+    "siren": "901057620",
+    "nom": "RESEAU JANNOY",
+    "num": "3-2103",
+    "dept": "33"
+   },
+   {
+    "siren": "929484897",
+    "nom": "CAP'ES",
+    "num": "3-2322",
+    "dept": "33"
+   },
+   {
+    "siren": "835149824",
+    "nom": "MEDICONSEIL FORMATION",
+    "num": "3-1993",
+    "dept": "64"
+   },
+   {
+    "siren": "939988499",
+    "nom": "MEDICONSEIL EVALUATION",
+    "num": "3-2446",
+    "dept": "64"
+   },
+   {
+    "siren": "410218754",
+    "nom": "Cabinet GRANGER Consultant",
+    "num": "3-1996",
+    "dept": "64"
+   },
+   {
+    "siren": "420272973",
+    "nom": "CABINET CHANTAL MORNET-PÉRIER",
+    "num": "3-2052",
+    "dept": "64"
+   },
+   {
+    "siren": "411047913",
+    "nom": "ACTIONS FORMATIONS",
+    "num": "3-2030",
+    "dept": "12"
+   },
+   {
+    "siren": "400092094",
+    "nom": "CHAMP SOCIAL FORMATION ET EVALUATION",
+    "num": "3-2243",
+    "dept": "30"
+   },
+   {
+    "siren": "805184371",
+    "nom": "AVIANCE",
+    "num": "3-2114",
+    "dept": "30"
+   },
+   {
+    "siren": "919133132",
+    "nom": "QUALITIA INSPECTION",
+    "num": "3-2088",
+    "dept": "31"
+   },
+   {
+    "siren": "529545683",
+    "nom": "AD-VENIR",
+    "num": "3-1981",
+    "dept": "31"
+   },
+   {
+    "siren": "948248240",
+    "nom": "PLUS VALUE ESMS",
+    "num": "3-2179",
+    "dept": "31"
+   },
+   {
+    "siren": "905103362",
+    "nom": "A+EVAL",
+    "num": "3-1974",
+    "dept": "34"
+   },
+   {
+    "siren": "951826189",
+    "nom": "INAES",
+    "num": "3-2205",
+    "dept": "34"
+   },
+   {
+    "siren": "914584446",
+    "nom": "CELAE",
+    "num": "3-2037",
+    "dept": "44"
+   },
+   {
+    "siren": "930853080",
+    "nom": "AURORA CABINET",
+    "num": "3-2334",
+    "dept": "49"
+   },
+   {
+    "siren": "388765901",
+    "nom": "TECHNE CONSEIL",
+    "num": "3-1990",
+    "dept": "53"
+   },
+   {
+    "siren": "513253138",
+    "nom": "ETIQ MANAGEMENT",
+    "num": "3-2102",
+    "dept": "72"
+   },
+   {
+    "siren": "304600885",
+    "nom": "CEAS DE LA VENDEE",
+    "num": "3-2101",
+    "dept": "85"
+   },
+   {
+    "siren": "921933388",
+    "nom": "CEPHEE EXPERTISE ET CONSULTING",
+    "num": "3-2137",
+    "dept": "85"
+   },
+   {
+    "siren": "786428979",
+    "nom": "CFP MESLAY",
+    "num": "3-2085",
+    "dept": "85"
+   },
+   {
+    "siren": "953438330",
+    "nom": "QUALIPREVYS",
+    "num": "3-2212",
+    "dept": "04"
+   },
+   {
+    "siren": "922631189",
+    "nom": "ABC SYNACTION",
+    "num": "3-2152",
+    "dept": "06"
+   },
+   {
+    "siren": "981666787",
+    "nom": "MAJEVAL",
+    "num": "",
+    "dept": "06"
+   },
+   {
+    "siren": "479246845",
+    "nom": "PREISO",
+    "num": "3-2032",
+    "dept": "13"
+   },
+   {
+    "siren": "493603153",
+    "nom": "AS CONSULTING",
+    "num": "3-2011",
+    "dept": "13"
+   },
+   {
+    "siren": "794653444",
+    "nom": "ISY CONSEIL",
+    "num": "3-2012",
+    "dept": "13"
+   },
+   {
+    "siren": "383916392",
+    "nom": "ELSE CONSULTANTS",
+    "num": "3-2009",
+    "dept": "13"
+   },
+   {
+    "siren": "442026811",
+    "nom": "ALEOZ",
+    "num": "3-2029",
+    "dept": "13"
+   },
+   {
+    "siren": "379227937",
+    "nom": "ACS CONSULTANTS",
+    "num": "3-2021",
+    "dept": "13"
+   },
+   {
+    "siren": "484549779",
+    "nom": "MISSIA CONSEIL",
+    "num": "3-2175",
+    "dept": "13"
+   },
+   {
+    "siren": "949184964",
+    "nom": "ANALYSE LES BESOINS ALB",
+    "num": "3-2181",
+    "dept": "13"
+   },
+   {
+    "siren": "800456980",
+    "nom": "CABINET D’EXPERTISE ET D’INGENIERIE SOCIALE- CEISS VAR CONSULTANT",
+    "num": "3-2084",
+    "dept": "83"
+   },
+   {
+    "siren": "809919384",
+    "nom": "EULALIA CONSEIL",
+    "num": "3-1970",
+    "dept": "83"
+   },
+   {
+    "siren": "530545847",
+    "nom": "IN AURIS",
+    "num": "3-0895",
+    "dept": "83"
+   }
+  ],
+  "date_releve": "2026-05-07",
+  "sha256": "790d45ddf118bc6e891ddc038ec0dfcca039b89af57965b46066203bdefa367f"
+ },
+ {
+  "date_source": "16 juillet 2026",
+  "organismes": [
+   {
+    "siren": "849526678",
+    "nom": "CIDEES CERTIFICATION",
+    "num": "3-1971",
+    "dept": "26"
+   },
+   {
+    "siren": "480506773",
+    "nom": "INGERIS INSPECTION",
+    "num": "3-2106",
+    "dept": "26"
+   },
+   {
+    "siren": "791210719",
+    "nom": "CONVENANCE CONSULT",
+    "num": "3-2070",
+    "dept": "38"
+   },
+   {
+    "siren": "488336819",
+    "nom": "ACRITEC",
+    "num": "3-212",
+    "dept": "38"
+   },
+   {
+    "siren": "383429891",
+    "nom": "MM2C",
+    "num": "3-1975",
+    "dept": "42"
+   },
+   {
+    "siren": "444104491",
+    "nom": "CABINET KHEOPS CONSULTING",
+    "num": "3-2010",
+    "dept": "63"
+   },
+   {
+    "siren": "829452499",
+    "nom": "CABINET BROUSSEAUD",
+    "num": "3-2124",
+    "dept": "63"
+   },
+   {
+    "siren": "533398491",
+    "nom": "ID&ES",
+    "num": "3-2086",
+    "dept": "69"
+   },
+   {
+    "siren": "403419930",
+    "nom": "ABAQ CONSEIL EN MANAGEMENT",
+    "num": "3-2039",
+    "dept": "69"
+   },
+   {
+    "siren": "430485201",
+    "nom": "R.H.& ORGANISATION",
+    "num": "3-2053",
+    "dept": "69"
+   },
+   {
+    "siren": "822566295",
+    "nom": "APHILIA CONSEIL",
+    "num": "3-1985",
+    "dept": "69"
+   },
+   {
+    "siren": "383925633",
+    "nom": "POLE FORMATION SANTE",
+    "num": "3-2031",
+    "dept": "69"
+   },
+   {
+    "siren": "414862672",
+    "nom": "GRIEPS GROUPE DE RECHERCHE ET D'INTERVENTION POUR L' EDUCATION DES PROFESSIONS SANITAIRES ET SOCIALES",
+    "num": "3-2091",
+    "dept": "69"
+   },
+   {
+    "siren": "928991629",
+    "nom": "GK CONSEIL AUDIT",
+    "num": "3-2382",
+    "dept": "69"
+   },
+   {
+    "siren": "512511577",
+    "nom": "NICOMAK",
+    "num": "3-2203",
+    "dept": "73"
+   },
+   {
+    "siren": "988683801",
+    "nom": "LA COOPERATIVE DE L'EVALUATION SCOP SARL",
+    "num": "",
+    "dept": "73"
+   },
+   {
+    "siren": "451389928",
+    "nom": "SOCRATES",
+    "num": "3-1986",
+    "dept": "74"
+   },
+   {
+    "siren": "978178002",
+    "nom": "AVENIR EVALUATION",
+    "num": "3-2233",
+    "dept": "21"
+   },
+   {
+    "siren": "410475081",
+    "nom": "INSTITUT REGIONAL SUPERIEUR DU TRAVAIL EDUCATIF ET SOCIAL - IRTESS rev 0",
+    "num": "3-2177",
+    "dept": "21"
+   },
+   {
+    "siren": "929494755",
+    "nom": "ETHIQUALITE",
+    "num": "3-2327",
+    "dept": "21"
+   },
+   {
+    "siren": "434009973",
+    "nom": "KIWO",
+    "num": "",
+    "dept": "21"
+   },
+   {
+    "siren": "338138597",
+    "nom": "ACTION INFORMATION RECHERCHE",
+    "num": "3-1992",
+    "dept": "25"
+   },
+   {
+    "siren": "349432443",
+    "nom": "IRTS",
+    "num": "3-2222",
+    "dept": "25"
+   },
+   {
+    "siren": "511569857",
+    "nom": "PERINOVE",
+    "num": "3-2018",
+    "dept": "35"
+   },
+   {
+    "siren": "432990638",
+    "nom": "MANAGEMENT DE LA QUALITE EN SANTE",
+    "num": "3-2105",
+    "dept": "35"
+   },
+   {
+    "siren": "497968479",
+    "nom": "JEUDEVI - JEUNESSE DEVELOPPEMENT INTELLIGENTS",
+    "num": "3-2074",
+    "dept": "35"
+   },
+   {
+    "siren": "442490306",
+    "nom": "SOCIETE NOUVELLE CATALYS",
+    "num": "3-2071",
+    "dept": "35"
+   },
+   {
+    "siren": "351503412",
+    "nom": "GALATA ORGANISATION",
+    "num": "3-2165",
+    "dept": "35"
+   },
+   {
+    "siren": "388986895",
+    "nom": "AUDIT ASSISTANCE CONTROLE CONSEIL EN ENVIRONNEMENT ET SANTE PUBLIQUE",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "519978340",
+    "nom": "BGP CONSEIL",
+    "num": "3-1989",
+    "dept": "56"
+   },
+   {
+    "siren": "477974398",
+    "nom": "Cabinet Sylvie CHEVESSIER",
+    "num": "3-2153",
+    "dept": "37"
+   },
+   {
+    "siren": "951655109",
+    "nom": "SAS AB QUAL",
+    "num": "3-2194",
+    "dept": "37"
+   },
+   {
+    "siren": "889415246",
+    "nom": "QOANIX",
+    "num": "3-2115",
+    "dept": "45"
+   },
+   {
+    "siren": "987912441",
+    "nom": "A STRADA EVALUATION ET CONSEIL",
+    "num": "",
+    "dept": "2B"
+   },
+   {
+    "siren": "903307684",
+    "nom": "IPSO FACTO CONSEIL AUDIT RECRUTEMENT FORMATION",
+    "num": "3-1976",
+    "dept": "51"
+   },
+   {
+    "siren": "908577828",
+    "nom": "SANTE2D",
+    "num": "3-2286",
+    "dept": "54"
+   },
+   {
+    "siren": "838339646",
+    "nom": "AFRIS-CIFAL-ECE (ESEIS)",
+    "num": "3-1987",
+    "dept": "67"
+   },
+   {
+    "siren": "837479617",
+    "nom": "ACE GRAND EST",
+    "num": "",
+    "dept": "67"
+   },
+   {
+    "siren": "753089424",
+    "nom": "CABINET LUDOVIC SORIS",
+    "num": "3-2155",
+    "dept": "68"
+   },
+   {
+    "siren": "989393863",
+    "nom": "PROMETHEUS SANTETECH",
+    "num": "",
+    "dept": "88"
+   },
+   {
+    "siren": "900921503",
+    "nom": "SOLEVA",
+    "num": "3-1998",
+    "dept": "971"
+   },
+   {
+    "siren": "533546974",
+    "nom": "CJM CONSULTING",
+    "num": "3-2138",
+    "dept": "971"
+   },
+   {
+    "siren": "892613076",
+    "nom": "CEOS'CONSULT",
+    "num": "3-2154",
+    "dept": "59"
+   },
+   {
+    "siren": "448721746",
+    "nom": "BIOCONSULTANTS",
+    "num": "3-1959",
+    "dept": "59"
+   },
+   {
+    "siren": "878950963",
+    "nom": "CABINET OULAD",
+    "num": "3-1972",
+    "dept": "59"
+   },
+   {
+    "siren": "823462676",
+    "nom": "AM CONSULTANTS NORD",
+    "num": "3-2003",
+    "dept": "59"
+   },
+   {
+    "siren": "933509176",
+    "nom": "ACURIA INSPECTION",
+    "num": "3-2456",
+    "dept": "59"
+   },
+   {
+    "siren": "479667735",
+    "nom": "STRATELYS",
+    "num": "3-2089",
+    "dept": "59"
+   },
+   {
+    "siren": "329070809",
+    "nom": "CONSEIL EN PRATIQUES & ANALYSES SOCIALES",
+    "num": "3-2036",
+    "dept": "59"
+   },
+   {
+    "siren": "377631593",
+    "nom": "SAINT ANDRE SOLIDARITE FORMATION",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "499129997",
+    "nom": "T.L.C.",
+    "num": "3-2008",
+    "dept": "80"
+   },
+   {
+    "siren": "827514613",
+    "nom": "EIRL Céline LISEK Formation Conseil",
+    "num": "3-2049",
+    "dept": "80"
+   },
+   {
+    "siren": "898061155",
+    "nom": "PARMENTIER BLEU SOCIAL",
+    "num": "3-2028",
+    "dept": "75"
+   },
+   {
+    "siren": "905009668",
+    "nom": "MEDIA-SOIN",
+    "num": "3-2427",
+    "dept": "75"
+   },
+   {
+    "siren": "518991294",
+    "nom": "A-AMCOS",
+    "num": "3-2040",
+    "dept": "75"
+   },
+   {
+    "siren": "414513275",
+    "nom": "AB CERTIFICATION",
+    "num": "3-2000",
+    "dept": "75"
+   },
+   {
+    "siren": "524893237",
+    "nom": "RESIDEAL SANTE",
+    "num": "3-2002",
+    "dept": "75"
+   },
+   {
+    "siren": "528530264",
+    "nom": "AMPLEA",
+    "num": "3-2023",
+    "dept": "75"
+   },
+   {
+    "siren": "949930309",
+    "nom": "EVAL'EXT",
+    "num": "3-2220",
+    "dept": "75"
+   },
+   {
+    "siren": "933107864",
+    "nom": "QUALISANTE CERTIFICATION",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "414009928",
+    "nom": "BAQIMEHP",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "801531971",
+    "nom": "NTG CONSEIL",
+    "num": "3-2183",
+    "dept": "77"
+   },
+   {
+    "siren": "398210997",
+    "nom": "JRH CONSULTANTS",
+    "num": "3-1984",
+    "dept": "77"
+   },
+   {
+    "siren": "930879549",
+    "nom": "SYNOTEA",
+    "num": "",
+    "dept": "77"
+   },
+   {
+    "siren": "451303549",
+    "nom": "ELIANE CONSEIL",
+    "num": "3-2187",
+    "dept": "78"
+   },
+   {
+    "siren": "834096497",
+    "nom": "SOCOTEC ENVIRONNEMENT",
+    "num": "3-1595",
+    "dept": "78"
+   },
+   {
+    "siren": "802212720",
+    "nom": "VALDOR",
+    "num": "",
+    "dept": "78"
+   },
+   {
+    "siren": "827917352",
+    "nom": "ENYS CONSEIL",
+    "num": "3-1965",
+    "dept": "91"
+   },
+   {
+    "siren": "377505565",
+    "nom": "FORVIS MAZARS SAS",
+    "num": "3-2273",
+    "dept": "92"
+   },
+   {
+    "siren": "850223843",
+    "nom": "ACACIA-ETHIQUE ET QUALITE",
+    "num": "3-2126",
+    "dept": "92"
+   },
+   {
+    "siren": "399851609",
+    "nom": "BUREAU VERITAS CERTIFICATION",
+    "num": "3-2024",
+    "dept": "92"
+   },
+   {
+    "siren": "527573141",
+    "nom": "APAVE",
+    "num": "3-2025",
+    "dept": "92"
+   },
+   {
+    "siren": "920343571",
+    "nom": "ETIKEVAL",
+    "num": "3-2118",
+    "dept": "92"
+   },
+   {
+    "siren": "479076002",
+    "nom": "AFNOR CERTIFICATION",
+    "num": "3-2014",
+    "dept": "93"
+   },
+   {
+    "siren": "501332712",
+    "nom": "4 AS",
+    "num": "3-1988",
+    "dept": "94"
+   },
+   {
+    "siren": "403293103",
+    "nom": "SGS INTERNATIONAL CERTIFICATION SERVICE",
+    "num": "3-2019",
+    "dept": "94"
+   },
+   {
+    "siren": "934830639",
+    "nom": "AUTONOMII EVALUATION",
+    "num": "3-2361",
+    "dept": "94"
+   },
+   {
+    "siren": "802740233",
+    "nom": "2 VOUS A NOUS",
+    "num": "3-2112",
+    "dept": "95"
+   },
+   {
+    "siren": "988410742",
+    "nom": "CEISS ANTILLES GUYANE CONSULTANT",
+    "num": "",
+    "dept": "972"
+   },
+   {
+    "siren": "400360988",
+    "nom": "ARFOS",
+    "num": "3-2108",
+    "dept": "14"
+   },
+   {
+    "siren": "439995994",
+    "nom": "O TRADING & CONSULTING",
+    "num": "3-1978",
+    "dept": "14"
+   },
+   {
+    "siren": "412261018",
+    "nom": "CERTIPAQ",
+    "num": "3-0676",
+    "dept": "76"
+   },
+   {
+    "siren": "341929750",
+    "nom": "REALITES ET PROJETS CONSULTANTS",
+    "num": "3-2035",
+    "dept": "33"
+   },
+   {
+    "siren": "440249175",
+    "nom": "CFER SANTE",
+    "num": "3-2001",
+    "dept": "33"
+   },
+   {
+    "siren": "901057620",
+    "nom": "RESEAU JANNOY",
+    "num": "3-2103",
+    "dept": "33"
+   },
+   {
+    "siren": "929484897",
+    "nom": "CAP'ES",
+    "num": "3-2322",
+    "dept": "33"
+   },
+   {
+    "siren": "939988499",
+    "nom": "MEDICONSEIL EVALUATION",
+    "num": "3-2446",
+    "dept": "64"
+   },
+   {
+    "siren": "410218754",
+    "nom": "Cabinet GRANGER Consultant",
+    "num": "3-1996",
+    "dept": "64"
+   },
+   {
+    "siren": "420272973",
+    "nom": "CABINET CHANTAL MORNET-PÉRIER",
+    "num": "3-2052",
+    "dept": "64"
+   },
+   {
+    "siren": "411047913",
+    "nom": "ACTIONS FORMATIONS",
+    "num": "3-2030",
+    "dept": "12"
+   },
+   {
+    "siren": "400092094",
+    "nom": "CHAMP SOCIAL FORMATION ET EVALUATION",
+    "num": "3-2243",
+    "dept": "30"
+   },
+   {
+    "siren": "805184371",
+    "nom": "AVIANCE",
+    "num": "3-2114",
+    "dept": "30"
+   },
+   {
+    "siren": "529545683",
+    "nom": "AD-VENIR",
+    "num": "3-1981",
+    "dept": "31"
+   },
+   {
+    "siren": "919133132",
+    "nom": "QUALITIA INSPECTION",
+    "num": "3-2088",
+    "dept": "31"
+   },
+   {
+    "siren": "948248240",
+    "nom": "PLUS VALUE ESMS",
+    "num": "3-2179",
+    "dept": "31"
+   },
+   {
+    "siren": "905103362",
+    "nom": "A+EVAL",
+    "num": "3-1974",
+    "dept": "34"
+   },
+   {
+    "siren": "951826189",
+    "nom": "INAES 3-",
+    "num": "",
+    "dept": "34"
+   },
+   {
+    "siren": "914584446",
+    "nom": "CELAE",
+    "num": "3-2037",
+    "dept": "44"
+   },
+   {
+    "siren": "930853080",
+    "nom": "AURORA CABINET",
+    "num": "3-2334",
+    "dept": "49"
+   },
+   {
+    "siren": "388765901",
+    "nom": "TECHNE CONSEIL",
+    "num": "3-1990",
+    "dept": "53"
+   },
+   {
+    "siren": "304600885",
+    "nom": "CEAS DE LA VENDEE",
+    "num": "3-2101",
+    "dept": "85"
+   },
+   {
+    "siren": "921933388",
+    "nom": "CEPHEE EXPERTISE ET CONSULTING",
+    "num": "3-2137",
+    "dept": "85"
+   },
+   {
+    "siren": "786428979",
+    "nom": "CFP MESLAY",
+    "num": "3-2085",
+    "dept": "85"
+   },
+   {
+    "siren": "953438330",
+    "nom": "QUALIPREVYS",
+    "num": "3-2212",
+    "dept": "04"
+   },
+   {
+    "siren": "922631189",
+    "nom": "ABC SYNACTION",
+    "num": "3-2152",
+    "dept": "06"
+   },
+   {
+    "siren": "981666787",
+    "nom": "MAJEVAL",
+    "num": "",
+    "dept": "06"
+   },
+   {
+    "siren": "479246845",
+    "nom": "PREISO",
+    "num": "3-2032",
+    "dept": "13"
+   },
+   {
+    "siren": "493603153",
+    "nom": "AS CONSULTING",
+    "num": "3-2011",
+    "dept": "13"
+   },
+   {
+    "siren": "794653444",
+    "nom": "ISY CONSEIL",
+    "num": "3-2012",
+    "dept": "13"
+   },
+   {
+    "siren": "379227937",
+    "nom": "ACS CONSULTANTS",
+    "num": "3-2021",
+    "dept": "13"
+   },
+   {
+    "siren": "442026811",
+    "nom": "ALEOZ",
+    "num": "3-2029",
+    "dept": "13"
+   },
+   {
+    "siren": "383916392",
+    "nom": "ELSE CONSULTANTS",
+    "num": "3-2009",
+    "dept": "13"
+   },
+   {
+    "siren": "484549779",
+    "nom": "MISSIA CONSEIL",
+    "num": "3-2175",
+    "dept": "13"
+   },
+   {
+    "siren": "949184964",
+    "nom": "ANALYSE LES BESOINS ALB",
+    "num": "3-2181",
+    "dept": "13"
+   },
+   {
+    "siren": "800456980",
+    "nom": "CABINET D’EXPERTISE ET D’INGENIERIE SOCIALE- CEISS VAR CONSULTANT",
+    "num": "3-2084",
+    "dept": "83"
+   },
+   {
+    "siren": "809919384",
+    "nom": "EULALIA CONSEIL",
+    "num": "3-1970",
+    "dept": "83"
+   },
+   {
+    "siren": "530545847",
+    "nom": "IN AURIS",
+    "num": "3-0895",
+    "dept": "83"
+   }
+  ],
+  "date_releve": "2026-07-16",
+  "sha256": "43fcf18450aed7187d6ab633c98006b9a1f138a3871dad49f2c420095b10385f"
+ },
+ {
+  "date_source": "13 août 2026",
+  "organismes": [
+   {
+    "siren": "849526678",
+    "nom": "CIDEES CERTIFICATION",
+    "num": "3-1971",
+    "dept": "26"
+   },
+   {
+    "siren": "480506773",
+    "nom": "INGERIS INSPECTION",
+    "num": "3-2106",
+    "dept": "26"
+   },
+   {
+    "siren": "791210719",
+    "nom": "CONVENANCE CONSULT",
+    "num": "3-2070",
+    "dept": "38"
+   },
+   {
+    "siren": "488336819",
+    "nom": "ACRITEC",
+    "num": "3-212",
+    "dept": "38"
+   },
+   {
+    "siren": "383429891",
+    "nom": "MM2C",
+    "num": "3-1975",
+    "dept": "42"
+   },
+   {
+    "siren": "444104491",
+    "nom": "CABINET KHEOPS CONSULTING",
+    "num": "3-2010",
+    "dept": "63"
+   },
+   {
+    "siren": "829452499",
+    "nom": "CABINET BROUSSEAUD",
+    "num": "3-2124",
+    "dept": "63"
+   },
+   {
+    "siren": "533398491",
+    "nom": "ID&ES",
+    "num": "3-2086",
+    "dept": "69"
+   },
+   {
+    "siren": "403419930",
+    "nom": "ABAQ CONSEIL EN MANAGEMENT",
+    "num": "3-2039",
+    "dept": "69"
+   },
+   {
+    "siren": "430485201",
+    "nom": "R.H.& ORGANISATION",
+    "num": "3-2053",
+    "dept": "69"
+   },
+   {
+    "siren": "822566295",
+    "nom": "APHILIA CONSEIL",
+    "num": "3-1985",
+    "dept": "69"
+   },
+   {
+    "siren": "383925633",
+    "nom": "POLE FORMATION SANTE",
+    "num": "3-2031",
+    "dept": "69"
+   },
+   {
+    "siren": "414862672",
+    "nom": "GRIEPS GROUPE DE RECHERCHE ET D'INTERVENTION POUR L' EDUCATION DES PROFESSIONS SANITAIRES ET SOCIALES",
+    "num": "3-2091",
+    "dept": "69"
+   },
+   {
+    "siren": "928991629",
+    "nom": "GK CONSEIL AUDIT",
+    "num": "3-2382",
+    "dept": "69"
+   },
+   {
+    "siren": "512511577",
+    "nom": "NICOMAK",
+    "num": "3-2203",
+    "dept": "73"
+   },
+   {
+    "siren": "988683801",
+    "nom": "LA COOPERATIVE DE L'EVALUATION SCOP SARL",
+    "num": "",
+    "dept": "73"
+   },
+   {
+    "siren": "451389928",
+    "nom": "SOCRATES",
+    "num": "3-1986",
+    "dept": "74"
+   },
+   {
+    "siren": "978178002",
+    "nom": "AVENIR EVALUATION",
+    "num": "3-2233",
+    "dept": "21"
+   },
+   {
+    "siren": "410475081",
+    "nom": "INSTITUT REGIONAL SUPERIEUR DU TRAVAIL EDUCATIF ET SOCIAL - IRTESS",
+    "num": "3-2177",
+    "dept": "21"
+   },
+   {
+    "siren": "929494755",
+    "nom": "ETHIQUALITE",
+    "num": "3-2327",
+    "dept": "21"
+   },
+   {
+    "siren": "434009973",
+    "nom": "KIWO",
+    "num": "",
+    "dept": "21"
+   },
+   {
+    "siren": "338138597",
+    "nom": "ACTION INFORMATION RECHERCHE",
+    "num": "3-1992",
+    "dept": "25"
+   },
+   {
+    "siren": "349432443",
+    "nom": "IRTS",
+    "num": "3-2222",
+    "dept": "25"
+   },
+   {
+    "siren": "511569857",
+    "nom": "PERINOVE",
+    "num": "3-2018",
+    "dept": "35"
+   },
+   {
+    "siren": "432990638",
+    "nom": "MANAGEMENT DE LA QUALITE EN SANTE",
+    "num": "3-2105",
+    "dept": "35"
+   },
+   {
+    "siren": "497968479",
+    "nom": "JEUDEVI - JEUNESSE DEVELOPPEMENT INTELLIGENTS",
+    "num": "3-2074",
+    "dept": "35"
+   },
+   {
+    "siren": "442490306",
+    "nom": "SOCIETE NOUVELLE CATALYS",
+    "num": "3-2071",
+    "dept": "35"
+   },
+   {
+    "siren": "351503412",
+    "nom": "GALATA ORGANISATION",
+    "num": "3-2165",
+    "dept": "35"
+   },
+   {
+    "siren": "388986895",
+    "nom": "AUDIT ASSISTANCE CONTROLE CONSEIL EN ENVIRONNEMENT ET SANTE PUBLIQUE",
+    "num": "",
+    "dept": "35"
+   },
+   {
+    "siren": "519978340",
+    "nom": "BGP CONSEIL",
+    "num": "3-1989",
+    "dept": "56"
+   },
+   {
+    "siren": "477974398",
+    "nom": "Cabinet Sylvie CHEVESSIER",
+    "num": "3-2153",
+    "dept": "37"
+   },
+   {
+    "siren": "951655109",
+    "nom": "SAS AB QUAL",
+    "num": "3-2194",
+    "dept": "37"
+   },
+   {
+    "siren": "889415246",
+    "nom": "QOANIX",
+    "num": "3-2115",
+    "dept": "45"
+   },
+   {
+    "siren": "987912441",
+    "nom": "A STRADA EVALUATION ET CONSEIL",
+    "num": "",
+    "dept": "2B"
+   },
+   {
+    "siren": "903307684",
+    "nom": "IPSO FACTO CONSEIL AUDIT RECRUTEMENT FORMATION",
+    "num": "3-1976",
+    "dept": "51"
+   },
+   {
+    "siren": "908577828",
+    "nom": "SANTE2D",
+    "num": "3-2286",
+    "dept": "54"
+   },
+   {
+    "siren": "838339646",
+    "nom": "AFRIS-CIFAL-ECE (ESEIS)",
+    "num": "3-1987",
+    "dept": "67"
+   },
+   {
+    "siren": "837479617",
+    "nom": "ACE GRAND EST",
+    "num": "",
+    "dept": "67"
+   },
+   {
+    "siren": "753089424",
+    "nom": "CABINET LUDOVIC SORIS",
+    "num": "3-2155",
+    "dept": "68"
+   },
+   {
+    "siren": "989393863",
+    "nom": "PROMETHEUS SANTETECH",
+    "num": "",
+    "dept": "88"
+   },
+   {
+    "siren": "900921503",
+    "nom": "SOLEVA",
+    "num": "3-1998",
+    "dept": "971"
+   },
+   {
+    "siren": "533546974",
+    "nom": "CJM CONSULTING",
+    "num": "3-2138",
+    "dept": "971"
+   },
+   {
+    "siren": "892613076",
+    "nom": "CEOS'CONSULT",
+    "num": "3-2154",
+    "dept": "59"
+   },
+   {
+    "siren": "448721746",
+    "nom": "BIOCONSULTANTS",
+    "num": "3-1959",
+    "dept": "59"
+   },
+   {
+    "siren": "823462676",
+    "nom": "AM CONSULTANTS NORD",
+    "num": "3-2003",
+    "dept": "59"
+   },
+   {
+    "siren": "933509176",
+    "nom": "ACURIA INSPECTION",
+    "num": "3-2456",
+    "dept": "59"
+   },
+   {
+    "siren": "479667735",
+    "nom": "STRATELYS",
+    "num": "3-2089",
+    "dept": "59"
+   },
+   {
+    "siren": "329070809",
+    "nom": "CONSEIL EN PRATIQUES & ANALYSES SOCIALES",
+    "num": "3-2036",
+    "dept": "59"
+   },
+   {
+    "siren": "377631593",
+    "nom": "SAINT ANDRE SOLIDARITE FORMATION",
+    "num": "",
+    "dept": "59"
+   },
+   {
+    "siren": "499129997",
+    "nom": "T.L.C.",
+    "num": "3-2008",
+    "dept": "80"
+   },
+   {
+    "siren": "827514613",
+    "nom": "EIRL Céline LISEK Formation Conseil",
+    "num": "3-2049",
+    "dept": "80"
+   },
+   {
+    "siren": "898061155",
+    "nom": "PARMENTIER BLEU SOCIAL",
+    "num": "3-2028",
+    "dept": "75"
+   },
+   {
+    "siren": "905009668",
+    "nom": "MEDIA-SOIN",
+    "num": "3-2427",
+    "dept": "75"
+   },
+   {
+    "siren": "518991294",
+    "nom": "A-AMCOS",
+    "num": "3-2040",
+    "dept": "75"
+   },
+   {
+    "siren": "414513275",
+    "nom": "AB CERTIFICATION",
+    "num": "3-2000",
+    "dept": "75"
+   },
+   {
+    "siren": "524893237",
+    "nom": "RESIDEAL SANTE",
+    "num": "3-2002",
+    "dept": "75"
+   },
+   {
+    "siren": "528530264",
+    "nom": "AMPLEA",
+    "num": "3-2023",
+    "dept": "75"
+   },
+   {
+    "siren": "980895270",
+    "nom": "NCU CONSULTING",
+    "num": "3-2265",
+    "dept": "75"
+   },
+   {
+    "siren": "949930309",
+    "nom": "EVAL'EXT",
+    "num": "3-2220",
+    "dept": "75"
+   },
+   {
+    "siren": "933107864",
+    "nom": "QUALISANTE CERTIFICATION",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "414009928",
+    "nom": "BAQIMEHP",
+    "num": "",
+    "dept": "75"
+   },
+   {
+    "siren": "801531971",
+    "nom": "NTG CONSEIL",
+    "num": "3-2183",
+    "dept": "77"
+   },
+   {
+    "siren": "398210997",
+    "nom": "JRH CONSULTANTS",
+    "num": "3-1984",
+    "dept": "77"
+   },
+   {
+    "siren": "451303549",
+    "nom": "ELIANE CONSEIL",
+    "num": "3-2187",
+    "dept": "78"
+   },
+   {
+    "siren": "834096497",
+    "nom": "SOCOTEC ENVIRONNEMENT",
+    "num": "3-1595",
+    "dept": "78"
+   },
+   {
+    "siren": "802212720",
+    "nom": "VALDOR",
+    "num": "",
+    "dept": "78"
+   },
+   {
+    "siren": "827917352",
+    "nom": "ENYS CONSEIL",
+    "num": "3-1965",
+    "dept": "91"
+   },
+   {
+    "siren": "377505565",
+    "nom": "FORVIS MAZARS SAS",
+    "num": "3-2273",
+    "dept": "92"
+   },
+   {
+    "siren": "850223843",
+    "nom": "ACACIA-ETHIQUE ET QUALITE",
+    "num": "3-2126",
+    "dept": "92"
+   },
+   {
+    "siren": "399851609",
+    "nom": "BUREAU VERITAS CERTIFICATION",
+    "num": "3-2024",
+    "dept": "92"
+   },
+   {
+    "siren": "527573141",
+    "nom": "APAVE",
+    "num": "3-2025",
+    "dept": "92"
+   },
+   {
+    "siren": "920343571",
+    "nom": "ETIKEVAL",
+    "num": "3-2118",
+    "dept": "92"
+   },
+   {
+    "siren": "479076002",
+    "nom": "AFNOR CERTIFICATION",
+    "num": "3-2014",
+    "dept": "93"
+   },
+   {
+    "siren": "403293103",
+    "nom": "SGS INTERNATIONAL CERTIFICATION SERVICE",
+    "num": "3-2019",
+    "dept": "94"
+   },
+   {
+    "siren": "934830639",
+    "nom": "AUTONOMII EVALUATION",
+    "num": "3-2361",
+    "dept": "94"
+   },
+   {
+    "siren": "501332712",
+    "nom": "4 AS",
+    "num": "3-1988",
+    "dept": "94"
+   },
+   {
+    "siren": "802740233",
+    "nom": "2 VOUS A NOUS",
+    "num": "3-2112",
+    "dept": "95"
+   },
+   {
+    "siren": "988410742",
+    "nom": "CEISS ANTILLES GUYANE CONSULTANT",
+    "num": "",
+    "dept": "972"
+   },
+   {
+    "siren": "400360988",
+    "nom": "ARFOS",
+    "num": "3-2108",
+    "dept": "14"
+   },
+   {
+    "siren": "439995994",
+    "nom": "O TRADING & CONSULTING",
+    "num": "3-1978",
+    "dept": "14"
+   },
+   {
+    "siren": "412261018",
+    "nom": "CERTIPAQ",
+    "num": "3-0676",
+    "dept": "76"
+   },
+   {
+    "siren": "341929750",
+    "nom": "REALITES ET PROJETS CONSULTANTS",
+    "num": "3-2035",
+    "dept": "33"
+   },
+   {
+    "siren": "440249175",
+    "nom": "CFER SANTE",
+    "num": "3-2001",
+    "dept": "33"
+   },
+   {
+    "siren": "901057620",
+    "nom": "RESEAU JANNOY",
+    "num": "3-2103",
+    "dept": "33"
+   },
+   {
+    "siren": "929484897",
+    "nom": "CAP'ES",
+    "num": "3-2322",
+    "dept": "33"
+   },
+   {
+    "siren": "939988499",
+    "nom": "MEDICONSEIL EVALUATION",
+    "num": "3-2446",
+    "dept": "64"
+   },
+   {
+    "siren": "410218754",
+    "nom": "Cabinet GRANGER Consultant",
+    "num": "3-1996",
+    "dept": "64"
+   },
+   {
+    "siren": "420272973",
+    "nom": "CABINET CHANTAL MORNET-PÉRIER",
+    "num": "3-2052",
+    "dept": "64"
+   },
+   {
+    "siren": "411047913",
+    "nom": "ACTIONS FORMATIONS",
+    "num": "3-2030",
+    "dept": "12"
+   },
+   {
+    "siren": "400092094",
+    "nom": "CHAMP SOCIAL FORMATION ET EVALUATION",
+    "num": "3-2243",
+    "dept": "30"
+   },
+   {
+    "siren": "805184371",
+    "nom": "AVIANCE",
+    "num": "3-2114",
+    "dept": "30"
+   },
+   {
+    "siren": "529545683",
+    "nom": "AD-VENIR",
+    "num": "3-1981",
+    "dept": "31"
+   },
+   {
+    "siren": "919133132",
+    "nom": "QUALITIA INSPECTION",
+    "num": "3-2088",
+    "dept": "31"
+   },
+   {
+    "siren": "948248240",
+    "nom": "PLUS VALUE ESMS",
+    "num": "3-2179",
+    "dept": "31"
+   },
+   {
+    "siren": "905103362",
+    "nom": "A+EVAL",
+    "num": "3-1974",
+    "dept": "34"
+   },
+   {
+    "siren": "951826189",
+    "nom": "INAES",
+    "num": "3-2205",
+    "dept": "34"
+   },
+   {
+    "siren": "914584446",
+    "nom": "CELAE",
+    "num": "3-2037",
+    "dept": "44"
+   },
+   {
+    "siren": "930853080",
+    "nom": "AURORA CABINET",
+    "num": "3-2334",
+    "dept": "49"
+   },
+   {
+    "siren": "388765901",
+    "nom": "TECHNE CONSEIL",
+    "num": "3-1990",
+    "dept": "53"
+   },
+   {
+    "siren": "921933388",
+    "nom": "CEPHEE EXPERTISE ET CONSULTING",
+    "num": "3-2137",
+    "dept": "85"
+   },
+   {
+    "siren": "786428979",
+    "nom": "CFP MESLAY",
+    "num": "3-2085",
+    "dept": "85"
+   },
+   {
+    "siren": "953438330",
+    "nom": "QUALIPREVYS",
+    "num": "3-2212",
+    "dept": "04"
+   },
+   {
+    "siren": "922631189",
+    "nom": "ABC SYNACTION",
+    "num": "3-2152",
+    "dept": "06"
+   },
+   {
+    "siren": "981666787",
+    "nom": "MAJEVAL",
+    "num": "",
+    "dept": "06"
+   },
+   {
+    "siren": "479246845",
+    "nom": "PREISO",
+    "num": "3-2032",
+    "dept": "13"
+   },
+   {
+    "siren": "493603153",
+    "nom": "AS CONSULTING",
+    "num": "3-2011",
+    "dept": "13"
+   },
+   {
+    "siren": "794653444",
+    "nom": "ISY CONSEIL",
+    "num": "3-2012",
+    "dept": "13"
+   },
+   {
+    "siren": "379227937",
+    "nom": "ACS CONSULTANTS",
+    "num": "3-2021",
+    "dept": "13"
+   },
+   {
+    "siren": "442026811",
+    "nom": "ALEOZ",
+    "num": "3-2029",
+    "dept": "13"
+   },
+   {
+    "siren": "383916392",
+    "nom": "ELSE CONSULTANTS",
+    "num": "3-2009",
+    "dept": "13"
+   },
+   {
+    "siren": "484549779",
+    "nom": "MISSIA CONSEIL",
+    "num": "3-2175",
+    "dept": "13"
+   },
+   {
+    "siren": "949184964",
+    "nom": "ANALYSE LES BESOINS ALB",
+    "num": "3-2181",
+    "dept": "13"
+   },
+   {
+    "siren": "800456980",
+    "nom": "CABINET D’EXPERTISE ET D’INGENIERIE SOCIALE- CEISS VAR CONSULTANT",
+    "num": "3-2084",
+    "dept": "83"
+   },
+   {
+    "siren": "809919384",
+    "nom": "EULALIA CONSEIL",
+    "num": "3-1970",
+    "dept": "83"
+   },
+   {
+    "siren": "530545847",
+    "nom": "IN AURIS",
+    "num": "3-0895",
+    "dept": "83"
+   }
+  ],
+  "date_releve": "2026-08-13",
+  "sha256": "123813a1404c6535c6436f37011ba638876286d2054bf2ad7b37137521b3533b"
+ }
+]

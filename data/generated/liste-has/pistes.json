@@ -1,0 +1,30 @@
+[
+ {
+  "sortiSiren": "442928826",
+  "sortiNom": "STRATELYS",
+  "revenuSiren": "479667735",
+  "revenuNom": "STRATELYS",
+  "lecture": "même nom, autre SIREN"
+ },
+ {
+  "sortiSiren": "800719262",
+  "sortiNom": "AUTONOMII",
+  "revenuSiren": "934830639",
+  "revenuNom": "AUTONOMII EVALUATION",
+  "lecture": "nom repris avec variation, autre SIREN"
+ },
+ {
+  "sortiSiren": "411588619",
+  "sortiNom": "CABINET GK Conseil",
+  "revenuSiren": "928991629",
+  "revenuNom": "GK CONSEIL AUDIT",
+  "lecture": "nom repris avec variation, autre SIREN"
+ },
+ {
+  "sortiSiren": "835149824",
+  "sortiNom": "MEDICONSEIL FORMATION",
+  "revenuSiren": "939988499",
+  "revenuNom": "MEDICONSEIL EVALUATION",
+  "lecture": "nom repris avec variation, autre SIREN"
+ }
+]

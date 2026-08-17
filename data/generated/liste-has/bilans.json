@@ -1,0 +1,30 @@
+[
+ {
+  "date": "2022-12-31",
+  "autorises": 72,
+  "accredites": null,
+  "derogation": null,
+  "source": "Bilan annuel HAS 2023"
+ },
+ {
+  "date": "2023-12-31",
+  "autorises": 117,
+  "accredites": null,
+  "derogation": null,
+  "source": "Bilan annuel HAS 2023"
+ },
+ {
+  "date": "2024-12-31",
+  "autorises": 128,
+  "accredites": 87,
+  "derogation": 41,
+  "source": "Bilan annuel HAS 2024"
+ },
+ {
+  "date": "2025-12-31",
+  "autorises": 121,
+  "accredites": 100,
+  "derogation": 21,
+  "source": "Bilan annuel HAS 2025"
+ }
+]
