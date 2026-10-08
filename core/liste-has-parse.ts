@@ -2,7 +2,7 @@
  * Analyseur du texte de la liste HAS des organismes autorisés (ESSMS).
  * Implémentation pure : string → état structuré. La clé d'identité est le
  * SIREN ; le nom est du texte libre ; le numéro d'accréditation (section 3,
- * motif 3-\d{3,4}) est absent pour les organismes sans accréditation.
+ * motif 3-\d{3,5}) est absent pour les organismes sans accréditation.
  * Deux mises en page couvertes : 2022 (enregistrement monoligne, SIREN en
  * fin de ligne) et 2023+ (un champ par ligne, le SIREN clôt le bloc).
  */
@@ -10,7 +10,7 @@
 export interface ListeHasOrganisme {
   siren: string;
   nom: string;
-  /** Numéro d'accréditation section 3 (3-XXX ou 3-XXXX), '' si absent. */
+  /** Numéro d'accréditation section 3 (3-XXX à 3-XXXXX), '' si absent. */
   num: string;
   dept: string;
 }
@@ -30,7 +30,10 @@ export interface ListeHasEtat {
 }
 
 const RE_SIREN_ALONE = /^\s*(\d{9})\s*$/;
-const RE_NUMERO = /(?<!\d)(3-\d{3,4})(?!\d)/;
+// 3 à 5 chiffres : la série à 5 chiffres (3-1XXXX) est en service au COFRAC et
+// publiée par la liste depuis l'édition du 2026-10-06. Les numéros sont lus tels
+// qu'imprimés par la source.
+const RE_NUMERO = /(?<!\d)(3-\d{3,5})(?!\d)/;
 const RE_DEPT = /^\s*(\d{2,3}|2A|2B)\s+[-–]\s+(.+?)\s*$/;
 const RE_ACTUALISEE = /Actualis[ée]e?\s+le\s+(.{0,30})/i;
 const RE_PAGE = /^\s*\d{1,3}\s*$/;

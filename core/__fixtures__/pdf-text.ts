@@ -2,6 +2,23 @@
 // pdf-lib (StandardFonts / WinAnsi). Pas de dépendance externe (pdf-parse…).
 import zlib from 'node:zlib';
 import { Buffer } from 'node:buffer';
+import { sanitizeForWinAnsi } from '../winansi';
+
+/**
+ * Expression régulière d'un texte attendu dans le texte extrait, tel que
+ * dessiné : translittération WinAnsi, espaces multiples réduits au retour à la
+ * ligne ; l'espace de fin de ligne disparaît à l'extraction, d'où chaque espace
+ * rendue facultative ; une espace peut être dessinée insécable (U+00A0). Tous
+ * les métacaractères sont échappés.
+ */
+export function souple(s: string): RegExp {
+  return new RegExp(
+    sanitizeForWinAnsi(s)
+      .replace(/\s+/g, ' ')
+      .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      .replace(/ /g, '[ \u00A0]?'),
+  );
+}
 
 /**
  * Extrait le texte « affiché » d'un PDF pdf-lib (StandardFonts, WinAnsi) : les
@@ -17,7 +34,9 @@ import { Buffer } from 'node:buffer';
  */
 export function extractPdfText(pdf: Buffer): string {
   const raw = pdf.toString('latin1');
-  const streamRe = /stream\r?\n([\s\S]*?)\r?\nendstream/g;
+  // Le dernier octet d'un flux compressé peut valoir 0x0D : il n'est pas retiré
+  // avant « \nendstream » (zlib ignore un octet superflu en fin de flux).
+  const streamRe = /stream\r?\n([\s\S]*?)\nendstream/g;
   let m: RegExpExecArray | null;
   let out = '';
   while ((m = streamRe.exec(raw))) {

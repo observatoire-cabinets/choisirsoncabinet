@@ -3,11 +3,21 @@
 **Télécharger** : allez dans https://github.com/observatoire-cabinets/choisirsoncabinet/releases
 puis, dans « Assets » de la dernière version, cliquez sur l'un des deux fichiers :
 
-- `observatoire-cabinets-setup-0.4.0.exe` (recommandé) — installateur : le logiciel
+- `observatoire-cabinets-setup-0.5.0.exe` (recommandé) — installateur : le logiciel
   se met à jour tout seul ;
-- `Observatoire-Cabinets-Evaluateurs-ESSMS-v0.4.0-windows-portable.zip` — version
-  portable : la mise à jour automatique du logiciel ne s'applique pas ; les données,
-  elles, se mettent à jour normalement.
+- `Observatoire-Cabinets-Evaluateurs-ESSMS-v0.5.0-windows-portable.zip` — version
+  portable : la mise à jour automatique du logiciel ne s'applique pas (les Réglages
+  l'indiquent) ; les données, elles, se mettent à jour normalement. Décompressez-la
+  dans un dossier au chemin court, par exemple `C:\Observatoire` (le dossier
+  « Téléchargements » convient aussi) : dans un dossier trop profond, par exemple
+  plusieurs sous-dossiers d'un OneDrive, Windows refuse d'extraire trois fichiers dont
+  le chemin devient trop long, et la copie obtenue est incomplète.
+
+**Vous utilisez la version 0.4.0 ?** Elle ne se met pas à jour d'elle-même, qu'elle ait
+été installée ou décompressée : téléchargez l'installateur 0.5.0 ci-dessus et lancez-le
+une fois. La version installée reprend les mêmes données, les mêmes réglages et la même
+tâche planifiée ; une copie portable 0.4.0 peut ensuite être supprimée. À partir de la
+0.5.0, l'installateur se met à jour tout seul.
 
 Application de bureau **hors-ligne** qui analyse les données **publiques** d'évaluation
 des établissements et services sociaux et médico-sociaux (ESSMS) et met en regard les
@@ -39,7 +49,16 @@ dans les Réglages.
   exportable en **PDF**, ainsi que la fiche complète. Le jeu public ne conservant que la
   dernière évaluation par structure, la reconstitution des mois passés est approchée
   pour les rares structures réévaluées ; les évaluations sans date de clôture sont
-  exclues de l'historique et comptées à part.
+  exclues de l'historique et comptées à part. **Historique du positionnement** : pour
+  chacune des 12 fiches statistiques, l'évolution mensuelle (cumulée, as-of) de la
+  position du cabinet face à la **moyenne des cabinets** — note moyenne, écarts sur les
+  7 axes, concentration du portefeuille, DROM, rang au méta-classement et note moyenne
+  dans chaque région d'intervention — du début à la fin de l'historique, avec bornes
+  d'axe, dernière valeur et effectifs sous chaque graphique ; courbe du cabinet en bleu
+  au-dessus de la moyenne, en orange en dessous (couleurs choisies pour rester lisibles
+  par les personnes daltoniennes), en pointillé tant que l'effectif est faible ; à
+  l'écran et dans le PDF de la fiche. Être au-dessus ou en dessous de la moyenne n'est
+  pas un jugement.
 - **Accréditations** — suivi de la **liste HAS des organismes autorisés** (relevés
   archivés depuis octobre 2022) croisée avec le relevé **COFRAC** des suspensions,
   résiliations et retraits : statut de chaque cabinet (accrédité, autorisé sans
@@ -75,12 +94,15 @@ L'application embarque un instantané des sources publiques suivantes — voir
   **Licence Ouverte 2.0**.
 - **HAS — base documentaire ESSMS** (nom officiel + adresse) — **Licence Ouverte 2.0**.
 - **HAS — liste des organismes autorisés pour l'évaluation des ESSMS** (PDF public) —
-  relevés archivés localement, huit états historiques embarqués (oct. 2022 → août 2026).
+  relevés archivés localement, neuf états historiques embarqués (oct. 2022 → oct. 2026).
 - **COFRAC — suspensions, résiliations et retraits d'accréditation** (page publique) —
   relevés archivés localement.
 
-La mise à jour (Réglages → *Mettre à jour*) retélécharge ces sources depuis data.gouv.fr
-et HAS puis reconstruit l'instantané ; les versions précédentes sont archivées localement.
+La mise à jour manuelle (Réglages → *Mettre à jour les données maintenant*), disponible
+que la mise à jour automatique soit activée ou non, relève d'abord la liste HAS et la page
+COFRAC (si ce n'est pas déjà fait aujourd'hui), puis retélécharge les autres sources (Synaé,
+FINESS, base documentaire) depuis data.gouv.fr et HAS et reconstruit l'instantané ; les
+versions précédentes sont archivées localement. Hors ligne, rien n'est tenté.
 Si la tâche planifiée est supprimée manuellement dans le Planificateur Windows,
 l'application ne la recrée qu'à la prochaine bascule de l'interrupteur de mise à jour.
 

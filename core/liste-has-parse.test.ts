@@ -153,3 +153,54 @@ France
     ]);
   });
 });
+
+describe('parseListeHasText — numéros à 5 chiffres', () => {
+  const TEXTE = `Actualisée le 6 octobre 2026
+75 - Paris
+A-AMCOS QUALITE EVALUATION ET
+CERTIFICATION 3-10079
+2 AVENUE DE LA BOURDONNAIS
+75007 PARIS
+France
+101854743
+SOCIETE TEST ZA 13-10079
+1 RUE DU TEST
+75001 PARIS
+France
+123456789
+`;
+  const etat = parseListeHasText(TEXTE);
+  it('lit un numéro 3-XXXXX et garde le nom intact', () => {
+    expect(etat.organismes[0]).toEqual({
+      siren: '101854743', nom: 'A-AMCOS QUALITE EVALUATION ET CERTIFICATION', num: '3-10079', dept: '75',
+    });
+  });
+  it('un nombre plus long qui contient « 3-10079 » n’est pas un numéro', () => {
+    expect(etat.organismes[1].num).toBe('');
+  });
+  it('six chiffres ne sont pas un numéro', () => {
+    const e = parseListeHasText('75 - Paris\nORG 3-100790\n1 RUE X\n75001 PARIS\n111111111\n');
+    expect(e.organismes).toHaveLength(1);
+    expect(e.organismes[0].num).toBe('');
+  });
+  it("« 3-NNNNN » dans une ligne d'adresse : le premier numéro trouvé dans le bloc est retenu, adresse comprise", () => {
+    // Comportement de l'analyseur : le numéro est cherché dans tout l'enregistrement,
+    // lignes d'adresse comprises ; le nom, lui, s'arrête au début de l'adresse.
+    const e = parseListeHasText(`75 - Paris
+ORGANISME SANS NUMERO
+12 RUE DES LOTS 3-10080
+75001 PARIS
+France
+222222222
+ORGANISME NUMEROTE 3-2001
+12 RUE DES LOTS 3-10080
+75001 PARIS
+France
+333333333
+`);
+    expect(e.organismes).toEqual([
+      { siren: '222222222', nom: 'ORGANISME SANS NUMERO', num: '3-10080', dept: '75' },
+      { siren: '333333333', nom: 'ORGANISME NUMEROTE', num: '3-2001', dept: '75' },
+    ]);
+  });
+});

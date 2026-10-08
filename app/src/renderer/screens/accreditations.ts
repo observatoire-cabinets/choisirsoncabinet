@@ -1,6 +1,12 @@
 /** Onglet Accréditations : statut des cabinets sur la liste HAS, chronologie, journal des sorties. */
 import { escapeHtml, frDate } from '../util';
-import type { AccreditationsView, CabinetStatut, StatutCabinet } from '../../../../core/accreditations';
+import type {
+  AccreditationsView,
+  CabinetStatut,
+  SortieRow,
+  StatutCabinet,
+} from '../../../../core/accreditations';
+import type { CofracRrsRow } from '../../../../core/cofrac-parse';
 
 const TOOLBAR = 'margin:8px 0; display:flex; gap:12px; align-items:center; flex-wrap:wrap;';
 
@@ -25,6 +31,27 @@ const BADGE: Record<StatutCabinet, string> = {
 };
 
 const dateFr = (iso: string | null): string => (iso ? frDate(iso) : '—');
+
+/** Cellule « Concordance COFRAC » (volets ① et ③) : date du relevé où la
+ * concordance est constatée, puis commentaire de la source cité entre
+ * guillemets s'il existe. */
+export function concordanceCellHtml(date: string | null, row: CofracRrsRow | null): string {
+  if (!date) return '—';
+  return `constatée le ${dateFr(date)}${row?.commentaire ? ` — COFRAC : « ${escapeHtml(row.commentaire)} »` : ''}`;
+}
+
+/** Ligne du journal des sorties (volet ③). */
+export function sortieRowHtml(s: SortieRow): string {
+  return `<tr>
+          <td>${escapeHtml(s.nom)}</td><td>${escapeHtml(s.siren)}</td>
+          <td>${s.num ? `<strong>${escapeHtml(s.num)}</strong>` : '—'}</td>
+          <td>${escapeHtml(s.dept)}</td>
+          <td>${dateFr(s.dernierPresent)}</td><td>${dateFr(s.premierAbsent)}</td>
+          <td>${s.revenu ? 'revenu en liste' : ''}</td>
+          <td>${concordanceCellHtml(s.concordanceDate, s.concordance)}</td>
+          <td class="note">${s.piste ? `${escapeHtml(s.piste.revenuNom)} (${escapeHtml(s.piste.lecture)}) — à confirmer` : ''}</td>
+        </tr>`;
+}
 
 export async function renderAccreditations(root: HTMLElement): Promise<void> {
   root.innerHTML = '<p class="note">Chargement de la liste HAS…</p>';
@@ -70,7 +97,7 @@ export async function renderAccreditations(root: HTMLElement): Promise<void> {
       <details class="note"><summary>Réserves de méthode — clé de lecture</summary><ul>
         <li>Une sortie de liste est un fait constaté entre deux relevés ; la source n'en indique jamais le motif. Ne jamais lire « retiré », « suspendu » ni « radié » : lire « sorti de liste, motif non indiqué ».</li>
         <li>Une absence d'observation n'est pas une observation d'absence : entre deux relevés, un mouvement n'est datable que par sa fenêtre. La période du 24/09/2023 au 06/03/2026 (894 jours) n'est pas observée.</li>
-        <li>Un rapprochement par nom est une piste à confirmer, jamais une continuité juridique. Une concordance COFRAC est une concordance documentaire datée, pas un jugement.</li>
+        <li>Un rapprochement par nom est une piste à confirmer, jamais une continuité juridique. Une concordance COFRAC est une concordance documentaire datée, pas un jugement ; la date affichée est celle du relevé consulté, et le commentaire éventuel est reproduit tel que publié par le COFRAC.</li>
         <li>Figurer sur la liste n'implique pas d'exercer ; en sortir n'implique ni cessation ni faute.</li>
       </ul></details>
     </section>`;
@@ -149,7 +176,7 @@ export async function renderAccreditations(root: HTMLElement): Promise<void> {
         <td>${escapeHtml(s.siren ?? '—')}</td>
         <td>${dateFr(s.dernierEtatPresent)}</td>
         <td>${dateFr(s.premierEtatAbsent)}</td>
-        <td>${s.concordanceDate ? `constatée le ${dateFr(s.concordanceDate)}${s.concordance?.commentaire ? ' — ' + escapeHtml(s.concordance.commentaire) : ''}` : '—'}</td>
+        <td>${concordanceCellHtml(s.concordanceDate, s.concordance)}</td>
       </tr>`,
         )
         .join('');
@@ -215,19 +242,7 @@ export async function renderAccreditations(root: HTMLElement): Promise<void> {
       <table id="acc-sorties"><thead><tr>
         <th>Nom (dernier connu)</th><th>SIREN</th><th>N°</th><th>Dép.</th><th>Présent au</th><th>Absent au</th><th>Revenu</th><th>Concordance COFRAC</th><th>Piste ⚠️</th>
       </tr></thead><tbody>
-      ${view.sorties
-        .map(
-          (s) => `<tr>
-          <td>${escapeHtml(s.nom)}</td><td>${escapeHtml(s.siren)}</td>
-          <td>${s.num ? `<strong>${escapeHtml(s.num)}</strong>` : '—'}</td>
-          <td>${escapeHtml(s.dept)}</td>
-          <td>${dateFr(s.dernierPresent)}</td><td>${dateFr(s.premierAbsent)}</td>
-          <td>${s.revenu ? 'revenu en liste' : ''}</td>
-          <td>${s.concordanceDate ? `constatée le ${dateFr(s.concordanceDate)}` : '—'}</td>
-          <td class="note">${s.piste ? `${escapeHtml(s.piste.revenuNom)} (${escapeHtml(s.piste.lecture)}) — à confirmer` : ''}</td>
-        </tr>`,
-        )
-        .join('')}
+      ${view.sorties.map(sortieRowHtml).join('')}
       </tbody></table>`;
   }
 

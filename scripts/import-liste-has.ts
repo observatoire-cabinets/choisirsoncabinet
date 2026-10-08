@@ -23,8 +23,9 @@ const REFERENCE: Record<string, { organismes: number; accredites: number }> = {
   '2023-09-24': { organismes: 115, accredites: 4 },
   '2026-03-06': { organismes: 118, accredites: 100 },
   '2026-05-07': { organismes: 119, accredites: 104 },
-  '2026-07-16': { organismes: 117, accredites: 103 },
+  '2026-07-16': { organismes: 117, accredites: 104 },
   '2026-08-13': { organismes: 115, accredites: 103 },
+  '2026-10-06': { organismes: 115, accredites: 103 },
 };
 
 // Effectifs des bilans annuels HAS (sources publiques, valeurs relues dans les PDF).
@@ -50,6 +51,7 @@ const PISTES: PisteSuccession[] = [
   { sortiSiren: '800719262', sortiNom: 'AUTONOMII', revenuSiren: '934830639', revenuNom: 'AUTONOMII EVALUATION', lecture: 'nom repris avec variation, autre SIREN' },
   { sortiSiren: '411588619', sortiNom: 'CABINET GK Conseil', revenuSiren: '928991629', revenuNom: 'GK CONSEIL AUDIT', lecture: 'nom repris avec variation, autre SIREN' },
   { sortiSiren: '835149824', sortiNom: 'MEDICONSEIL FORMATION', revenuSiren: '939988499', revenuNom: 'MEDICONSEIL EVALUATION', lecture: 'nom repris avec variation, autre SIREN' },
+  { sortiSiren: '518991294', sortiNom: 'A-AMCOS', revenuSiren: '101854743', revenuNom: 'A-AMCOS QUALITE EVALUATION ET CERTIFICATION', lecture: 'nom repris avec variation, autre SIREN' },
 ];
 
 function main(): void {

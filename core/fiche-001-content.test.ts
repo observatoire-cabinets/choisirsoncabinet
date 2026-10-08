@@ -238,3 +238,89 @@ describe('buildFiche001Content — données de calcul et vérification', () => {
     expect(serializeFicheContent(base)).toBe(serializeFicheContent(stripped));
   });
 });
+
+describe('buildFiche001Content — résultats de l’étude de référence signalés comme tels', () => {
+  const REF = 'dans l’étude de référence du 19/05/2026 (N = 18 795)';
+  // Recherche insensible à la casse : la mention peut ouvrir une phrase (« Dans l’étude… »).
+  const REFL = REF.toLowerCase();
+  const DYN2: MonoMultiResult = {
+    n: 20000, nMono: 4000, nMulti: 16000, meanMono: 70, meanMulti: 85, sdMono: 12, sdMulti: 9,
+    gapRaw: 15, betaAdj: 12.5, se: 0.5, t: 25, p: 0, ciLow: 11.5, ciHigh: 13.5, ciLevel: 0.95, k: 30,
+  };
+  const chemins = [
+    ['chiffres de référence', buildFiche001Content()],
+    ['stats recalculées', buildFiche001Content({ stats: DYN2, hasSourceLabel: '01/07/2026', finessSourceLabel: '01/06/2026' })],
+  ] as const;
+
+  for (const [nom, f] of chemins) {
+    it(`${nom} : l’effet par statut (interprétation) est attribué à l’étude de référence`, () => {
+      const t = f.blocs.interpretation.toLowerCase();
+      expect(t).toContain(REFL);
+      expect(t.indexOf(REFL)).toBeLessThan(t.indexOf('+7,2 pts'));
+      expect(t.indexOf(REFL)).toBeLessThan(t.indexOf('+2,0 pts'));
+    });
+
+    it(`${nom} : l’effet par segment (limites) est attribué à l’étude de référence`, () => {
+      const t = f.blocs.limites;
+      const i = t.indexOf('nul dans le privé commercial, +1,5 pt sur les EHPAD');
+      expect(i).toBeGreaterThan(-1);
+      expect(t.lastIndexOf(REF, i)).toBeGreaterThan(-1);
+      expect(t.slice(t.lastIndexOf(REF, i), i)).not.toMatch(/\.\s/);
+    });
+
+    it(`${nom} : la date d’extraction FINESS n’est plus accolée à l’effectif figé 103 022`, () => {
+      expect(f.blocs.methode).not.toContain('103 022');
+      expect(f.blocs.methode).toMatch(/répertoire FINESS national \(extraction du \d{2}\/\d{2}\/\d{4}\)/);
+    });
+  }
+
+  for (const [nom, f] of chemins) {
+    it(`${nom} : les résultats détaillés (classes, dose-réponse, R²) sont attribués à l’étude de référence`, () => {
+      const t = f.blocs.resultats;
+      const i = t.toLowerCase().indexOf(REFL);
+      expect(i).toBeGreaterThan(-1);
+      for (const fig of ['A/B/C/D', '2,9 fois', '+0,85 point', 'R² = 0,21']) {
+        expect(t.indexOf(fig)).toBeGreaterThan(i);
+      }
+    });
+
+    it(`${nom} : « 79 % » et « ~103 000 » sont attribués à l’étude de référence (limites)`, () => {
+      const t = f.blocs.limites;
+      for (const fig of ['79 %', '103 000']) {
+        const k = t.indexOf(fig);
+        expect(k).toBeGreaterThan(-1);
+        const j = t.lastIndexOf('étude de référence du 19/05/2026', k);
+        expect(j).toBeGreaterThan(-1);
+        expect(t.slice(j, k)).not.toMatch(/\.\s/);
+      }
+    });
+
+    it(`${nom} : l’interprétation lit l’écart ajusté calculé, sans « environ +4 points » figé`, () => {
+      const t = f.blocs.interpretation;
+      expect(t).not.toContain('environ +4 points');
+      const k = t.indexOf('entre un B et un C');
+      expect(k).toBeGreaterThan(-1);
+      const j = t.toLowerCase().lastIndexOf(REFL, k);
+      expect(j).toBeGreaterThan(-1);
+      expect(t.slice(j, k)).not.toMatch(/\.\s/);
+    });
+
+    it(`${nom} : l’écart par statut se lit chiffres entre parenthèses, sans « nul … +2,0 pts »`, () => {
+      const t = f.blocs.interpretation;
+      expect(t).toContain('(+7,2 pts)');
+      expect(t).toContain('(+6,0 pts)');
+      expect(t).toContain('non significatif dans le privé commercial (+2,0 pts)');
+      expect(t).not.toMatch(/nul dans le privé commercial \+2,0/);
+    });
+  }
+
+  it('stats recalculées : l’interprétation reprend l’écart ajusté recalculé', () => {
+    expect(chemins[1][1].blocs.interpretation).toContain('+12,5 points');
+  });
+
+  it('stats recalculées : la date FINESS courante figure sans effectif', () => {
+    const f = chemins[1][1];
+    expect(f.blocs.methode).toContain('répertoire FINESS national (extraction du 01/06/2026)');
+    expect(serializeFicheContent(f)).not.toMatch(/01\/06\/2026, 103 022/);
+  });
+});

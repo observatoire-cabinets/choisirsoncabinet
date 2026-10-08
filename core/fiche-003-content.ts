@@ -8,6 +8,7 @@ import {
   type CabinetContrastSummary,
 } from './fiche-001-content';
 import type { FicheBuilderOpts } from './fiche-calendar';
+import { axeNonConformeDefinition } from './cabinet-non-conformite';
 
 export function buildFiche003Content(
   opts: FicheBuilderOpts = {},
@@ -26,8 +27,9 @@ export function buildFiche003Content(
         // « - » ASCII (pas − U+2212, strippé par sanitizeForWinAnsi dans le rendu PDF)
         'Niveau global d’un cabinet = moyenne de ses scores - moyenne nationale (écart BRUT). ' +
         'Profil par axe : écart phare (M1), palier de fiabilité selon l’effectif (M2), ' +
-        'significativité par test de Welch (M3).',
-      renvoi: 'Matrice complète cabinet × 7 axes (écart, palier, p) : voir le fichier joint.',
+        'significativité par test de Welch (M3), qui sert au décompte des axes non conformes de la fiche 12 ' +
+        'et reste non imprimée dans la matrice jointe.',
+      renvoi: 'Matrice complète cabinet × 7 axes (écart, palier) : voir le fichier joint.',
       sources: [
         { libelle: 'HAS / Synaé open_data_par_essms (ODbL)', date: opts.hasSourceLabel ?? null },
         { libelle: 'FINESS national', date: opts.finessSourceLabel ?? null },
@@ -63,9 +65,9 @@ export function buildFiche003Content(
         'dimensions (mono/multi, statut, secteur, capacité, groupe lucratif, temporel, établissement/service).',
         'Objectif : rendre visible l’hétérogénéité des cabinets et identifier d’éventuelles pratiques NON',
         'CONFORMES à l’égalité de traitement attendue lors de l’évaluation externe — volontaires ou',
-        'involontaires. « Non conforme » s’entend ici au sens strictement statistique (écart fiable, d’ampleur',
-        'notable — Cohen d ≥ 0,2 —, significatif après correction Holm-Bonferroni et de même sens qu’au national',
-        'ajusté), non au sens d’une non-conformité d’accréditation. Le score mesure le niveau de',
+        'involontaires. « Non conforme » s’entend ici au sens strictement statistique, non au sens d’une',
+        'non-conformité d’accréditation : un axe l’est pour un cabinet s’il réunit quatre conditions,',
+        `${axeNonConformeDefinition()}. Le score mesure le niveau de`,
         'satisfaction des exigences du référentiel par la structure, tel que coté par l’évaluateur, pas la qualité réelle des soins.',
       ].join(' '),
       question: [
@@ -79,7 +81,7 @@ export function buildFiche003Content(
         // « - » ASCII (pas − U+2212, strippé par sanitizeForWinAnsi dans le rendu PDF)
         'Niveau global = moyenne des scores du cabinet - moyenne nationale (écart BRUT, non ajusté du portefeuille).',
         'Profil = pour chaque axe, l’écart « phare » du cabinet (M1) avec son palier de fiabilité (M2) et sa',
-        'significativité (M3 : Cohen’s d + IC + Welch). Région et DROM sont exclus de la matrice (par cabinet, ils',
+        'significativité (M3 : Cohen’s d + IC + Welch), calculée pour le décompte de la fiche 12 et non imprimée dans la matrice jointe. Région et DROM sont exclus de la matrice (par cabinet, ils',
         'sont le plus souvent non calculables). Voir le guide des méthodes. La matrice complète est en PDF joint.',
       ].join(' '),
       resultats: [

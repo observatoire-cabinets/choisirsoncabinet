@@ -11,6 +11,8 @@ export interface Settings {
   tachePlanifiee: boolean;
   /** Dernière version de l'application ayant relu les bruts archivés (null : jamais relu). */
   derniereVersionRelue: string | null;
+  /** Exécutable visé par la tâche planifiée enregistrée (null : inconnu). */
+  tacheExe: string | null;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -20,6 +22,7 @@ export const DEFAULT_SETTINGS: Settings = {
   collecteHeure: null,
   tachePlanifiee: false,
   derniereVersionRelue: null,
+  tacheExe: null,
 };
 
 const file = (dir: string): string => join(dir, 'settings.json');
@@ -52,6 +55,7 @@ export function readSettings(dir: string): Settings {
         typeof raw['derniereVersionRelue'] === 'string' && raw['derniereVersionRelue'] !== ''
           ? raw['derniereVersionRelue']
           : null,
+      tacheExe: typeof raw['tacheExe'] === 'string' && raw['tacheExe'] !== '' ? raw['tacheExe'] : null,
     };
   } catch {
     return { ...DEFAULT_SETTINGS };

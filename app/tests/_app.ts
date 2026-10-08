@@ -10,10 +10,12 @@ export const appDir = join(__dirname, '..');
 // racine où tourne Playwright) → on le résout explicitement.
 const electronPath = require(join(appDir, 'node_modules', 'electron')) as string;
 
-export function launchApp(): Promise<ElectronApplication> {
+export function launchApp(
+  // Dossier userData préparé par le test (archive pré-remplie) ; à défaut, neuf.
+  userDataDir: string = mkdtempSync(join(tmpdir(), 'obs-ud-')),
+): Promise<ElectronApplication> {
   // userData isolé par lancement : les réglages écrits en test ne polluent pas
   // (ni ne dépendent de) l'installation réelle.
-  const userDataDir = mkdtempSync(join(tmpdir(), 'obs-ud-'));
   return electron.launch({
     // --no-autoupdate : les smoke tests ne déclenchent jamais le refresh réseau.
     args: ['.', `--user-data-dir=${userDataDir}`, '--no-autoupdate'],

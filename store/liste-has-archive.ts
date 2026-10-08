@@ -2,8 +2,8 @@
  * Archive locale de la liste HAS et des relevés COFRAC — AJOUT SEUL pour les
  * bruts, l'index et le journal ; les états sont des produits d'analyseur
  * (une re-analyse peut les remplacer, seul le brut fait foi).
- * Un état d'amorce (embarqué, sans brut local) n'écrase JAMAIS un état issu
- * d'une collecte du poste.
+ * Un état d'amorce n'écrase JAMAIS un état issu d'une collecte locale ; il
+ * peut remplacer un état d'amorce antérieur.
  */
 import { mkdir, readFile, writeFile, readdir, appendFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -56,11 +56,48 @@ export async function readAllEtats(root: string): Promise<ListeHasEtat[]> {
   return etats; // tri par nom de fichier = tri par date_releve (YYYY-MM-DD)
 }
 
-/** Fusion de l'amorce : ajoute les états absents, ne touche jamais un état local. */
+/** Forme canonique d'un état pour comparaison (organismes triés par SIREN). */
+function canonique(e: ListeHasEtat): string {
+  const orgs = [...e.organismes]
+    .map((o) => ({ siren: o.siren, nom: o.nom, num: o.num, dept: o.dept }))
+    .sort((a, b) => a.siren.localeCompare(b.siren));
+  return JSON.stringify({ date_source: e.date_source, date_releve: e.date_releve, organismes: orgs });
+}
+
+/**
+ * Dates (YYYY-MM-DD) pour lesquelles un brut de la liste est archivé localement.
+ * Dossier absent (ENOENT) : aucun brut, ensemble vide. Toute autre erreur de
+ * lecture : `null` (inconnu) — l'appelant ne doit alors rien remplacer.
+ */
+async function datesAvecBrut(root: string): Promise<Set<string> | null> {
+  try {
+    return new Set(
+      (await readdir(join(root, BRUT))).filter((f) => f.endsWith('_liste-has.pdf')).map((f) => f.slice(0, 10)),
+    );
+  } catch (e) {
+    return (e as NodeJS.ErrnoException).code === 'ENOENT' ? new Set() : null;
+  }
+}
+
+/**
+ * Fusion de l'amorce : ajoute les états absents ; remplace un état de même date
+ * SEULEMENT s'il provient lui-même d'une amorce (aucun brut archivé localement à
+ * cette date) et que son contenu diffère — une version plus récente du logiciel
+ * apporte ainsi son amorce ré-analysée. Un état issu d'une collecte locale n'est
+ * jamais touché ; si la présence des bruts ne peut pas être lue, rien n'est
+ * remplacé (ajouts seulement).
+ */
 export async function seedEtats(root: string, amorce: ListeHasEtat[]): Promise<void> {
-  const existants = new Set((await readAllEtats(root)).map((e) => e.date_releve));
+  const existants = new Map((await readAllEtats(root)).map((e) => [e.date_releve, e]));
+  const bruts = await datesAvecBrut(root);
   for (const e of amorce) {
-    if (!existants.has(e.date_releve)) await writeEtat(root, e);
+    const local = existants.get(e.date_releve);
+    if (!local) {
+      await writeEtat(root, e);
+      continue;
+    }
+    if (bruts === null || bruts.has(e.date_releve)) continue;
+    if (canonique(local) !== canonique(e)) await writeEtat(root, e);
   }
 }
 

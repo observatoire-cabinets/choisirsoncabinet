@@ -11,7 +11,7 @@ import { STATUT_LABELS } from './accreditations-csv';
 import type { AccreditationsView } from './accreditations';
 
 const PAGE_W = 841.89, PAGE_H = 595.28;
-const MARGIN_X = 40, MARGIN_TOP = 50, MARGIN_BOTTOM = 44, ROW_H = 15;
+const MARGIN_X = 40, MARGIN_TOP = 50, MARGIN_BOTTOM = 44, ROW_H = 15, LINE_H = 10;
 const COLOR_TITLE = rgb(0.106, 0.165, 0.29), COLOR_HEAD = rgb(0.16, 0.24, 0.4);
 const COLOR_BODY = rgb(0.098, 0.137, 0.196), COLOR_FOOTER = rgb(0.5, 0.55, 0.6);
 
@@ -19,8 +19,15 @@ const RESERVES = [
   "Une sortie de liste est un fait constaté entre deux relevés : la source n'en indique jamais le motif (motif non indiqué par la source).",
   "Une absence d'observation n'est pas une observation d'absence : entre deux relevés, aucun mouvement n'est datable plus finement que la fenêtre.",
   'Les dates sont celles que les documents revendiquent (« Actualisée le ») ; un rapprochement par nom est une piste à confirmer, jamais une continuité juridique.',
-  'Une concordance COFRAC est une concordance documentaire datée entre deux sources publiques — pas un jugement.',
+  'Une concordance COFRAC est une concordance documentaire datée entre deux sources publiques — pas un jugement ; la date imprimée est celle du relevé consulté, et le commentaire éventuel est reproduit tel que publié par le COFRAC.',
 ];
+
+/** Cellule « Concordance COFRAC » : date du relevé où la concordance est
+ * constatée, puis commentaire de la source cité entre guillemets s'il existe. */
+function concordanceCell(date: string | null, commentaire: string | null | undefined): string {
+  if (!date) return '—';
+  return `constatée le ${date}${commentaire ? ` — COFRAC : « ${commentaire} »` : ''}`;
+}
 
 function fit(text: string, font: PDFFont, size: number, maxW: number): string {
   let s = sanitizeForWinAnsi(text);
@@ -57,7 +64,9 @@ export async function renderAccreditationsPdf(
     page.drawText(fit(t, fontBold, 13, usableW), { x: MARGIN_X, y, size: 13, font: fontBold, color: COLOR_TITLE });
     y -= 22;
   };
-  const drawTable = (columns: string[], weights: number[], rows: string[][]): void => {
+  /** Tableau à une ligne par enregistrement ; les colonnes de `wrapCols` passent
+   * à la ligne au lieu d'être tronquées (la hauteur de la ligne s'adapte). */
+  const drawTable = (columns: string[], weights: number[], rows: string[][], wrapCols: number[] = []): void => {
     const wSum = weights.reduce((s, w) => s + w, 0);
     const colW = weights.map((w) => (w / wSum) * usableW);
     const colX: number[] = [];
@@ -71,10 +80,16 @@ export async function renderAccreditationsPdf(
     };
     head();
     for (const r of rows) {
-      if (y - ROW_H < MARGIN_BOTTOM) { newPage(); head(); }
-      r.forEach((c, i) =>
-        page.drawText(fit(c, font, 8.5, colW[i] - 4), { x: colX[i], y, size: 8.5, font, color: COLOR_BODY }));
-      y -= ROW_H;
+      const cells = r.map((c, i) =>
+        wrapCols.includes(i)
+          ? wrap(sanitizeForWinAnsi(c), font, 8.5, colW[i] - 4)
+          : [fit(c, font, 8.5, colW[i] - 4)]);
+      const rowH = ROW_H + (Math.max(...cells.map((l) => l.length)) - 1) * LINE_H;
+      if (y - rowH < MARGIN_BOTTOM) { newPage(); head(); }
+      cells.forEach((lignes, i) =>
+        lignes.forEach((l, k) =>
+          page.drawText(l, { x: colX[i], y: y - k * LINE_H, size: 8.5, font, color: COLOR_BODY })));
+      y -= rowH;
     }
     y -= 8;
   };
@@ -91,12 +106,14 @@ export async function renderAccreditationsPdf(
   if (inclus.has('statuts')) {
     drawTitle('① Statut des cabinets');
     drawTable(
-      ['Cabinet', 'Statut', 'SIREN', 'N°', 'Présent au', 'Absent au', 'COFRAC'],
-      [26, 30, 9, 7, 9, 9, 10],
+      ['Cabinet', 'Statut', 'SIREN', 'N°', 'Présent au', 'Absent au', 'Concordance COFRAC'],
+      [28, 30, 7, 6, 7, 7, 15],
       v.statuts.map((s) => [
         s.cabinet, STATUT_LABELS[s.statut], s.siren ?? '—', s.num ?? '—',
-        s.dernierEtatPresent ?? '—', s.premierEtatAbsent ?? '—', s.concordanceDate ?? '—',
+        s.dernierEtatPresent ?? '—', s.premierEtatAbsent ?? '—',
+        concordanceCell(s.concordanceDate, s.concordance?.commentaire),
       ]),
+      [1, 6],
     );
   }
 
@@ -125,12 +142,13 @@ export async function renderAccreditationsPdf(
   if (inclus.has('sorties')) {
     drawTitle('③ Journal des sorties');
     drawTable(
-      ['SIREN', 'Nom (dernier connu)', 'N°', 'Présent au', 'Absent au', 'Motif', 'Revenu', 'COFRAC'],
-      [10, 30, 7, 10, 10, 18, 7, 8],
+      ['SIREN', 'Nom (dernier connu)', 'N°', 'Présent au', 'Absent au', 'Motif', 'Revenu', 'Concordance COFRAC'],
+      [7, 32, 6, 7, 7, 14, 5, 22],
       v.sorties.map((s) => [
         s.siren, s.nom, s.num ?? '—', s.dernierPresent, s.premierAbsent,
-        s.motif, s.revenu ? 'oui' : '', s.concordanceDate ?? '—',
+        s.motif, s.revenu ? 'oui' : '', concordanceCell(s.concordanceDate, s.concordance?.commentaire),
       ]),
+      [1, 7],
     );
   }
 

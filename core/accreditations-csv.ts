@@ -20,11 +20,12 @@ export const STATUT_LABELS: Record<StatutCabinet, string> = {
 };
 
 export function buildStatutsCsv(v: AccreditationsView): string {
-  const head = 'Cabinet;Statut;SIREN;N° accréditation;Dép.;Dernier état présent;Premier état absent;Concordance COFRAC (date du relevé)';
+  const head = 'Cabinet;Statut;SIREN;N° accréditation;Dép.;Dernier état présent;Premier état absent;Concordance COFRAC (date du relevé);Commentaire COFRAC';
   const lines = v.statuts.map((s) =>
     [
       cell(s.cabinet), cell(STATUT_LABELS[s.statut]), cell(s.siren), cell(s.num), cell(s.dept),
       cell(s.dernierEtatPresent), cell(s.premierEtatAbsent), cell(s.concordanceDate),
+      cell(s.concordance?.commentaire ?? null),
     ].join(';'),
   );
   return BOM + [head, ...lines].join('\r\n') + '\r\n';
@@ -40,12 +41,13 @@ export function buildChronologieCsv(v: AccreditationsView): string {
 }
 
 export function buildSortiesCsv(v: AccreditationsView): string {
-  const head = 'SIREN;Nom (dernier connu);N° accréditation;Dép.;Présent au;Absent au;Motif;Revenu en liste;Concordance COFRAC;Piste';
+  const head = 'SIREN;Nom (dernier connu);N° accréditation;Dép.;Présent au;Absent au;Motif;Revenu en liste;Concordance COFRAC (date du relevé);Commentaire COFRAC;Piste';
   const lines = v.sorties.map((s) =>
     [
       cell(s.siren), cell(s.nom), cell(s.num), cell(s.dept), cell(s.dernierPresent),
       cell(s.premierAbsent), cell(s.motif), cell(s.revenu ? 'oui' : ''),
-      cell(s.concordanceDate), cell(s.piste ? `${s.piste.revenuNom} (${s.piste.lecture}) — à confirmer` : ''),
+      cell(s.concordanceDate), cell(s.concordance?.commentaire ?? null),
+      cell(s.piste ? `${s.piste.revenuNom} (${s.piste.lecture}) — à confirmer` : ''),
     ].join(';'),
   );
   return BOM + [head, ...lines].join('\r\n') + '\r\n';

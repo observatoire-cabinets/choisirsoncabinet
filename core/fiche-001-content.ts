@@ -281,7 +281,7 @@ export function buildFiche001Content(
 
       methode: [
         `Sources : HAS / Synaé open data (\`open_data_par_essms\`, extraction du ${f.hasSource}, licence ODbL)`,
-        `et répertoire FINESS national (extraction du ${f.finessSource}, 103 022 établissements).`,
+        `et répertoire FINESS national (extraction du ${f.finessSource}).`,
         `Échantillon : N = ${f.n} ESSMS évalués dont les résultats sont publics (${f.pctMulti} multi, ${f.pctMono} mono).`,
         'Exposition : statut mono (gestionnaire FINESS juridique avec un seul FINESS géographique) vs multi.',
         'Outcome : score consolidé « moyenne des objectifs ramenée à 100 » (échelle 0–100).',
@@ -297,22 +297,26 @@ export function buildFiche001Content(
         `sur 100, et le vrai écart se situe très vraisemblablement entre ${f.ciLow} et ${f.ciHigh} points ; la`,
         'p-value est la probabilité d\'observer un tel écart s\'il n\'existait en réalité aucune différence',
         '(plus elle est petite, plus l\'écart est crédible).',
-        'Indice qualité A/B/C/D : les mono sont 2,9 fois plus souvent classés D',
-        '(9,6 % vs 3,3 %). Toutes choses égales par ailleurs, l’appartenance à un groupe multiplie par',
-        '1,8 la probabilité d’obtenir A ou B et divise par 2,6 la probabilité d’être classé D.',
-        'Relation monotone : chaque doublement de la taille du gestionnaire ajoute en moyenne +0,85 point',
-        'sur l’échelle 0–100. Le modèle explique 21 % de la variance (R² = 0,21).',
+        'Analyses détaillées, dans l’étude de référence du 19/05/2026 (N = 18 795) :',
+        'indice qualité A/B/C/D : les mono y étaient 2,9 fois plus souvent classés D',
+        '(9,6 % vs 3,3 %). Toutes choses égales par ailleurs, l’appartenance à un groupe y multipliait par',
+        '1,8 la probabilité d’obtenir A ou B et divisait par 2,6 la probabilité d’être classé D.',
+        'Relation monotone : chaque doublement de la taille du gestionnaire y ajoutait en moyenne +0,85 point',
+        'sur l’échelle 0–100. Le modèle y expliquait 21 % de la variance (R² = 0,21).',
       ].join(' '),
 
       interpretation: [
         'Ce que le résultat montre : après neutralisation des facteurs observables, il subsiste un écart',
-        'd’environ +4 points sur 100 en défaveur des établissements indépendants — soit, statistiquement,',
-        'l’écart typique entre un B et un C, ou entre un C et un D.',
+        `de ${f.beta} points sur 100 en défaveur des établissements indépendants. Dans l’étude de référence`,
+        'du 19/05/2026 (N = 18 795), l’écart ajusté (+4,1 points) correspondait, statistiquement, à l’écart',
+        'typique entre un B et un C, ou entre un C et un D.',
         'Ce qu’il ne montre pas : il n’établit pas de causalité, et ne mesure pas la qualité réelle des',
         'soins — seulement la cotation de la structure par l’évaluateur (satisfaction des exigences du référentiel).',
-        'Hypothèses alternatives : mutualisation des ressources qualité (effet maximal dans le public',
-        '+7,2 pts et l’associatif +6,0 pts, nul dans le privé commercial +2,0 pts non significatif),',
-        'sélection des portefeuilles à l’intégration, et familiarité accrue des groupes avec l’exercice.',
+        'Hypothèses alternatives : mutualisation des ressources qualité, sélection des portefeuilles à',
+        'l’intégration, et familiarité accrue des groupes avec l’exercice. Dans l’étude de référence du',
+        '19/05/2026 (N = 18 795), l’écart mono/multi était le plus marqué dans le public (+7,2 pts) et',
+        'l’associatif (+6,0 pts), et non significatif dans le privé commercial (+2,0 pts), ce qui est',
+        'compatible avec l’hypothèse de mutualisation.',
       ].join(' '),
 
       ceQueNeDitPas: [
@@ -324,13 +328,15 @@ export function buildFiche001Content(
 
       limites: [
         'Causalité non démontrée : association robuste, pas preuve de cause à effet.',
-        `Cohorte non exhaustive : ${f.n} ESSMS évalués sur ~103 000 référencés — les non encore évalués`,
-        'peuvent présenter une distribution différente.',
+        `Cohorte non exhaustive : ${f.n} ESSMS évalués, quand, dans l’étude de référence du 19/05/2026, le`,
+        'FINESS en référençait ~103 000 — les non encore évalués peuvent présenter une distribution différente.',
         'Outcome = cotation de la structure par l’évaluateur (satisfaction des exigences du référentiel), pas la qualité de soin réelle.',
-        'Effet hétérogène par segment : nul dans le privé commercial, +1,5 pt sur les EHPAD, +7,0 pts sur',
-        'les résidences autonomie, +5,6 pts sur les services autonomie — à lire segment par segment.',
+        'Effet hétérogène par segment, dans l’étude de référence du 19/05/2026 (N = 18 795) : nul dans le',
+        'privé commercial, +1,5 pt sur les EHPAD, +7,0 pts sur les résidences autonomie, +5,6 pts sur les',
+        'services autonomie — à lire segment par segment.',
         'Confondants non testés : capacité, ancienneté, urbain/rural, identité du cabinet évaluateur.',
-        `Le modèle laisse 79 % de la variance inexpliquée. Snapshot arrêté au ${f.hasSource}.`,
+        'Dans l’étude de référence du 19/05/2026 (N = 18 795), le modèle laissait 79 % de la variance',
+        `inexpliquée. Snapshot arrêté au ${f.hasSource}.`,
       ].join(' '),
 
       misePerspective: [

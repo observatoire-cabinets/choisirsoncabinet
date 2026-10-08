@@ -27,6 +27,7 @@ describe('settings', () => {
       collecteHeure: null,
       tachePlanifiee: false,
       derniereVersionRelue: null,
+      tacheExe: null,
     });
     expect(readSettings(dir)).toEqual({
       alpha: 0.01,
@@ -35,6 +36,7 @@ describe('settings', () => {
       collecteHeure: null,
       tachePlanifiee: false,
       derniereVersionRelue: null,
+      tacheExe: null,
     });
   });
 
@@ -56,6 +58,7 @@ describe('settings', () => {
       tachePlanifiee: true,
       collecteHeure: { heure: 7, minute: 30 },
       derniereVersionRelue: null,
+      tacheExe: null,
     });
     const s = readSettings(dir);
     expect(s.tachePlanifiee).toBe(true);
@@ -95,6 +98,7 @@ describe('settings', () => {
       collecteHeure: null,
       tachePlanifiee: false,
       derniereVersionRelue: '0.3.0',
+      tacheExe: null,
     });
     expect(readSettings(dir).derniereVersionRelue).toBe('0.3.0');
     // Chaîne vide ou type inattendu : retombe sur null, jamais de throw.
@@ -110,5 +114,12 @@ describe('settings', () => {
       'utf8',
     );
     expect(readSettings(dir).derniereVersionRelue).toBeNull();
+  });
+
+  it('tacheExe : chaîne conservée, autre forme → null', () => {
+    writeSettings(dir, { ...DEFAULT_SETTINGS, tacheExe: 'C:/x/app.exe' });
+    expect(readSettings(dir).tacheExe).toBe('C:/x/app.exe');
+    writeFileSync(join(dir, 'settings.json'), JSON.stringify({ tacheExe: 42 }), 'utf8');
+    expect(readSettings(dir).tacheExe).toBeNull();
   });
 });

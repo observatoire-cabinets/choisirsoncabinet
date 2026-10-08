@@ -26,7 +26,7 @@ export function setSignificanceAlpha(alpha: Alpha): void {
 }
 
 /** Seuil de significativité courant (défaut 0,05). */
-export function significanceAlpha(): number {
+export function significanceAlpha(): Alpha {
   return current;
 }
 

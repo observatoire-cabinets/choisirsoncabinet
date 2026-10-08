@@ -6,9 +6,6 @@
  *
  * C'est un guard architectural PERMANENT — pas un contournement. Si un jour on
  * embarque une police TTF Unicode complete, cette fonction devient un no-op.
- *
- * Extrait du generateur PDF pour etre reutilise
- * a l'identique par les exports courrier/recours en PDF.
  */
 export function sanitizeForWinAnsi(text: string): string {
   return text
@@ -38,8 +35,16 @@ export function sanitizeForWinAnsi(text: string): string {
     .replace(/①/g, '1.') // ① -> 1.
     .replace(/②/g, '2.') // ② -> 2.
     .replace(/③/g, '3.') // ③ -> 3.
-    // Remove any remaining characters outside WinAnsi range (0x00-0xFF minus control chars).
-    // This catches edge cases from LLM outputs (emoji, CJK, arrows, narrow no-break
-    // space U+202F, etc.) without breaking the PDF.
+    // Retire les caractères hors WinAnsi restants (emoji, CJK, flèches, espace
+    // fine insécable U+202F…) sans casser le PDF.
     .replace(/[^\x20-\x7E\xA0-\xFF]/g, '');
+}
+
+/**
+ * Comme sanitizeForWinAnsi, mais en CONSERVANT les espaces insécables
+ * (U+00A0, présente en WinAnsi et dessinée comme une espace) : un texte ainsi
+ * assaini n'est jamais coupé à ces espaces par wrap() (ex. « 1 998 »).
+ */
+export function sanitizeForWinAnsiInsecable(text: string): string {
+  return text.split('\u00A0').map(sanitizeForWinAnsi).join('\u00A0');
 }

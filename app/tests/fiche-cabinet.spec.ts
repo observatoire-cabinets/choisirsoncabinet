@@ -5,7 +5,7 @@ import { launchApp } from './_app';
 // mais le premier affichage cumule démarrage + IPC : marge généreuse.
 test.setTimeout(240_000);
 
-test('fiche cabinet : portrait 6 sections + historique mensuel + exports', async () => {
+test('fiche cabinet : portrait 7 sections + historique mensuel + exports', async () => {
   const app = await launchApp();
   const win = await app.firstWindow();
   await win.locator('nav [data-screen="fiche-cabinet"]').click();
@@ -21,5 +21,11 @@ test('fiche cabinet : portrait 6 sections + historique mensuel + exports', async
   await expect(win.locator('#fc-history tbody tr').first().locator('button.fc-month-pdf')).toBeVisible();
   // Export de la fiche complète présent.
   await expect(win.locator('#fc-export')).toBeVisible();
+  // Historique du positionnement : section calculée en arrière-plan.
+  await expect(win.locator('#fc-positioning .pos-carte').first()).toBeVisible({ timeout: 180_000 });
+  await expect(win.locator('#fc-positioning')).toContainText(/historique d[e'] ?\S+ \d{4} à \S+ \d{4}/);
+  await expect(win.locator('#fc-positioning')).toContainText('Couleurs choisies pour rester lisibles par les personnes daltoniennes.');
+  await expect(win.locator('#fc-positioning .pos-carte svg').first()).toBeVisible();
+  await expect(win.locator('#fc-positioning')).toContainText('Fiche 12');
   await app.close();
 });

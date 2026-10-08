@@ -13,6 +13,9 @@ const api: ObsApi = {
   generateFiches: (a) => ipcRenderer.invoke('generateFiches', a),
   exportCabinetRanking: (cabinet, outDir) => ipcRenderer.invoke('exportCabinetRanking', { cabinet, outDir }),
   refresh: () => ipcRenderer.invoke('refresh'),
+  miseAJourDonnees: () => ipcRenderer.invoke('miseAJourDonnees'),
+  miseAJourDonneesEnCours: () => ipcRenderer.invoke('miseAJourDonneesEnCours'),
+  rejoindreMiseAJourDonnees: () => ipcRenderer.invoke('rejoindreMiseAJourDonnees'),
   cotationGeneralView: () => ipcRenderer.invoke('cotationGeneralView'),
   cotationCabinetProfile: (cabinet) => ipcRenderer.invoke('cotationCabinetProfile', cabinet),
   exportCotationsGeneral: (outDir, format) => ipcRenderer.invoke('exportCotationsGeneral', { outDir, format }),
@@ -20,6 +23,7 @@ const api: ObsApi = {
     ipcRenderer.invoke('exportCotationCabinet', { cabinet, outDir, format }),
   ficheCabinet: (cabinet) => ipcRenderer.invoke('ficheCabinet', cabinet),
   ficheCabinetHistory: (cabinet) => ipcRenderer.invoke('ficheCabinetHistory', cabinet),
+  positioningHistory: (cabinet) => ipcRenderer.invoke('positioningHistory', cabinet),
   exportFicheCabinet: (cabinet, outDir, asOfMonth) =>
     ipcRenderer.invoke('exportFicheCabinet', { cabinet, outDir, asOfMonth }),
   accreditations: () => ipcRenderer.invoke('accreditations'),
@@ -28,6 +32,9 @@ const api: ObsApi = {
   appUpdateState: () => ipcRenderer.invoke('appUpdateState'),
   onRefreshProgress: (cb) => {
     ipcRenderer.on('refresh:progress', (_e, msg: string) => cb(msg));
+  },
+  onDonneesRechargees: (cb) => {
+    ipcRenderer.on('donnees:rechargees', () => cb());
   },
 };
 

@@ -1,6 +1,9 @@
 import { frDate, escapeHtml } from '../util';
 import type { FicheCabinetData } from '../../../../core/cabinet-fiche';
+import { ficheIndisponibleTexte } from '../../../../core/cabinet-fiche-text';
 import type { FicheCabinetHistory } from '../../../../core/cabinet-fiche-history';
+import type { PositioningHistoryState } from '../../main/engine';
+import { renderPositioningSection } from './positioning-chart';
 
 const RELIA: Record<string, string> = { fiable: 'suffisante', tendance: 'à confirmer', descriptif: 'limitée' };
 const d2 = (x: number | null): string => (x === null ? '—' : x.toFixed(2).replace('.', ','));
@@ -11,7 +14,8 @@ const pct = (x: number | null): string => (x === null ? '—' : `${Math.round(x 
 /**
  * Écran Fiche cabinet : portrait de synthèse mono-cabinet (niveau global, 7 axes,
  * portefeuille, résumés cotations/structures avec renvois) + historique mensuel
- * as-of avec PDF par mois à la demande. Formulation neutre (charte).
+ * as-of avec PDF par mois à la demande + historique du positionnement (graphiques).
+ * Formulation neutre (charte).
  */
 export async function renderFicheCabinet(root: HTMLElement): Promise<void> {
   const cabinets = await window.api.listCabinets();
@@ -36,7 +40,12 @@ export async function renderFicheCabinet(root: HTMLElement): Promise<void> {
         window.api.ficheCabinet(sel.value),
         window.api.ficheCabinetHistory(sel.value),
       ]);
-      if (!fiche) { content.innerHTML = '<p class="note">Aucune donnée pour ce cabinet.</p>'; return; }
+      if (!fiche) {
+        const [detail, meta] = await Promise.all([window.api.cabinetDetail(sel.value), window.api.getMeta()]);
+        const texte = ficheIndisponibleTexte(detail?.establishments.length ?? 0, meta.finessSnapshotMax);
+        content.innerHTML = `<p class="note" id="fc-indisponible">${escapeHtml(texte)}</p>`;
+        return;
+      }
       drawFiche(content, fiche, history);
     } catch (e) {
       content.innerHTML = `<p class="note">Erreur : ${escapeHtml((e as Error).message)}</p>`;
@@ -113,6 +122,9 @@ function drawFiche(content: HTMLElement, f: FicheCabinetData, h: FicheCabinetHis
          ? ` ${h.nUndated} évaluation(s) sans date de clôture, exclue(s) de l'historique.` : ''}</p>`
       : '<p class="note">Aucune évaluation datée : historique indisponible.</p>'}
 
+    <h3>7. Historique du positionnement</h3>
+    <div id="fc-positioning"><p class="note">Calcul de l'historique en cours…</p></div>
+
     <p class="note">Le score mesure le niveau de satisfaction des exigences du référentiel par la structure,
        tel que coté par l'évaluateur ; l'open data ne publie pas le contenu des rapports, la justesse de la
        cotation n'y est donc pas vérifiable. Un écart n'est un jugement ni sur les structures ni sur le
@@ -141,4 +153,45 @@ function drawFiche(content: HTMLElement, f: FicheCabinetData, h: FicheCabinetHis
   content.querySelectorAll<HTMLButtonElement>('.fc-month-pdf').forEach((b) =>
     b.addEventListener('click', () => void runExport(b.dataset['month']!)),
   );
+  void afficherPositionnement(content, f.cabinet);
+}
+
+/** Intervalle entre deux interrogations du moteur (ms). */
+const INTERVALLE_INTERROGATION = 2000;
+/** Nombre maximal d'interrogations (environ 5 minutes à raison d'une toutes les 2 s). */
+const MAX_INTERROGATIONS = 150;
+
+/** Interroge le moteur jusqu'à ce que l'historique soit prêt (calcul en arrière-plan). */
+async function afficherPositionnement(content: HTMLElement, cabinet: string): Promise<void> {
+  const zone = content.querySelector('#fc-positioning') as HTMLElement | null;
+  if (!zone) return;
+  for (let interrogations = 1; ; interrogations++) {
+    // La fiche a été remplacée (autre cabinet choisi) : on cesse d'interroger.
+    if (!zone.isConnected) return;
+    let etat: PositioningHistoryState;
+    try {
+      etat = await window.api.positioningHistory(cabinet);
+    } catch (e) {
+      // Rejet de l'appel au processus principal, distinct d'un échec du calcul.
+      console.error('Historique du positionnement :', e);
+      const message = e instanceof Error ? e.message : String(e);
+      zone.innerHTML = `<p class="note">Historique non calculé : ${escapeHtml(message)}</p>`;
+      return;
+    }
+    if (etat.etat === 'pret') {
+      // Cabinet absent de l'historique, ou sans aucune valeur tracée : la section
+      // rend alors la mention commune à l'écran et au PDF.
+      zone.innerHTML = renderPositioningSection(etat.data);
+      return;
+    }
+    if (etat.etat === 'echec') {
+      zone.innerHTML = '<p class="note">Historique non calculé.</p>';
+      return;
+    }
+    if (interrogations >= MAX_INTERROGATIONS) {
+      zone.innerHTML = '<p class="note">Historique non calculé (délai dépassé).</p>';
+      return;
+    }
+    await new Promise((r) => setTimeout(r, INTERVALLE_INTERROGATION));
+  }
 }

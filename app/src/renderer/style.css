@@ -111,3 +111,13 @@ button.primary:disabled {
   font-size: 12px;
   margin-top: 8px;
 }
+
+.pos-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin: 8px 0; }
+.pos-carte { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.pos-titre { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.pos-pied { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.pos-vide { height: 110px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--muted); }
+.pos-legende { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--muted); margin: 6px 0; }
+.pos-legende i { display: inline-block; width: 18px; border-top: 2px solid; vertical-align: middle; margin-right: 5px; }
+.pos-legende i.pos-pointille { border-top: 2px dashed var(--muted); }
+.pos-legende i.pos-creux { width: 7px; height: 7px; border: 1.5px solid var(--muted); border-radius: 50%; }

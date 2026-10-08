@@ -35,7 +35,7 @@ test("app packagée : l'onglet Accréditations rend les trois volets sur l'amorc
     .poll(async () => win.locator('#acc-statuts tbody tr').count(), { timeout: 60_000 })
     .toBeGreaterThan(100);
   await win.locator('#acc-v-chronologie').click();
-  await expect(win.locator('#acc-chrono tbody tr')).toHaveCount(12);
+  await expect(win.locator('#acc-chrono tbody tr')).toHaveCount(13);
   await app.close();
 });
 

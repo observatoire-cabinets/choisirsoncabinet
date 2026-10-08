@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import type { Dataset, EssmsRow } from '../store/types';
+import { cabinetDetail } from '../store/cabinet-detail';
 import { asOfDataset, buildFicheCabinet } from './cabinet-fiche';
+import { ficheIndisponibleTexte } from './cabinet-fiche-text';
 
 function mkRow(p: Partial<EssmsRow> & { finessGeo: string }): EssmsRow {
   return {
@@ -109,5 +111,19 @@ describe('buildFicheCabinet', () => {
 
   it('dataset vide → null', () => {
     expect(buildFicheCabinet(mkDataset([]), 'X')).toBeNull();
+  });
+});
+
+describe('ficheIndisponibleTexte sur un jeu construit', () => {
+  it('cohérent avec buildFicheCabinet : structures scorées toutes sans entité juridique → fiche null, N = structures du cabinet', () => {
+    const ds = mkDataset([
+      mkRow({ finessGeo: '000000001', score: 80 }),
+      mkRow({ finessGeo: '000000002', score: 90 }),
+      mkRow({ finessGeo: '000000003', score: 70, cabinet: 'CAB B' }),
+    ]);
+    ds.ejSnapshots = ds.ejSnapshots.filter((s) => s.finessGeo === '000000003');
+    expect(buildFicheCabinet(ds, 'CAB A')).toBeNull();
+    expect(ficheIndisponibleTexte(cabinetDetail(ds, 'CAB A')!.establishments.length, ds.meta.finessSnapshotMax))
+      .toMatch(/^Fiche indisponible : les 2 structures évaluées .*\(extraction du 01\/06\/2026\)/);
   });
 });

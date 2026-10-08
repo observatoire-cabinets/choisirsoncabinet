@@ -6,4 +6,3 @@ data/archives/
 data/refresh-test/
 *.log
 test-results/
-.claude/

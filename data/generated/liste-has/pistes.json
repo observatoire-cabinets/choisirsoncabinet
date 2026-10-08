@@ -26,5 +26,12 @@
   "revenuSiren": "939988499",
   "revenuNom": "MEDICONSEIL EVALUATION",
   "lecture": "nom repris avec variation, autre SIREN"
+ },
+ {
+  "sortiSiren": "518991294",
+  "sortiNom": "A-AMCOS",
+  "revenuSiren": "101854743",
+  "revenuNom": "A-AMCOS QUALITE EVALUATION ET CERTIFICATION",
+  "lecture": "nom repris avec variation, autre SIREN"
  }
 ]

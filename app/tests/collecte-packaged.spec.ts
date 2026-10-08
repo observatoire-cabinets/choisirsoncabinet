@@ -37,7 +37,7 @@ test('mode --collecte sans réseau : trou d’observation journalisé, sortie co
   // L'archive locale du userData isolé porte l'amorce + le trou d'observation.
   const archiveRoot = join(ud, 'liste-has');
   const etats = readdirSync(join(archiveRoot, 'etats'));
-  expect(etats.length).toBe(8); // l'amorce embarquée a été versée
+  expect(etats.length).toBe(9); // l'amorce embarquée (neuf états) a été versée
   const index = readFileSync(join(archiveRoot, 'index.jsonl'), 'utf8');
   expect(index).toContain('"resultat":"echec"');
   expect(index).toContain('observation');

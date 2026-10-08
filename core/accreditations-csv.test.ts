@@ -47,3 +47,45 @@ describe('CSV accréditations (convention Excel FR)', () => {
     expect(sorties).toContain('non indiqué par la source');
   });
 });
+
+describe('CSV accréditations — commentaire COFRAC', () => {
+  const concordance = { num: '3-2040', nom: 'A-AMCOS', date: '12/08/2026', commentaire: 'vers 3-10079' };
+  const commente: AccreditationsView = {
+    ...view,
+    statuts: [
+      {
+        ...view.statuts[0], cabinet: 'A-AMCOS', statut: 'sorti-concordance-cofrac', num: '3-2040',
+        concordance, concordanceDate: '2026-10-07',
+      },
+      { ...view.statuts[0], cabinet: 'SANS CONCORDANCE' },
+    ],
+    sorties: [
+      {
+        ...view.sorties[0], siren: '518991294', nom: 'A-AMCOS', num: '3-2040',
+        concordance, concordanceDate: '2026-10-07',
+      },
+      { ...view.sorties[0], nom: 'SANS CONCORDANCE' },
+    ],
+  };
+
+  it('statuts : colonne « Commentaire COFRAC » juste après la date de concordance', () => {
+    const [head, l1, l2] = buildStatutsCsv(commente).replace(/^﻿/, '').split('\r\n');
+    const cols = head.split(';');
+    expect(cols.indexOf('Commentaire COFRAC')).toBe(cols.indexOf('Concordance COFRAC (date du relevé)') + 1);
+    expect(l1.split(';')[cols.indexOf('Concordance COFRAC (date du relevé)')]).toBe('2026-10-07');
+    expect(l1.split(';')[cols.indexOf('Commentaire COFRAC')]).toBe('vers 3-10079');
+    expect(l2.split(';')[cols.indexOf('Commentaire COFRAC')]).toBe('');
+    expect(l1.split(';')).toHaveLength(cols.length);
+  });
+
+  it('sorties : colonne « Commentaire COFRAC » juste après la date de concordance', () => {
+    const [head, l1, l2] = buildSortiesCsv(commente).replace(/^﻿/, '').split('\r\n');
+    const cols = head.split(';');
+    // Même en-tête qu'au volet ① : la date est celle du relevé, pas celle d'un mouvement.
+    expect(cols.indexOf('Commentaire COFRAC')).toBe(cols.indexOf('Concordance COFRAC (date du relevé)') + 1);
+    expect(l1.split(';')[cols.indexOf('Concordance COFRAC (date du relevé)')]).toBe('2026-10-07');
+    expect(l1.split(';')[cols.indexOf('Commentaire COFRAC')]).toBe('vers 3-10079');
+    expect(l2.split(';')[cols.indexOf('Commentaire COFRAC')]).toBe('');
+    expect(l1.split(';')).toHaveLength(cols.length);
+  });
+});

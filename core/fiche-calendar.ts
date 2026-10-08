@@ -50,7 +50,7 @@ export const FICHE_CALENDAR: ReadonlyArray<CalendarEntry> = [
   { numero: 7, titre: 'Effet d’appartenance à un groupe lucratif national', famille: 'A. Taille' },
   { numero: 8, titre: 'Effet temporel (premier vs second semestre)', famille: 'E. Cabinet' },
   { numero: 9, titre: 'Effet établissement vs service (SAAD, SSIAD…)', famille: 'C. Secteur' },
-  { numero: 10, titre: 'Effet de la spécialisation sectorielle du cabinet', famille: 'E. Cabinet' },
+  { numero: 10, titre: 'Spécialisation sectorielle du cabinet (portefeuilles)', famille: 'E. Cabinet' },
   { numero: 11, titre: 'Effet DROM vs métropole', famille: 'D. Territoire' },
   { numero: 12, titre: 'Synthèse annuelle — méta-fiche', famille: 'Toutes' },
 ];

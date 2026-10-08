@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { mkdtemp, readFile, readdir, appendFile } from 'node:fs/promises';
+import { mkdtemp, readFile, readdir, appendFile, writeFile, stat, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
@@ -34,19 +34,110 @@ describe('liste-has-archive', () => {
     expect(entries).toEqual(expect.arrayContaining(['brut', 'cofrac', 'etats']));
   });
 
-  it("seedEtats verse l'amorce puis ne ré-écrit jamais un état local (ajout seul)", async () => {
+  it("seedEtats : n'écrase jamais un état issu d'une collecte locale (brut présent)", async () => {
     const root = await tmp();
     await ensureArchive(root);
-    // Un état local préexistant, différent de l'amorce à la même date.
     await writeEtat(root, mkEtat('2022-10-11', 'sha-local', ['111111111']));
+    await writeFile(join(root, 'brut', '2022-10-11_080000_liste-has.pdf'), 'x');
     await seedEtats(root, [
       mkEtat('2022-10-11', 'sha-seed', ['222222222']),
       mkEtat('2023-04-07', 'sha-b', ['333333333']),
     ]);
     const etats = await readAllEtats(root);
     expect(etats.map((e) => e.date_releve)).toEqual(['2022-10-11', '2023-04-07']);
-    // L'état local du 2022-10-11 est CONSERVÉ (jamais écrasé par l'amorce).
     expect(etats[0].sha256).toBe('sha-local');
+  });
+
+  it('seedEtats : remplace un état venu d’une amorce antérieure (aucun brut) si le contenu diffère', async () => {
+    const root = await tmp();
+    await ensureArchive(root);
+    await writeEtat(root, mkEtat('2026-07-16', 'sha-amorce', ['111111111']));
+    const nouvelle = mkEtat('2026-07-16', 'sha-amorce', ['111111111']);
+    nouvelle.organismes[0].num = '3-32205';
+    await seedEtats(root, [nouvelle]);
+    const [e] = await readAllEtats(root);
+    expect(e.organismes[0].num).toBe('3-32205');
+  });
+
+  it('seedEtats : contenu identique → fichier non réécrit', async () => {
+    const root = await tmp();
+    await ensureArchive(root);
+    const e = mkEtat('2026-07-16', 'sha', ['111111111']);
+    await writeEtat(root, e);
+    const f = join(root, 'etats', '2026-07-16_etat.json');
+    const avant = (await stat(f)).mtimeMs;
+    await new Promise((r) => setTimeout(r, 20));
+    await seedEtats(root, [mkEtat('2026-07-16', 'sha', ['111111111'])]);
+    expect((await stat(f)).mtimeMs).toBe(avant);
+  });
+
+  it('seedEtats : mêmes organismes dans un autre ordre → état local inchangé', async () => {
+    const root = await tmp();
+    await ensureArchive(root);
+    await writeEtat(root, mkEtat('2026-07-16', 'sha', ['111111111', '222222222']));
+    const f = join(root, 'etats', '2026-07-16_etat.json');
+    const contenuAvant = await readFile(f, 'utf8');
+    const avant = (await stat(f)).mtimeMs;
+    await new Promise((r) => setTimeout(r, 20));
+    await seedEtats(root, [mkEtat('2026-07-16', 'sha', ['222222222', '111111111'])]);
+    // Le contenu est comparé après tri par SIREN : l'ordre ne déclenche aucune réécriture.
+    expect(await readFile(f, 'utf8')).toBe(contenuAvant);
+    expect((await stat(f)).mtimeMs).toBe(avant);
+  });
+
+  it('seedEtats : empreinte différente pour un contenu identique → pas de remplacement', async () => {
+    const root = await tmp();
+    await ensureArchive(root);
+    await writeEtat(root, mkEtat('2026-07-16', 'sha-local', ['111111111']));
+    await seedEtats(root, [mkEtat('2026-07-16', 'sha-amorce', ['111111111'])]);
+    const [e] = await readAllEtats(root);
+    // L'empreinte ne fait pas partie de la comparaison : celle de l'état local est conservée.
+    expect(e.sha256).toBe('sha-local');
+  });
+
+  it('seedEtats : un brut archivé à une autre date ne bloque pas le remplacement', async () => {
+    const root = await tmp();
+    await ensureArchive(root);
+    await writeEtat(root, mkEtat('2026-07-16', 'sha-amorce', ['111111111']));
+    await writeFile(join(root, 'brut', '2026-08-13_070000_liste-has.pdf'), 'x');
+    const nouvelle = mkEtat('2026-07-16', 'sha-amorce', ['111111111']);
+    nouvelle.organismes[0].num = '3-2205';
+    await seedEtats(root, [nouvelle]);
+    const [e] = await readAllEtats(root);
+    expect(e.organismes[0].num).toBe('3-2205');
+  });
+
+  it('seedEtats : dossier brut absent → aucun brut, le remplacement a lieu', async () => {
+    const root = await tmp();
+    await ensureArchive(root);
+    await rm(join(root, 'brut'), { recursive: true });
+    await writeEtat(root, mkEtat('2026-07-16', 'sha-amorce', ['111111111']));
+    const nouvelle = mkEtat('2026-07-16', 'sha-amorce', ['111111111']);
+    nouvelle.organismes[0].num = '3-2205';
+    await seedEtats(root, [nouvelle]);
+    const [e] = await readAllEtats(root);
+    expect(e.organismes[0].num).toBe('3-2205');
+  });
+
+  it('seedEtats : lecture des bruts impossible → aucun remplacement, les états absents sont ajoutés', async () => {
+    const root = await tmp();
+    await ensureArchive(root);
+    await writeEtat(root, mkEtat('2022-10-11', 'sha-local', ['111111111']));
+    // `brut` devient un fichier : la lecture du dossier échoue (ENOTDIR), la
+    // présence des bruts est inconnue.
+    await rm(join(root, 'brut'), { recursive: true });
+    await writeFile(join(root, 'brut'), 'x');
+    await expect(
+      seedEtats(root, [
+        mkEtat('2022-10-11', 'sha-seed', ['222222222']),
+        mkEtat('2023-04-07', 'sha-b', ['333333333']),
+      ]),
+    ).resolves.toBeUndefined();
+    const etats = await readAllEtats(root);
+    expect(etats.map((e) => e.date_releve)).toEqual(['2022-10-11', '2023-04-07']);
+    expect(etats[0].sha256).toBe('sha-local');
+    expect(etats[0].organismes[0].siren).toBe('111111111');
+    expect(etats[1].sha256).toBe('sha-b');
   });
 
   it('readAllEtats trie par date_releve croissante', async () => {

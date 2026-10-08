@@ -12,6 +12,7 @@ import { promisify } from 'node:util';
 import { writeFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import type { Settings } from './settings';
 
 const pExecFile = promisify(execFile);
 
@@ -32,6 +33,24 @@ const psq = (s: string): string => `'${s.replace(/'/g, "''")}'`;
 export function tirerHeureCollecte(graine: string): { heure: number; minute: number } {
   const h = createHash('sha256').update(graine).digest();
   return { heure: 6 + (h[0] % 16), minute: h[1] % 60 };
+}
+
+/**
+ * Deux chemins désignent-ils le même exécutable ? Sous Windows le système de
+ * fichiers ignore la casse : un même fichier rapporté avec une autre casse reste
+ * le même exécutable. Ailleurs, comparaison stricte.
+ */
+export function memeExecutable(a: string, b: string, platform: string = process.platform): boolean {
+  return platform === 'win32' ? a.toLowerCase() === b.toLowerCase() : a === b;
+}
+
+/**
+ * Faut-il (ré)enregistrer la tâche ? Oui si la collecte automatique est active et
+ * que la tâche n'est pas enregistrée, ou qu'elle vise un autre exécutable (dossier
+ * déplacé, passage d'une copie portable à une installation, réglages antérieurs).
+ */
+export function doitEnregistrerTache(s: Settings, execPath: string): boolean {
+  return s.autoUpdate && (!s.tachePlanifiee || s.tacheExe === null || !memeExecutable(s.tacheExe, execPath));
 }
 
 export function buildTaskXml(exePath: string, heure: number, minute: number): string {

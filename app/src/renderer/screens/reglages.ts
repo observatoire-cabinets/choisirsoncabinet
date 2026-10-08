@@ -1,7 +1,9 @@
 import { escapeHtml, frDate } from '../util';
 import type { Settings } from '../../main/settings';
+import type { MiseAJourDonneesResultat } from '../../main/autoupdate';
+import { segmentEtatLogiciel, libelleMiseAJourDonnees, libelleErreurMiseAJour } from './reglages-textes';
 
-/** Écran Réglages : seuil α (0,05 défaut), mise à jour auto, dossier de sortie. */
+/** Écran Réglages : seuil α (0,05 défaut), mise à jour auto, mise à jour manuelle des données, dossier de sortie. */
 export async function renderReglages(root: HTMLElement): Promise<void> {
   const s = await window.api.getSettings();
   const cur: Settings = { ...s };
@@ -20,8 +22,15 @@ export async function renderReglages(root: HTMLElement): Promise<void> {
       <label><input type="checkbox" id="autoupdate" ${cur.autoUpdate ? 'checked' : ''}/>
         Activée (données publiques, liste HAS, relevé COFRAC et logiciel)</label>
       <p class="note">Désactiver supprime la tâche planifiée quotidienne et coupe toute connexion automatique.
-        La mise à jour manuelle ci-dessous reste disponible.</p>
+        La mise à jour manuelle des données ci-dessous reste disponible.</p>
       <p class="note" id="set-etat-collecte">Chargement…</p>
+    </fieldset>
+    <fieldset>
+      <legend>Mise à jour manuelle des données</legend>
+      <button id="maj-donnees">Mettre à jour les données maintenant</button>
+      <p class="note">Relève la liste HAS et la page COFRAC (si ce n’est pas déjà fait aujourd’hui),
+        puis retélécharge les données Synaé/FINESS. Connexion requise ; le logiciel n’est pas concerné.</p>
+      <p class="note" id="maj-donnees-statut" role="status" aria-live="polite"></p>
     </fieldset>
     <fieldset>
       <legend>Dossier de sortie par défaut</legend>
@@ -42,14 +51,7 @@ export async function renderReglages(root: HTMLElement): Promise<void> {
         window.api.accreditations(),
         window.api.appUpdateState(),
       ]);
-      const updLabel =
-        upd.etat === 'prete'
-          ? `version ${upd.versionDisponible ?? ''} téléchargée — installée à la prochaine fermeture`
-          : upd.etat === 'telechargement'
-            ? 'téléchargement d’une nouvelle version…'
-            : upd.etat === 'indisponible'
-              ? 'vérification indisponible (hors ligne ?)'
-              : 'application à jour';
+      const updLabel = segmentEtatLogiciel(upd, cur.autoUpdate);
       const collecteLabel = acc.collecte.sourceIntrouvableDepuis
         ? ` · SOURCE DE LA LISTE INTROUVABLE depuis le ${frDate(acc.collecte.sourceIntrouvableDepuis)} — l'archive locale reste servie`
         : '';
@@ -60,7 +62,7 @@ export async function renderReglages(root: HTMLElement): Promise<void> {
         `Instantané Synaé/FINESS du ${frDate(meta.builtAt.slice(0, 10))} · ` +
         `dernier relevé de liste HAS : ${acc.dernierEtat ? frDate(acc.dernierEtat) : '—'} · ` +
         `dernier relevé COFRAC : ${acc.dernierReleveCofrac ? frDate(acc.dernierReleveCofrac) : '—'} · ` +
-        `logiciel : ${updLabel}${collecteLabel}${prochaineLabel}`;
+        `${updLabel}${collecteLabel}${prochaineLabel}`;
     } catch (e) {
       // La note d'état ne casse jamais l'écran : l'erreur est dite, sobrement.
       etatCollecteEl.textContent = `Erreur : ${(e as Error).message}`;
@@ -91,6 +93,38 @@ export async function renderReglages(root: HTMLElement): Promise<void> {
       await refreshEtatCollecte();
     }
   });
+  const majBtn = root.querySelector('#maj-donnees') as HTMLButtonElement;
+  const majStatut = root.querySelector('#maj-donnees-statut') as HTMLElement;
+  /**
+   * Opération réseau de durée variable : bouton désactivé jusqu'à son issue ;
+   * la progression détaillée s'affiche aussi sous le bandeau des dates.
+   * `operation` rend le résumé, ou null si la mise à jour rejointe s'est
+   * terminée entre-temps (son issue n'est alors plus disponible ici).
+   */
+  async function suivreMiseAJour(
+    operation: () => Promise<MiseAJourDonneesResultat | null>,
+  ): Promise<void> {
+    majBtn.disabled = true;
+    majStatut.textContent = 'Mise à jour en cours…';
+    try {
+      const r = await operation();
+      majStatut.textContent = r ? libelleMiseAJourDonnees(r) : '';
+    } catch (e) {
+      majStatut.textContent = libelleErreurMiseAJour(e);
+    } finally {
+      majBtn.disabled = false;
+      await refreshEtatCollecte();
+    }
+  }
+  majBtn.addEventListener('click', () => void suivreMiseAJour(() => window.api.miseAJourDonnees()));
+  // Écran rouvert pendant une mise à jour lancée plus tôt : l'état en cours est
+  // réaffiché et l'issue attendue, sans lancer de nouvelle opération.
+  void window.api
+    .miseAJourDonneesEnCours()
+    .then((enCours) => {
+      if (enCours) void suivreMiseAJour(() => window.api.rejoindreMiseAJourDonnees());
+    })
+    .catch(() => {});
   root.querySelector('#pick-out')!.addEventListener('click', async () => {
     const dir = await window.api.pickOutputDir();
     if (dir) {

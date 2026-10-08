@@ -23,18 +23,17 @@ import {
   deriveEtabService,
   deriveGroupeLucratif,
   adjustedNationalGapsForAxis,
+  type CategoryDeriver,
   type ControlDim,
   type Secteur,
 } from './fiche-categorical-axes';
 import type { RawMonoMultiExtractRow } from './mono-multi-extract';
-import { significanceAlpha } from './significance';
-
-type Deriver = (r: RawMonoMultiExtractRow) => string | null;
+import { significanceAlpha, type Alpha } from './significance';
 
 export interface PhareContrast {
   axisId: string;
   label: string;
-  derive: Deriver;
+  derive: CategoryDeriver;
   contrast: AxisContrast;
 }
 
@@ -85,7 +84,7 @@ export const PHARE_CONTRASTS: PhareContrast[] = [
   },
 ];
 
-// ─── Profil par cabinet (Task 2) ──────────────────────────────────────────────
+// ─── Profil par cabinet ───
 export const SPECIALIZED_DOMINANT_SHARE = 0.6;
 
 export interface AxisHeadline {
@@ -94,6 +93,10 @@ export interface AxisHeadline {
   gap: number | null;
   reliability: Reliability | null;
   significant: boolean;
+  /** Effectif du groupe de référence (0 si aucune ligne). */
+  nUnexposed: number;
+  /** Effectif du groupe cible (0 si aucune ligne). */
+  nExposed: number;
 }
 
 export interface CabinetPortfolio {
@@ -115,7 +118,7 @@ export interface CabinetProfile {
 
 const SECTEURS: Secteur[] = ['PA', 'PH adultes', 'PH enfants', 'Autres'];
 
-function toCategorical(raw: RawMonoMultiExtractRow[], derive: Deriver): CategoricalRow[] {
+export function toCategorical(raw: RawMonoMultiExtractRow[], derive: CategoryDeriver): CategoricalRow[] {
   const out: CategoricalRow[] = [];
   for (const r of raw) {
     const cabinet = r.cabinet ?? null;
@@ -156,8 +159,15 @@ function holmReject(pvals: number[], alpha: number): boolean[] {
   return rej;
 }
 
-/** Construit le profil de chaque cabinet, classé par niveau global décroissant. */
-export function buildCabinetProfiles(raw: RawMonoMultiExtractRow[]): CabinetProfile[] {
+/**
+ * Construit le profil de chaque cabinet, classé par niveau global décroissant.
+ * `alpha` : seuil de la correction de Holm — passé explicitement par les calculs
+ * concurrents (historique) pour ne jamais dépendre du seuil global en vol.
+ */
+export function buildCabinetProfiles(
+  raw: RawMonoMultiExtractRow[],
+  alpha: Alpha = significanceAlpha(),
+): CabinetProfile[] {
   const withCabinet = raw.filter((r) => (r.cabinet ?? '') !== '');
   const nationalMean =
     withCabinet.length > 0 ? withCabinet.reduce((s, r) => s + Number(r.score), 0) / withCabinet.length : 0;
@@ -229,7 +239,7 @@ export function buildCabinetProfiles(raw: RawMonoMultiExtractRow[]): CabinetProf
       res: axisIndex.get(p.axisId)!.get(cabinet) ?? null,
     }));
     const family = perAxis.filter((a) => a.res && a.res.reliability === 'fiable' && a.res.p != null);
-    const holm = holmReject(family.map((a) => a.res!.p as number), significanceAlpha());
+    const holm = holmReject(family.map((a) => a.res!.p as number), alpha);
     const holmOk = new Map<string, boolean>();
     family.forEach((a, i) => holmOk.set(a.axisId, holm[i]));
 
@@ -246,6 +256,8 @@ export function buildCabinetProfiles(raw: RawMonoMultiExtractRow[]): CabinetProf
         (nationalAdjSign.get(axisId) ?? 0) !== 0 &&
         Math.sign(res.gap) === nationalAdjSign.get(axisId) &&
         (holmOk.get(axisId) ?? false),
+      nUnexposed: res?.nUnexposed ?? 0,
+      nExposed: res?.nExposed ?? 0,
     }));
     const nSignificantAxes = axes.filter((a) => a.significant).length;
 
@@ -254,4 +266,13 @@ export function buildCabinetProfiles(raw: RawMonoMultiExtractRow[]): CabinetProf
 
   profiles.sort((a, b) => (b.niveauGlobal ?? -Infinity) - (a.niveauGlobal ?? -Infinity));
   return profiles;
+}
+
+/**
+ * Ordre du méta-classement : axes signalés décroissants ; à égalité, l'ordre
+ * d'entrée est conservé (tri stable) — celui de buildCabinetProfiles, soit le
+ * niveau global décroissant. Source unique du classement publié et de son historique.
+ */
+export function sortMetaRanking(profiles: CabinetProfile[]): CabinetProfile[] {
+  return [...profiles].sort((a, b) => b.nSignificantAxes - a.nSignificantAxes);
 }

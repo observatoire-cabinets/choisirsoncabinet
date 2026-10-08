@@ -3,6 +3,7 @@ import { mkdtemp, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { loadListeHasSeed } from './liste-has-load';
+import { buildAccreditationsView } from '../core/accreditations';
 
 describe('loadListeHasSeed', () => {
   it("lit l'amorce (5 fichiers) depuis un dossier", async () => {
@@ -23,5 +24,48 @@ describe('loadListeHasSeed', () => {
     expect(seed.etats).toEqual([]);
     expect(seed.alias).toEqual([]);
     expect(seed.faits).toEqual([]);
+  });
+});
+
+describe('amorce embarquée — pistes de rapprochement', () => {
+  const seedDir = join(__dirname, '..', 'data', 'generated', 'liste-has');
+
+  it('la sortie d’A-AMCOS (518991294) porte la piste vers 101854743', async () => {
+    const seed = await loadListeHasSeed(seedDir);
+    const v = buildAccreditationsView({
+      cabinets: [], etats: seed.etats, bilans: seed.bilans, faits: seed.faits,
+      pistes: seed.pistes, alias: seed.alias, cofrac: [],
+    });
+    const sortie = v.sorties.find((s) => s.siren === '518991294');
+    expect(sortie?.dernierPresent).toBe('2026-08-13');
+    expect(sortie?.premierAbsent).toBe('2026-10-06');
+    expect(sortie?.piste).toEqual({
+      sortiSiren: '518991294',
+      sortiNom: 'A-AMCOS',
+      revenuSiren: '101854743',
+      revenuNom: 'A-AMCOS QUALITE EVALUATION ET CERTIFICATION',
+      lecture: 'nom repris avec variation, autre SIREN',
+    });
+  });
+
+  it('chaque piste désigne une sortie dérivée des états et un SIREN présent ensuite, sous les noms des états', async () => {
+    const seed = await loadListeHasSeed(seedDir);
+    const v = buildAccreditationsView({
+      cabinets: [], etats: seed.etats, bilans: seed.bilans, faits: seed.faits,
+      pistes: seed.pistes, alias: seed.alias, cofrac: [],
+    });
+    expect(seed.pistes.length).toBeGreaterThan(0);
+    for (const p of seed.pistes) {
+      const sortie = v.sorties.find((s) => s.siren === p.sortiSiren);
+      expect(sortie, p.sortiSiren).toBeDefined();
+      expect(sortie!.nom).toBe(p.sortiNom);
+      expect(sortie!.piste).toEqual(p);
+      const revenu = seed.etats
+        .filter((e) => e.date_releve >= sortie!.premierAbsent)
+        .flatMap((e) => e.organismes)
+        .filter((o) => o.siren === p.revenuSiren);
+      expect(revenu.length, p.revenuSiren).toBeGreaterThan(0);
+      expect(revenu.map((o) => o.nom)).toContain(p.revenuNom);
+    }
   });
 });

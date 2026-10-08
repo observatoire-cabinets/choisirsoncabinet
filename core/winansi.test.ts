@@ -1,14 +1,11 @@
 /**
- * Sanitisation WinAnsi partagée.
- *
- * createPdfFromText (text-formats) embarquait StandardFonts.Helvetica (encodage
- * WinAnsi/Windows-1252) sans aucune sanitisation, contrairement au générateur
- * frère pdf-generator. Un caractère hors Windows-1252 (flèche, emoji, espace
- * fine insécable…) émis par le LLM dans une lettre de recours faisait throw
- * pdf-lib → 500 non catché. On extrait le guard (verbatim) en util partagé.
+ * Sanitisation WinAnsi partagée : les polices standard de pdf-lib (Helvetica,
+ * encodage Windows-1252) lèvent une exception sur tout caractère hors de cet
+ * encodage (flèche, emoji, espace fine insécable…) ; cette garde translittère ou
+ * retire ces caractères avant tout drawText.
  */
 import { describe, it, expect } from 'vitest';
-import { sanitizeForWinAnsi } from './winansi';
+import { sanitizeForWinAnsi, sanitizeForWinAnsiInsecable } from './winansi';
 
 describe('sanitizeForWinAnsi', () => {
   it('normalise guillemets typographiques, tirets, points de suspension', () => {
@@ -40,5 +37,12 @@ describe('sanitizeForWinAnsi', () => {
 
   it('préserve les accents français WinAnsi-safe', () => {
     expect(sanitizeForWinAnsi('é è ç à ê î ô û')).toBe('é è ç à ê î ô û');
+  });
+});
+
+describe('sanitizeForWinAnsiInsecable', () => {
+  it('même assainissement, espaces insécables conservées', () => {
+    expect(sanitizeForWinAnsiInsecable('n = 1\u00A0998 · a—b ≥ 2')).toBe('n = 1\u00A0998 · a - b >= 2');
+    expect(sanitizeForWinAnsi('1\u00A0998')).toBe('1 998');
   });
 });

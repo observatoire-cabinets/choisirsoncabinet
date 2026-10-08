@@ -1,5 +1,5 @@
 import { app, BrowserWindow, dialog, net } from 'electron';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { EngineService } from './engine';
 import { registerIpc } from './ipc';
 import {
@@ -10,9 +10,14 @@ import {
 } from './paths';
 import { readSettings, writeSettings } from './settings';
 import { shouldAutoUpdate, runAutoUpdate } from './autoupdate';
-import { startAppUpdater } from './app-update';
+import { startAppUpdater, isUpdatableInstall, setPortableState } from './app-update';
 import { runCollecte, shouldRefreshDataset } from './collecte-run';
-import { tirerHeureCollecte, registerScheduledTask, unregisterScheduledTask } from './scheduled-task';
+import {
+  tirerHeureCollecte,
+  registerScheduledTask,
+  unregisterScheduledTask,
+  doitEnregistrerTache,
+} from './scheduled-task';
 import { relireBruts } from '../../../store/collecte';
 
 const PRODUCT = "Observatoire Cabinets Evaluateurs d'ESSMS";
@@ -117,6 +122,9 @@ app
     }
 
     const win = createWindow();
+    // Historique du positionnement : calcul en arrière-plan (tranches mensuelles),
+    // prêt avant la première ouverture d'une fiche dans le cas courant.
+    engine.warmPositioningHistory(settings.alpha);
 
     app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -128,7 +136,13 @@ app
       // INDÉPENDANT du réglage autoUpdate — le vérificateur le relit à chaque
       // tick, donc l'activer/désactiver en cours de session prend effet sans
       // redémarrer l'app.
-      if (app.isPackaged) void startAppUpdater(app.getPath('userData'));
+      if (app.isPackaged) {
+        if (isUpdatableInstall(process.resourcesPath, dirname(process.execPath), PRODUCT)) {
+          void startAppUpdater(app.getPath('userData'));
+        } else {
+          setPortableState();
+        }
+      }
 
       if (shouldAutoUpdate(settings, net.isOnline())) {
         // Collecte du jour (liste HAS + COFRAC) — fire and forget.
@@ -151,7 +165,8 @@ app
       }, 60 * 60 * 1000);
     }
 
-    // Tâche planifiée (app fermée) : enregistrée une fois, retirée si réglage coupé.
+    // Tâche planifiée (app fermée) : enregistrée une fois — de nouveau si
+    // l'exécutable a changé de chemin —, retirée si réglage coupé.
     if (app.isPackaged && !process.argv.includes('--no-autoupdate')) {
       // Premier lancement : tirer l'heure de collecte et la PERSISTER.
       let heure = settings.collecteHeure;
@@ -159,14 +174,24 @@ app
         heure = tirerHeureCollecte(app.getPath('userData'));
         writeSettings(app.getPath('userData'), { ...readSettings(app.getPath('userData')), collecteHeure: heure });
       }
-      if (settings.autoUpdate && !settings.tachePlanifiee) {
+      if (doitEnregistrerTache(settings, process.execPath)) {
         void registerScheduledTask(process.execPath, heure).then((ok) => {
-          if (ok) writeSettings(app.getPath('userData'), { ...readSettings(app.getPath('userData')), tachePlanifiee: true });
+          if (ok) {
+            writeSettings(app.getPath('userData'), {
+              ...readSettings(app.getPath('userData')),
+              tachePlanifiee: true,
+              tacheExe: process.execPath,
+            });
+          }
         });
       }
       if (!settings.autoUpdate && settings.tachePlanifiee) {
         void unregisterScheduledTask().then(() =>
-          writeSettings(app.getPath('userData'), { ...readSettings(app.getPath('userData')), tachePlanifiee: false }),
+          writeSettings(app.getPath('userData'), {
+            ...readSettings(app.getPath('userData')),
+            tachePlanifiee: false,
+            tacheExe: null,
+          }),
         );
       }
     }
@@ -206,6 +231,7 @@ app.on('second-instance', (_e, argv) => {
     // Limite assumée (cas rare) : cette session fenêtre issue d'un processus
     // --collecte n'a ni tick horaire ni vérification du logiciel — elles
     // reviennent au prochain lancement normal.
+    // Ni l'état portable (setPortableState) ni l'updater n'y sont initialisés non plus.
     if (pretPourFenetre) createWindow();
     else fenetreDemandee = true;
   } else {

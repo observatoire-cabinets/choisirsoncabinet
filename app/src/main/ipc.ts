@@ -1,16 +1,26 @@
-import { ipcMain, dialog, app } from 'electron';
+import { ipcMain, dialog, app, net, BrowserWindow } from 'electron';
 import type { EngineService, GenerateArgs } from './engine';
 import { readSettings, writeSettings, type Settings } from './settings';
-import { resolveArchiveRoot, resolveDataDir } from './paths';
+import { resolveArchiveRoot, resolveDataDir, resolveListeHasArchiveRoot } from './paths';
 import { tirerHeureCollecte, registerScheduledTask, unregisterScheduledTask } from './scheduled-task';
-import { getAppUpdateState } from './app-update';
+import { getAppUpdateState, relancerVerificationLogiciel } from './app-update';
+import { miseAJourDonnees, volUnique } from './autoupdate';
+import { runCollecte } from './collecte-run';
+
+/** Message vers toutes les fenêtres ouvertes (une fenêtre fermée entre-temps est ignorée). */
+function diffuser(canal: string, ...args: unknown[]): void {
+  for (const w of BrowserWindow.getAllWindows()) {
+    if (!w.isDestroyed()) w.webContents.send(canal, ...args);
+  }
+}
 
 // File de bascules tâche-planifiée : Register/Unregister-ScheduledTask durent
 // plusieurs secondes (PowerShell) — deux bascules rapprochées (ex. OFF puis ON
 // en moins d'une seconde) ne doivent JAMAIS s'exécuter en parallèle : sinon
 // le résultat est indéterministe (la tâche peut finir désinscrite alors que
 // tachePlanifiee reste à true — un flag menteur jamais auto-réparé, car le
-// démarrage n'enregistre que si !tachePlanifiee). Chaque maillon relit l'état
+// démarrage n'enregistre que si la tâche n'est pas déjà marquée enregistrée
+// pour l'exécutable courant). Chaque maillon relit l'état
 // AU MOMENT DE SON EXÉCUTION (pas au moment de l'enfilage) : une bascule
 // devenue obsolète (dépassée par une plus récente) est un no-op.
 let chaineBascule: Promise<void> = Promise.resolve();
@@ -26,10 +36,10 @@ async function basculerTachePlanifiee(userData: string, souhaite: boolean): Prom
       writeSettings(userData, { ...readSettings(userData), collecteHeure: heure });
     }
     const ok = await registerScheduledTask(process.execPath, heure);
-    writeSettings(userData, { ...readSettings(userData), tachePlanifiee: ok });
+    writeSettings(userData, { ...readSettings(userData), tachePlanifiee: ok, tacheExe: ok ? process.execPath : null });
   } else {
     await unregisterScheduledTask();
-    writeSettings(userData, { ...readSettings(userData), tachePlanifiee: false });
+    writeSettings(userData, { ...readSettings(userData), tachePlanifiee: false, tacheExe: null });
   }
 }
 
@@ -51,6 +61,10 @@ export function registerIpc(engine: EngineService): void {
     const avant = readSettings(userData);
     writeSettings(userData, { ...avant, alpha: s.alpha, autoUpdate: s.autoUpdate, outputDir: s.outputDir });
 
+    // L'état de la mise à jour du logiciel suit la bascule sans attendre le tick
+    // de 24 h (sans effet si l'updater n'est pas démarré, dont la version portable).
+    if (avant.autoUpdate !== s.autoUpdate) relancerVerificationLogiciel();
+
     if (app.isPackaged && avant.autoUpdate !== s.autoUpdate) {
       const souhaite = s.autoUpdate;
       chaineBascule = chaineBascule.then(() => basculerTachePlanifiee(userData, souhaite)).catch(() => {});
@@ -69,6 +83,23 @@ export function registerIpc(engine: EngineService): void {
   );
   ipcMain.handle('refresh', () => engine.refresh(resolveDataDir(), resolveArchiveRoot()));
 
+  // Bandeau des dates : relu par le renderer après tout rafraîchissement réussi.
+  engine.onDonneesRechargees(() => diffuser('donnees:rechargees'));
+
+  // Mise à jour manuelle (Réglages), indépendante du réglage autoUpdate, à vol
+  // unique : une seconde demande (ou un écran rouvert) attend la même issue.
+  const miseAJour = volUnique(() =>
+    miseAJourDonnees({
+      enLigne: () => net.isOnline(),
+      collecter: () => runCollecte(resolveListeHasArchiveRoot()),
+      rafraichir: () => engine.refresh(resolveDataDir(), resolveArchiveRoot()),
+      progression: (msg) => diffuser('refresh:progress', msg),
+    }),
+  );
+  ipcMain.handle('miseAJourDonnees', () => miseAJour.demarrer());
+  ipcMain.handle('miseAJourDonneesEnCours', () => miseAJour.enCours());
+  ipcMain.handle('rejoindreMiseAJourDonnees', () => miseAJour.rejoindre());
+
   ipcMain.handle('cotationGeneralView', () => engine.cotationGeneralView());
   ipcMain.handle('cotationCabinetProfile', (_e, cabinet: string) => engine.cotationCabinetProfile(cabinet));
   ipcMain.handle('exportCotationsGeneral', (_e, a: { outDir: string; format: 'csv' | 'pdf' }) =>
@@ -82,6 +113,11 @@ export function registerIpc(engine: EngineService): void {
     engine.ficheCabinet(cabinet, readSettings(userData).alpha),
   );
   ipcMain.handle('ficheCabinetHistory', (_e, cabinet: string) => engine.ficheCabinetHistory(cabinet));
+  ipcMain.handle('positioningHistory', (_e, cabinet: string) => {
+    const alpha = readSettings(userData).alpha;
+    engine.warmPositioningHistory(alpha);
+    return engine.positioningHistory(cabinet, alpha);
+  });
   ipcMain.handle('exportFicheCabinet', (_e, a: { cabinet: string; outDir: string; asOfMonth?: string }) =>
     engine.exportFicheCabinet(a.cabinet, a.outDir, readSettings(userData).alpha, a.asOfMonth ?? null),
   );

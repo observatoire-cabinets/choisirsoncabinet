@@ -1,8 +1,9 @@
 // Contrat typé exposé au renderer via contextBridge. Imports `type` uniquement →
 // entièrement effacés au build (aucun couplage runtime avec le processus principal).
-import type { GenerateArgs, GenerateResult } from '../main/engine';
+import type { GenerateArgs, GenerateResult, PositioningHistoryState } from '../main/engine';
 import type { Settings } from '../main/settings';
 import type { AppUpdateState } from '../main/app-update';
+import type { MiseAJourDonneesResultat } from '../main/autoupdate';
 import type { DatasetMeta } from '../../../store/types';
 import type { CabinetDetail } from '../../../store/cabinet-detail';
 import type { CabinetLifeline } from '../../../store/registry';
@@ -35,12 +36,22 @@ export interface ObsApi {
   exportCabinetRanking(cabinet: string, outDir: string): Promise<string>;
   refresh(): Promise<RefreshSummary>;
   onRefreshProgress(cb: (msg: string) => void): void;
+  /** Mise à jour manuelle : collecte du jour (liste HAS + COFRAC) puis données Synaé/FINESS. */
+  miseAJourDonnees(): Promise<MiseAJourDonneesResultat>;
+  /** Vrai tant qu'une mise à jour manuelle est en cours (lancée depuis n'importe quel écran). */
+  miseAJourDonneesEnCours(): Promise<boolean>;
+  /** Issue de la mise à jour manuelle en cours, sans en lancer une ; null si aucune n'est en cours. */
+  rejoindreMiseAJourDonnees(): Promise<MiseAJourDonneesResultat | null>;
+  /** Appelé après chaque rafraîchissement réussi des données (automatique ou manuel). */
+  onDonneesRechargees(cb: () => void): void;
   cotationGeneralView(): Promise<CotationCabinetRow[]>;
   cotationCabinetProfile(cabinet: string): Promise<CotationCabinetProfile | null>;
   exportCotationsGeneral(outDir: string, format: 'csv' | 'pdf'): Promise<string>;
   exportCotationCabinet(cabinet: string, outDir: string, format: 'csv' | 'pdf'): Promise<string>;
   ficheCabinet(cabinet: string): Promise<FicheCabinetData | null>;
   ficheCabinetHistory(cabinet: string): Promise<FicheCabinetHistory | null>;
+  /** Historique du positionnement (calcul en arrière-plan : interroger jusqu'à 'pret' ou 'echec'). */
+  positioningHistory(cabinet: string): Promise<PositioningHistoryState>;
   /** Fiche courante si asOfMonth omis ; fiche du mois 'YYYY-MM' sinon. Renvoie le chemin écrit. */
   exportFicheCabinet(cabinet: string, outDir: string, asOfMonth?: string): Promise<string>;
   accreditations(): Promise<AccreditationsView>;

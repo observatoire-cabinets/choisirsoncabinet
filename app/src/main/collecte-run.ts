@@ -3,7 +3,12 @@
  * sous verrou, avec l'heure « déjà fait aujourd'hui » gérée par store/collecte.
  * Jamais bloquant, jamais de throw : le résultat se lit dans l'archive.
  */
-import { collecteListeHas, collecteCofrac } from '../../../store/collecte';
+import {
+  collecteListeHas,
+  collecteCofrac,
+  type CollecteListeHasResult,
+  type CollecteCofracResult,
+} from '../../../store/collecte';
 import { acquireLock, releaseLock, ensureArchive } from '../../../store/liste-has-archive';
 
 export const REFRESH_MAX_AGE_JOURS = 30;
@@ -16,8 +21,8 @@ export function shouldRefreshDataset(builtAt: string, now: Date): boolean {
 }
 
 export interface RunCollecteResult {
-  liste: string; // résultat de collecteListeHas ('archive' | 'inchange' | …)
-  cofrac: string;
+  liste: CollecteListeHasResult['resultat'];
+  cofrac: CollecteCofracResult['resultat'];
 }
 
 /** Une collecte complète sous verrou. `skipped` si un autre processus collecte. */

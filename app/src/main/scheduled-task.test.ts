@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { buildTaskXml, TASK_NAME, tirerHeureCollecte } from './scheduled-task';
+import { buildTaskXml, TASK_NAME, tirerHeureCollecte, doitEnregistrerTache, memeExecutable } from './scheduled-task';
+import { DEFAULT_SETTINGS } from './settings';
 
 describe('buildTaskXml', () => {
   const xml = buildTaskXml("C:\\Users\\U\\AppData\\Local\\Programs\\obs\\Observatoire Cabinets Evaluateurs d'ESSMS.exe", 7, 23);
@@ -40,4 +41,27 @@ describe('tirerHeureCollecte', () => {
     expect(a.minute).toBeGreaterThanOrEqual(0);
     expect(a.minute).toBeLessThanOrEqual(59);
   });
+});
+
+describe('memeExecutable', () => {
+  it('sous Windows : une autre casse du même chemin reste le même exécutable', () => {
+    expect(memeExecutable('C:/Users/U/App/Observatoire.exe', 'c:/users/u/app/OBSERVATOIRE.EXE', 'win32')).toBe(true);
+  });
+  it('sous Windows : un autre chemin reste un autre exécutable', () => {
+    expect(memeExecutable('C:/a/app.exe', 'C:/b/app.exe', 'win32')).toBe(false);
+  });
+  it('hors Windows : comparaison stricte (la casse distingue deux fichiers)', () => {
+    expect(memeExecutable('/opt/App', '/opt/app', 'linux')).toBe(false);
+    expect(memeExecutable('/opt/app', '/opt/app', 'linux')).toBe(true);
+  });
+});
+
+describe('doitEnregistrerTache', () => {
+  const s = { ...DEFAULT_SETTINGS, autoUpdate: true, tachePlanifiee: true, tacheExe: 'C:/a/app.exe' };
+  it('même exécutable déjà enregistré → non', () => expect(doitEnregistrerTache(s, 'C:/a/app.exe')).toBe(false));
+  it('exécutable déplacé ou remplacé → oui', () => expect(doitEnregistrerTache(s, 'C:/b/app.exe')).toBe(true));
+  it('jamais enregistrée → oui', () => expect(doitEnregistrerTache({ ...s, tachePlanifiee: false }, 'C:/a/app.exe')).toBe(true));
+  it('chemin inconnu (réglages d’une version antérieure) → oui', () => expect(doitEnregistrerTache({ ...s, tacheExe: null }, 'C:/a/app.exe')).toBe(true));
+  it.runIf(process.platform === 'win32')('même exécutable, autre casse (Windows) → non', () => expect(doitEnregistrerTache(s, 'c:/A/APP.exe')).toBe(false));
+  it('mise à jour automatique désactivée → non', () => expect(doitEnregistrerTache({ ...s, autoUpdate: false }, 'C:/b/app.exe')).toBe(false));
 });

@@ -1,5 +1,6 @@
 import { describe, it, expect, afterEach } from 'vitest';
-import { renderFichePdf } from './fiche-pdf';
+import { PDFDocument, StandardFonts } from 'pdf-lib';
+import { renderFichePdf, wrap, wrapFragments } from './fiche-pdf';
 import { buildFiche001Content } from './fiche-001-content';
 import { setSignificanceAlpha } from './significance';
 import { extractPdfText } from './__fixtures__/pdf-text';
@@ -99,5 +100,29 @@ describe('renderFichePdf — section « Données de calcul et vérification »',
     expect(text).toMatch(/écart du cabinet - ?écart national brut/);
     // « Principes » : « Association ≠ causalité » (≠ strippé → sens inversé) reformulé épelé.
     expect(text).toMatch(/Une association n'est ?pas ?une ?causalité/);
+  });
+});
+
+describe('wrap', () => {
+  it('coupe aux espaces, jamais à une espace insécable', async () => {
+    const font = await (await PDFDocument.create()).embedFont(StandardFonts.Helvetica);
+    const largeur = (t: string): number => font.widthOfTextAtSize(t, 10);
+    expect(wrap('aa bb cc', font, 10, largeur('aa bb'))).toEqual(['aa bb', 'cc']);
+    // « bb\u00A0cc » ne tient pas après « aa » : il passe entier à la ligne suivante.
+    expect(wrap('aa bb\u00A0cc', font, 10, largeur('aa bb'))).toEqual(['aa', 'bb\u00A0cc']);
+  });
+});
+
+describe('wrapFragments', () => {
+  it('replie aux séparateurs « · », gardés en fin de ligne et comptés dans la largeur ; fragment trop long replié aux espaces', async () => {
+    const font = await (await PDFDocument.create()).embedFont(StandardFonts.Helvetica);
+    const largeur = (t: string): number => font.widthOfTextAtSize(t, 10);
+    expect(wrapFragments('aa · bb', font, 10, 1000)).toEqual(['aa · bb']);
+    // « aa · bb » tient, « aa · bb · » non : la ligne s'arrête après « aa », jamais de « · » isolé.
+    const maxW = largeur('aa · bb');
+    const lignes = wrapFragments('aa · bb · cc', font, 10, maxW);
+    expect(lignes).toEqual(['aa ·', 'bb · cc']);
+    for (const l of lignes) expect(largeur(l)).toBeLessThanOrEqual(maxW);
+    expect(wrapFragments('mot mot mot · x', font, 10, largeur('mot mot'))).toEqual(['mot mot', 'mot ·', 'x']);
   });
 });

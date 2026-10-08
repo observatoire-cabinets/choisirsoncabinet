@@ -9,7 +9,7 @@ import {
   type CabinetContrastSummary,
 } from './fiche-001-content';
 import type { FicheBuilderOpts } from './fiche-calendar';
-import { alphaValueLabel } from './significance';
+import { axeNonConformeDefinition, axeNonConformeResume } from './cabinet-non-conformite';
 
 export function buildFiche012Content(
   opts: FicheBuilderOpts = {},
@@ -25,9 +25,8 @@ export function buildFiche012Content(
     verification: {
       kind: 'meta',
       regle:
-        'Axe « non conforme » pour un cabinet = écart Fiable (≥ 30 obs par groupe), d’ampleur notable ' +
-        '(Cohen d ≥ 0,2), de MÊME SENS que l’écart ajusté national (garde-fou d’inversion), ET significatif ' +
-        `après correction Holm-Bonferroni sur les 7 axes (p < ${alphaValueLabel()}). Méta-classement = nombre d’axes non conformes par cabinet.`,
+        'Axe « non conforme » pour un cabinet = écart réunissant quatre conditions cumulatives : ' +
+        `${axeNonConformeDefinition()}. Méta-classement = nombre d’axes non conformes par cabinet.`,
       renvoi: 'Classement complet, anonyme (cabinet par rang → nombre d’axes) : voir le fichier joint.',
       sources: [
         { libelle: 'HAS / Synaé open_data_par_essms (ODbL)', date: opts.hasSourceLabel ?? null },
@@ -44,7 +43,7 @@ export function buildFiche012Content(
       verdict: [
         'Sur les sept dimensions examinées (taille, statut, secteur, capacité, groupe lucratif, temporel,',
         'établissement/service), le méta-classement compte, pour chaque cabinet, le nombre de dimensions où',
-        `sa notation s’écarte de façon fiable, d’ampleur notable (Cohen d ≥ 0,2) et significative après correction Holm-Bonferroni (p < ${alphaValueLabel()}) de l’égalité de traitement ;`,
+        `sa notation s’écarte de l’égalité de traitement en réunissant ${axeNonConformeResume()} ;`,
         'le rang 1 en cumule le plus grand nombre. Le classement complet, anonyme, est en PDF joint —',
         'c’est une mesure d’intensité statistique, pas un verdict sur la qualité des soins.',
       ].join(' '),
@@ -64,12 +63,12 @@ export function buildFiche012Content(
       ].join(' '),
       methode: [
         `Sources : HAS / Synaé open data (\`open_data_par_essms\`, ${hasSource}, ODbL) + FINESS national (${finessSource}).`,
-        'Méta-classement : pour chaque cabinet, nombre de contrastes phares où son écart est Fiable (≥ 30/30),',
-        `d’ampleur notable (Cohen d ≥ 0,2), de même sens que l’écart ajusté national, ET significatif après correction Holm-Bonferroni (p < ${alphaValueLabel()}). Les écarts nationaux de chaque fiche d’axe sont rappelés dans leurs`,
+        'Méta-classement : pour chaque cabinet, nombre de contrastes phares où son écart réunit quatre conditions :',
+        `${axeNonConformeDefinition()}. Les écarts nationaux de chaque fiche d’axe sont rappelés dans leurs`,
         'fiches respectives. Le classement complet est en PDF joint.',
       ].join(' '),
       resultats: [
-        'Le PDF joint classe les cabinets par nombre de dimensions non conformes (écart significatif), avec leur niveau',
+        'Le PDF joint classe les cabinets par nombre de dimensions non conformes (quatre conditions, cf. Données et méthode), avec leur niveau',
         'global. Il fait ressortir les cabinets dont la pratique se distingue sur le plus grand nombre de critères.',
       ].join(' '),
       interpretation: [
@@ -103,7 +102,7 @@ export function buildFiche012Content(
       ].join(' '),
       annexe: [
         `Données : HAS Synaé \`open_data_par_essms\` (${hasSource}, ODbL) + FINESS national (${finessSource}).`,
-        `Méthode : méta-classement par nombre de contrastes Fiable, d’ampleur d≥0,2, de signe cohérent avec l’ajusté national et significatifs après Holm-Bonferroni (p<${alphaValueLabel()}, cf. guide). Classement complet en PDF joint.`,
+        `Méthode : méta-classement par nombre de contrastes réunissant les quatre conditions : ${axeNonConformeDefinition()}. Classement complet en PDF joint.`,
         'Document généré à partir de données publiques (HAS/FINESS).',
       ].join(' '),
     },

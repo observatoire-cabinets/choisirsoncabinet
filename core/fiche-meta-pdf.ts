@@ -12,9 +12,9 @@ import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from 'pdf
 import { Buffer } from 'node:buffer';
 import { sanitizeForWinAnsi } from './winansi';
 import { frSigned, frDec } from './fiche-001-content';
-import { PHARE_CONTRASTS, type CabinetProfile } from './cabinet-profile';
+import { PHARE_CONTRASTS, sortMetaRanking, type CabinetProfile } from './cabinet-profile';
 import type { Reliability } from './cabinet-axis';
-import { alphaValueLabel } from './significance';
+import { axeNonConformeDefinition } from './cabinet-non-conformite';
 
 const PAGE_W = 841.89;
 const PAGE_H = 595.28;
@@ -87,7 +87,7 @@ export function buildPortfolioTable(profiles: CabinetProfile[]): MetaTable {
 /** Méta-classement fiche 12 : cabinets triés par nb d'axes non conformes (écart significatif). */
 export function buildMetaRankingTable(profiles: CabinetProfile[]): MetaTable {
   const columns = ['Rang', 'Cabinet', 'N', 'Niveau', 'Axes non conformes (sig.)'];
-  const sorted = [...profiles].sort((a, b) => b.nSignificantAxes - a.nSignificantAxes);
+  const sorted = sortMetaRanking(profiles);
   const rows = sorted.map((p, i) => [
     String(i + 1),
     p.cabinet,
@@ -219,8 +219,9 @@ export function renderMetaRankingPdf(profiles: CabinetProfile[], periodLabel: st
     'Synthèse annuelle — méta-classement des cabinets',
     buildMetaRankingTable(profiles),
     periodLabel,
-    'Axes non conformes = nombre de dimensions (sur ' + PHARE_CONTRASTS.length + ') où le cabinet présente un écart à la fois ' +
-      `Fiable (≥30/30) ET significatif (p < ${alphaValueLabel()}), c’est-à-dire non conforme à l’égalité de traitement attendue. Mesure l’INTENSITÉ de non-conformité toutes dimensions confondues, pas sa ` +
+    'Axes non conformes = nombre de dimensions (sur ' + PHARE_CONTRASTS.length + ') où l’écart du cabinet réunit quatre ' +
+      `conditions cumulatives : ${axeNonConformeDefinition()} ; c’est-à-dire non conforme à l’égalité de traitement attendue. ` +
+      'Mesure l’INTENSITÉ de non-conformité toutes dimensions confondues, pas sa ' +
       // « n’est pas » épelé (pas ≠ U+2260, strippé par sanitizeForWinAnsi → sens inversé dans le PDF)
       'direction. Niveau = écart brut de notation au national. Lecture descriptive ; une association n’est pas une causalité ; un effectif faible ' +
       'ne permet pas de conclure (palier non fiable).',

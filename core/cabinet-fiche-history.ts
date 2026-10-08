@@ -27,7 +27,7 @@ export interface FicheCabinetHistory {
   nUndated: number;
 }
 
-const nextMonth = (m: string): string => {
+export const nextMonth = (m: string): string => {
   const [y, mo] = m.split('-').map(Number);
   return mo === 12 ? `${y + 1}-01` : `${y}-${String(mo + 1).padStart(2, '0')}`;
 };
@@ -41,7 +41,7 @@ const nextMonth = (m: string): string => {
  * date-only ('AAAA-MM-JJ'), parsées à minuit UTC — toISOString restitue alors
  * le même mois. Invariant du jeu de données.
  */
-const monthKey = (v: Date | string): string =>
+export const monthKey = (v: Date | string): string =>
   v instanceof Date ? v.toISOString().slice(0, 7) : v.slice(0, 7);
 
 export function cabinetFicheHistory(ds: Dataset, cabinet: string): FicheCabinetHistory | null {

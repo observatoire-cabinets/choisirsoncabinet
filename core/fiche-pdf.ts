@@ -45,10 +45,16 @@ const BLOCS: ReadonlyArray<{ key: keyof FicheBlocs; heading: string }> = [
   { key: 'annexe', heading: 'Annexe — Métadonnées' },
 ];
 
+/**
+ * Découpe un texte en lignes de largeur `maxW` aux espaces ; jamais à une
+ * espace insécable (U+00A0), conservée dans la ligne.
+ * Invariant : l'espace insécable n'est pas un point de coupe — un mot plus large
+ * que `maxW` (insécables comprises) reste entier sur sa ligne, qui déborde.
+ */
 export function wrap(text: string, font: PDFFont, size: number, maxW: number): string[] {
   const lines: string[] = [];
   for (const para of text.split('\n')) {
-    const words = para.split(/\s+/).filter(Boolean);
+    const words = para.split(/[^\S\u00A0]+/).filter(Boolean);
     let cur = '';
     for (const w of words) {
       const trial = cur ? `${cur} ${w}` : w;
@@ -62,6 +68,29 @@ export function wrap(text: string, font: PDFFont, size: number, maxW: number): s
     if (cur) lines.push(cur);
   }
   return lines;
+}
+
+/**
+ * Découpe un texte « a · b · c » en lignes de largeur `maxW` aux séparateurs
+ * « · » (le séparateur reste en fin de ligne, et compte dans la largeur) ; un
+ * fragment trop long à lui seul est découpé aux espaces (wrap).
+ */
+export function wrapFragments(text: string, font: PDFFont, size: number, maxW: number): string[] {
+  const lines: string[] = [];
+  const frags = text.split(' · ');
+  let cur = '';
+  frags.forEach((frag, k) => {
+    const trial = cur ? `${cur} · ${frag}` : frag;
+    const finDeLigne = k < frags.length - 1 ? ' ·' : '';
+    if (!cur || font.widthOfTextAtSize(trial + finDeLigne, size) <= maxW) {
+      cur = trial;
+      return;
+    }
+    lines.push(`${cur} ·`);
+    cur = frag;
+  });
+  if (cur) lines.push(cur);
+  return lines.flatMap((l) => wrap(l, font, size, maxW));
 }
 
 export async function renderFichePdf(
